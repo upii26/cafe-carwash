@@ -1,17 +1,25 @@
 @include('header.head')
-<body class="bg-[#F0FBF8] h-screen overflow-hidden">
+
+<body class="bg-[#F0FBF8] min-h-screen overflow-x-hidden">
+
     @include('header.sidebar')
-    <div id="panelOverlay" onclick="closePanel()"></div>
-    <div id="appWrapper" class="flex flex-col h-screen">
+
+    <!-- Overlay sidebar mobile -->
+    <div id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+    <div id="appWrapper" class="flex flex-col min-h-screen">
+
         @include('header.navbar')
 
-        <!-- ═══ MAIN LAYOUT ROW ═══ -->
-        <div class="main-layout flex flex-1 overflow-hidden" style="height:calc(100vh - 56px)">
-          {{-- isi konten main disini --}}
+        <!-- MAIN LAYOUT -->
+        <div class="main-layout flex flex-1 overflow-hidden">
+            {{-- Masukan konten nya di sini --}}
 
-      @include('header.navmobile')
+        </div>
 
-    </div><!-- end #appWrapper -->
+    </div>
 
-   \
-</body>
+    @include('header.navmobile')
+    </div>
+
+    @include('footer.footer')

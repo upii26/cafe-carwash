@@ -134,7 +134,7 @@
         <!-- MAIN LAYOUT -->
         <div class="main-layout flex flex-1 overflow-hidden">
 
-         
+
 
             {{-- ═══ DASHBOARD CONTENT ═══ --}}
             <div class="flex-1 overflow-y-auto p-4 md:p-6 pb-20 lg:pb-6" style="-webkit-overflow-scrolling:touch;">
