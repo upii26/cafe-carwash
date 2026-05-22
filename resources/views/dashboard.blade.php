@@ -142,7 +142,7 @@
                 {{-- ── Top greeting row ── --}}
                 <div class="flex items-center justify-between mb-5 fade-up">
                     <div>
-                        <h1 class="text-lg md:text-xl font-bold text-gray-900 leading-tight">Selamat Datang, Ibrahim 👋
+                        <h1 class="text-lg md:text-xl font-bold text-gray-900 leading-tight">Selamat Datang, SOSO anjing 👋
                         </h1>
                         <p class="text-xs text-gray-400 mt-0.5" id="dateLabel"></p>
                     </div>
