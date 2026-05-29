@@ -118,6 +118,22 @@
                 .donut {
                     transform: rotate(-90deg);
                 }
+
+                /* ── FIX SCROLL ── */
+                html, body {
+                    height: 100%;
+                    overflow-x: hidden;
+                }
+
+                #appWrapper {
+                    overflow-y: auto !important;
+                    height: 100vh;
+                }
+
+                .main-layout {
+                    overflow: visible !important;
+                    min-height: 0;
+                }
             </style>
 
 <body class="bg-[#F0FBF8] min-h-screen overflow-x-hidden">
@@ -132,12 +148,12 @@
         @include('header.navbar')
 
         <!-- MAIN LAYOUT -->
-        <div class="main-layout flex flex-1 overflow-hidden">
+        <div class="main-layout flex flex-1">
 
 
 
             {{-- ═══ DASHBOARD CONTENT ═══ --}}
-            <div class="flex-1 overflow-y-auto p-4 md:p-6 pb-20 lg:pb-6" style="-webkit-overflow-scrolling:touch;">
+            <div class="flex-1 p-4 md:p-6 pb-20 lg:pb-6">
 
                 {{-- ── Top greeting row ── --}}
                 <div class="flex items-center justify-between mb-5 fade-up">
