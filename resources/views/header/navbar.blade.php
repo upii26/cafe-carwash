@@ -1,24 +1,46 @@
- <header class="bg-white px-4 py-3 flex items-center gap-3 border-b border-gray-100 flex-shrink-0 z-20" style="height:56px">
+<header
+    class="bg-[linear-gradient(180deg,#14110A_0%,#1B160D_50%,#2A2112_100%)]
+    px-4 py-3 flex items-center gap-3 
+    border-b border-white/10 flex-shrink-0 z-20 shadow-md"
+    style="box-shadow: 0 2px 10px rgba(0,0,0,0.35); height:56px">
 
-            <!-- Hamburger (mobile + tablet, hidden on desktop) -->
-            <button id="hamburger" onclick="openSidebar()"
-                class="w-9 h-9 bg-gray-50 rounded-xl flex items-center justify-center hover:bg-gray-100 flex-shrink-0 lg:hidden">
-                <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-                </svg>
-            </button>
+    <!-- Hamburger -->
+    <button id="hamburger" onclick="openSidebar()"
+        class="w-9 h-9 
+    bg-[#C89B2C] 
+    rounded-xl flex items-center justify-center 
+    hover:bg-[#A87912] 
+    flex-shrink-0 lg:hidden 
+    transition-all duration-200 shadow-sm">
 
-            <div class="flex-1 relative">
+        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+    </button>
+
+    <div class="flex-1 relative">
+    </div>
+
+    <!-- Profile -->
+    <div class="flex items-center gap-2 flex-shrink-0">
+
+        <div
+            class="w-9 h-9 
+        bg-[#F2DA7B]
+        border border-[#E5C35A]/50
+        rounded-xl flex items-center justify-center 
+        text-[#6B4E0F] text-xs font-bold shadow-sm">
+            IK
+        </div>
+
+        <div class="hidden sm:block">
+            <div class="text-sm font-semibold text-white leading-tight">
+                Ibrahim Kadri
             </div>
 
-        
-
-            <!-- Profile -->
-            <div class="flex items-center gap-2 flex-shrink-0">
-                <div class="w-9 h-9 bg-gradient-to-br from-[#0BAB8C] to-teal-700 rounded-xl flex items-center justify-center text-white text-xs font-bold">IK</div>
-                <div class="hidden sm:block">
-                    <div class="text-sm font-semibold text-gray-800 leading-tight">Ibrahim Kadri</div>
-                    <div class="text-xs text-gray-400">Admin</div>
-                </div>
+            <div class="text-xs text-white/80 font-medium">
+                Admin
             </div>
-        </header>
+        </div>
+    </div>
+</header>

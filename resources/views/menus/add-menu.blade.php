@@ -5,7 +5,7 @@
 :root{
   --green:#0BAB8C;--green-2:#089073;--green-3:#065f46;
   --green-bg:#e6faf6;--green-glow:rgba(11,171,140,.18);
-  --bg:#EDF7F3;
+  --bg:#F2F2F0;
   --sidebar-w:220px;
   --nav-h:56px;
   --white:#fff;

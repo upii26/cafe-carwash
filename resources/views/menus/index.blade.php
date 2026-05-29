@@ -1,6 +1,6 @@
 @include('header.head')
 
-<body class="bg-[#F0FBF8] min-h-screen overflow-x-hidden">
+<body class="bg-[#F2F2F0] min-h-screen overflow-x-hidden">
 
     @include('header.sidebar')
 
