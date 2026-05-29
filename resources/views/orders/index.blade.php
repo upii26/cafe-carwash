@@ -1,7 +1,7 @@
 @include('header.head')
 
 
-<body class="bg-[#F0FBF8] h-screen overflow-hidden">
+<body class="bg-[#F2F2F0] h-screen overflow-hidden">
     @include('header.sidebar')
     <div id="panelOverlay" onclick="closePanel()"></div>
     <div id="appWrapper" class="flex flex-col h-screen">

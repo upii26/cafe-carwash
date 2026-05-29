@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,11 +31,11 @@
 
     .sidebar-item.active {
         background: #e6faf6;
-        color: #0BAB8C;
+        color: #000000;
     }
 
     .sidebar-item.active svg {
-        color: #0BAB8C;
+        color: #000000;
     }
 
     /* ── Cards ── */
@@ -49,7 +50,7 @@
     }
 
     .order-card.selected {
-        border-color: #0BAB8C !important;
+        border-color: #000000 !important;
     }
 
     .menu-card {
@@ -88,9 +89,9 @@
     }
 
     .payment-btn.selected {
-        border-color: #0BAB8C;
+        border-color: #000000;
         background: #e6faf6;
-        color: #0BAB8C;
+        color: #000000;
     }
 
     /* ── Badges ── */
@@ -106,7 +107,7 @@
 
     .badge-ready {
         background: #D1FAE5;
-        color: #065F46;
+        color: #000000;
     }
 
     /* ── Scrollbar ── */
@@ -129,16 +130,21 @@
         top: 0;
         bottom: 0;
         z-index: 60;
-        /* above everything */
-        background: white;
+
+        background: linear-gradient(180deg,
+                #14110A 0%,
+                #1B160D 50%,
+                #2A2112 100%);
+
         width: 220px;
         display: flex;
         flex-direction: column;
         padding: 20px 12px;
-        box-shadow: 4px 0 24px rgba(0, 0, 0, .12);
+
+        box-shadow: 6px 0 24px rgba(0, 0, 0, .35);
+
         transition: transform .3s cubic-bezier(.4, 0, .2, 1);
         transform: translateX(-100%);
-        /* hidden by default on all sizes */
     }
 
     #sidebar.open {
