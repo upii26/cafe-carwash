@@ -5,6 +5,8 @@
         transition: transform .2s, box-shadow .2s;
     }
 
+
+
     .stat-card:hover {
         transform: translateY(-3px);
         box-shadow: 0 8px 24px rgba(0, 0, 0, .09);
@@ -114,11 +116,11 @@
         border-radius: 6px 6px 0 0;
     }
 
-    /* ── Donut chart ── */
-    .donut {
-        transform: rotate(-90deg);
-    }
-</style>
+                /* ── Donut chart ── */
+                .donut {
+                    transform: rotate(-90deg);
+                }
+            </style>
 
 <body class="bg-[#F2F2F0] min-h-screen overflow-x-hidden">
 
@@ -127,17 +129,17 @@
     <!-- Overlay sidebar mobile -->
     <div id="sidebarOverlay" onclick="closeSidebar()"></div>
 
-    <div id="appWrapper" class="flex flex-col min-h-screen">
+    <div id="appWrapper" class="flex flex-col min-h-screen overflow-y-auto h-screen">
 
         @include('header.navbar')
 
         <!-- MAIN LAYOUT -->
-        <div class="main-layout flex flex-1 overflow-hidden">
+        <div class="main-layout flex flex-1 overflow-y-auto">
 
 
 
             {{-- ═══ DASHBOARD CONTENT ═══ --}}
-            <div class="flex-1 overflow-y-auto p-4 md:p-6 pb-20 lg:pb-6" style="-webkit-overflow-scrolling:touch;">
+            <div class="flex-1 p-4 md:p-6 pb-20 lg:pb-6">
 
                 {{-- ── Top greeting row ── --}}
                 <div class="flex items-center justify-between mb-5 fade-up">
@@ -149,24 +151,24 @@
                     </div>
                     <div class="flex items-center gap-2">
                         <div
-                            class="hidden sm:flex items-center gap-1.5 
-                            bg-[#D4AF37]/15 
-                            backdrop-blur-xl 
-                            border border-[#D4AF37]/30 
-                            rounded-xl 
-                            px-3 py-1.5 
+                            class="hidden sm:flex items-center gap-1.5
+                            bg-[#D4AF37]/15
+                            backdrop-blur-xl
+                            border border-[#D4AF37]/30
+                            rounded-xl
+                            px-3 py-1.5
                             text-xs font-medium text-[#000]
                             shadow-[0_8px_30px_rgba(212,175,55,0.15)]">
                             <span class="w-2 h-2 rounded-full bg-green-400 pulse-dot"></span>
                             Restoran Buka
                         </div>
                         <button
-                            class="w-9 h-9 
-                            bg-[#D4AF37]/15 
-                            backdrop-blur-xl 
-                            border border-[#D4AF37]/30 
-                            rounded-xl 
-                            flex items-center justify-center 
+                            class="w-9 h-9
+                            bg-[#D4AF37]/15
+                            backdrop-blur-xl
+                            border border-[#D4AF37]/30
+                            rounded-xl
+                            flex items-center justify-center
                             text-[#000]
                             hover:bg-[#000]/25
                             transition-all duration-200
@@ -185,12 +187,12 @@
 
                     {{-- Total Revenue --}}
                     <div
-                        class="stat-card 
-                        bg-[#D4AF37]/15 
-                        backdrop-blur-xl 
-                        border border-[#D4AF37]/30 
-                        rounded-2xl 
-                        p-4 
+                        class="stat-card
+                        bg-[#D4AF37]/15
+                        backdrop-blur-xl
+                        border border-[#D4AF37]/30
+                        rounded-2xl
+                        p-4
                         shadow-[0_8px_30px_rgba(212,175,55,0.15)]">
 
                         <div class="flex items-start justify-between mb-3">
@@ -224,12 +226,12 @@
 
                     {{-- Total Orders --}}
                     <div
-                        class="stat-card 
-                        bg-[#D4AF37]/15 
-                        backdrop-blur-xl 
-                        border border-[#D4AF37]/30 
-                        rounded-2xl 
-                        p-4 
+                        class="stat-card
+                        bg-[#D4AF37]/15
+                        backdrop-blur-xl
+                        border border-[#D4AF37]/30
+                        rounded-2xl
+                        p-4
                         shadow-[0_8px_30px_rgba(212,175,55,0.15)]">
 
                         <div class="flex items-start justify-between mb-3">
@@ -256,13 +258,13 @@
                     </div>
 
                     {{-- Active Tables --}}
-                    {{-- <div
-                        class="stat-card 
-                        bg-[#D4AF37]/15 
-                        backdrop-blur-xl 
-                        border border-[#D4AF37]/30 
-                        rounded-2xl 
-                        p-4 
+                    <div
+                        class="stat-card
+                        bg-[#D4AF37]/15
+                        backdrop-blur-xl
+                        border border-[#D4AF37]/30
+                        rounded-2xl
+                        p-4
                         shadow-[0_8px_30px_rgba(212,175,55,0.15)]">
                         <div class="flex items-start justify-between mb-3">
                             <div
@@ -279,16 +281,16 @@
                             <div class="progress-fill" style="width:56%; background:#f97316"></div>
                         </div>
                         <div class="text-[10px] text-black-400 mt-1">7 meja tersedia</div>
-                    </div> --}}
+                    </div>
 
                     {{-- Avg Order Value --}}
-                    {{-- <div
-                        class="stat-card 
-                        bg-[#D4AF37]/15 
-                        backdrop-blur-xl 
-                        border border-[#D4AF37]/30 
-                        rounded-2xl 
-                        p-4 
+                    <div
+                        class="stat-card
+                        bg-[#D4AF37]/15
+                        backdrop-blur-xl
+                        border border-[#D4AF37]/30
+                        rounded-2xl
+                        p-4
                         shadow-[0_8px_30px_rgba(212,175,55,0.15)]">
                         <div class="flex items-start justify-between mb-3">
                             <div
@@ -304,7 +306,7 @@
                             <div class="progress-fill" style="width:64%; background:#a855f7"></div>
                         </div>
                         <div class="text-[10px] text-black-400 mt-1">Target: $50</div>
-                    </div> --}}
+                    </div>
                 </div>
 
                 {{-- ── ROW 2: Chart + Donut ── --}}
@@ -312,13 +314,13 @@
 
                     {{-- Bar Chart (Revenue 7 hari) --}}
                     <div
-                        class="lg:col-span-2 
-                        bg-[#D4AF37]/15 
-                        backdrop-blur-xl 
-                        border border-[#D4AF37]/30 
-                        rounded-2xl 
-                        p-4 md:p-5 
-                        shadow-[0_8px_30px_rgba(212,175,55,0.15)] 
+                        class="lg:col-span-2
+                        bg-[#D4AF37]/15
+                        backdrop-blur-xl
+                        border border-[#D4AF37]/30
+                        rounded-2xl
+                        p-4 md:p-5
+                        shadow-[0_8px_30px_rgba(212,175,55,0.15)]
                         fade-up delay-5">
                         <div class="flex items-center justify-between mb-4">
                             <div>
@@ -329,13 +331,13 @@
                                 <button
                                     class="px-2.5 py-1 bg-[#0BAB8C] text-white rounded-lg text-[10px] font-semibold">Minggu</button>
                                 <button
-                                    class="px-2.5 py-1 
+                                    class="px-2.5 py-1
                                     bg-[#FFF]/100
                                     border border-[#D4AF37]/30
                                     text-[#000]
-                                    rounded-lg 
-                                    text-[10px] 
-                                    font-semibold 
+                                    rounded-lg
+                                    text-[10px]
+                                    font-semibold
                                     hover:bg-[#D4AF37]/25
                                     transition-all duration-200">Bulan</button>
                             </div>
@@ -349,12 +351,12 @@
 
                     {{-- Donut Chart (Order type) --}}
                     <div
-                        class="bg-[#D4AF37]/15 
-                        backdrop-blur-xl 
-                        border border-[#D4AF37]/30 
-                        rounded-2xl 
-                        p-4 md:p-5 
-                        shadow-[0_8px_30px_rgba(212,175,55,0.15)] 
+                        class="bg-[#D4AF37]/15
+                        backdrop-blur-xl
+                        border border-[#D4AF37]/30
+                        rounded-2xl
+                        p-4 md:p-5
+                        shadow-[0_8px_30px_rgba(212,175,55,0.15)]
                         fade-up delay-6">
                         <h3 class="font-bold text-black-900 text-sm mb-1">Tipe Pesanan</h3>
                         <p class="text-xs text-black-400 mb-4">Hari ini</p>

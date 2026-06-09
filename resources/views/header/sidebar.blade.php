@@ -11,7 +11,7 @@ flex flex-col py-5 px-3 shadow-sm z-50 transition-all">
     <div class="flex items-center gap-3 mb-7 px-2">
 
         <div
-            class="w-10 h-10 rounded-xl 
+            class="w-10 h-10 rounded-xl
         bg-gradient-to-br from-[#8B6B1F] to-[#D4AF37]
         flex items-center justify-center shadow-md">
 
@@ -37,41 +37,70 @@ flex flex-col py-5 px-3 shadow-sm z-50 transition-all">
     <nav class="flex flex-col gap-1 flex-1">
 
         <!-- Dashboard -->
-        <!-- Dashboard Cafe-->
-        <a href="{{ url('dashboard-cafe') }}"
-            class="sidebar-item flex items-center gap-3 px-2.5 py-2.5 rounded-xl text-sm font-medium
-{{ request()->is('dashboard-cafe')
-    ? 'bg-gradient-to-r from-[#8B6B1F] to-[#D4AF37] text-white shadow-md'
-    : 'text-white hover:bg-gradient-to-r hover:from-[#8B6B1F] hover:to-[#D4AF37] hover:text-white' }}">
+        <!-- Dashboard dengan submenu -->
+        <div x-data="{ open: {{ request()->is('dashboard*') ? 'true' : 'false' }} }">
 
-            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7h13v6a6 6 0 11-12 0V7z" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8h1a3 3 0 010 6h-1" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21h13" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 5 Q6.5 3.5 6 2" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.5 5 Q10 3.5 9.5 2" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5 Q13.5 3.5 13 2" />
-            </svg>
+            <!-- Parent: Dashboard -->
+            <button @click="open = !open"
+                class="sidebar-item w-full flex items-center gap-3 px-2.5 py-2.5 rounded-xl text-sm font-medium
+                {{ request()->is('dashboard*')
+                    ? 'bg-gradient-to-r from-[#8B6B1F] to-[#D4AF37] text-white shadow-md'
+                    : 'text-white hover:bg-gradient-to-r hover:from-[#8B6B1F] hover:to-[#D4AF37] hover:text-white' }}">
 
-            <span>Dashboard Cafe</span>
-        </a>
+                <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <rect x="3" y="3" width="7" height="7" rx="1.5" />
+                    <rect x="14" y="3" width="7" height="7" rx="1.5" />
+                    <rect x="3" y="14" width="7" height="7" rx="1.5" />
+                    <rect x="14" y="14" width="7" height="7" rx="1.5" />
+                </svg>
 
-        <!-- Dashboard Carwash -->
-        <a href="{{ url('dashboard-carwash') }}"
-            class="sidebar-item flex items-center gap-3 px-2.5 py-2.5 rounded-xl text-sm font-medium 
-{{ request()->is('dashboard-carwash')
-    ? 'bg-gradient-to-r from-[#8B6B1F] to-[#D4AF37] text-white shadow-md'
-    : 'text-white hover:bg-gradient-to-r hover:from-[#8B6B1F] hover:to-[#D4AF37] hover:text-white' }}">
+                <span class="flex-1 text-left">Dashboard</span>
 
-            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M5 11l1.5-4A2 2 0 018.4 6h7.2a2 2 0 011.9 1.3L19 11v5h-2a2 2 0 11-4 0H9a2 2 0 11-4 0H3v-5h2z" />
-                <circle cx="7" cy="16" r="1" fill="currentColor" />
-                <circle cx="17" cy="16" r="1" fill="currentColor" />
-            </svg>
+                <!-- Chevron -->
+                <svg class="w-4 h-4 transition-transform duration-200"
+                    :class="open ? 'rotate-180' : ''"
+                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+            </button>
 
-            <span>Dashboard Carwash</span>
-        </a>
+            <!-- Submenu -->
+            <div x-show="open"
+                x-transition:enter="transition ease-out duration-200"
+                x-transition:enter-start="opacity-0 -translate-y-1"
+                x-transition:enter-end="opacity-100 translate-y-0"
+                x-transition:leave="transition ease-in duration-150"
+                x-transition:leave-start="opacity-100 translate-y-0"
+                x-transition:leave-end="opacity-0 -translate-y-1"
+                class="mt-1 ml-3 pl-4 border-l border-white/20 flex flex-col gap-1">
+
+                    <!-- Cafe -->
+                    <a href="{{ url('dashboard') }}"
+                        class="sidebar-item flex items-center gap-3 px-2.5 py-2 rounded-xl text-sm font-medium
+                        {{ request()->is('dashboard')
+                            ? 'bg-gradient-to-r from-[#8B6B1F] to-[#D4AF37] text-white shadow-md'
+                            : 'text-white/80 hover:bg-gradient-to-r hover:from-[#8B6B1F] hover:to-[#D4AF37] hover:text-white' }}">
+                        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8zM6 1v3M10 1v3M14 1v3" />
+                        </svg>
+                        <span>Cafe</span>
+                    </a>
+
+                <!-- Carwash -->
+                <a href="{{ url('dashboard-carwash') }}"
+                    class="sidebar-item flex items-center gap-3 px-2.5 py-2 rounded-xl text-sm font-medium
+                    {{ request()->is('dashboard-carwash')
+                        ? 'bg-gradient-to-r from-[#8B6B1F] to-[#D4AF37] text-white shadow-md'
+                        : 'text-white/80 hover:bg-gradient-to-r hover:from-[#8B6B1F] hover:to-[#D4AF37] hover:text-white' }}">
+                            <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 17h1m16 0h1M5 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0m10 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0M3 17V9l3-5h12l3 5v8M3 13h18" />
+                            </svg>
+                    <span>Carwash</span>
+                </a>
+            </div>
+        </div>
 
         <!-- Order Line -->
         <a href="{{ url('orders') }}"
@@ -85,19 +114,6 @@ flex flex-col py-5 px-3 shadow-sm z-50 transition-all">
             </svg>
             <span>Order Line</span>
         </a>
-
-        <!-- Manage Table -->
-        {{-- <a href=""
-            class="sidebar-item flex items-center gap-3 px-2.5 py-2.5 rounded-xl text-sm font-medium
-            {{ Route::is('manage.table')
-                ? 'bg-gradient-to-r from-[#8B6B1F] to-[#D4AF37] text-white shadow-md'
-                : 'text-white hover:bg-gradient-to-r hover:from-[#8B6B1F] hover:to-[#D4AF37] hover:text-white' }}">
-            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M3 10h18M3 14h18M10 6v12M14 6v12M5 6h14a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2z" />
-            </svg>
-            <span>Manage Table</span>
-        </a> --}}
 
         <!-- Manage Dishes -->
 
@@ -147,7 +163,7 @@ flex flex-col py-5 px-3 shadow-sm z-50 transition-all">
     <!-- Bottom Menu -->
     <div class="flex flex-col gap-1 mt-auto">
 
-        <a href=""
+        <a href="{{url('/logout-process')}}"
             class="sidebar-item flex items-center gap-3 px-2.5 py-2.5 rounded-xl text-sm font-medium
     text-white hover:bg-red-500/15 hover:text-red-400 transition-all duration-200">
 

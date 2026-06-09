@@ -208,102 +208,12 @@
     </style>
 </head>
 
-{{-- Opsi 1 --}}
-{{-- <body class="min-h-screen flex items-center justify-start bg-cover bg-no-repeat relative overflow-hidden px-6 lg:px-20"
-    style="
-        background-image:url('{{ asset('images/tablet-standing-isolated-table.jpg') }}');
-        background-position:center top;
-    ">
-
-    <!-- Overlay -->
-    <div class="absolute inset-0 bg-black/30"></div>
-
-    <!-- Login Card -->
-    <div
-        class="relative z-10 w-full max-w-md
-    lg:ml-10
-    bg-black/50
-    backdrop-blur-xl
-    border border-white/10
-    rounded-3xl
-    shadow-2xl
-    p-8">
-
-        <!-- Heading -->
-        <div class="mb-8 text-center">
-            <div class="mb-4 flex justify-center">
-
-                <img src="{{ asset('images/gglogo.png') }}" alt="Logo" class="w-16 h-16 object-contain">
-            </div>
-
-            <h1 class="text-3xl font-black tracking-wide drop-shadow-lg" style="color:#d8b452;">
-                Cafe & Carwash
-            </h1>
-
-            <p class="text-white/70 mt-2 text-sm">
-                Login untuk mengakses dashboard restoran
-            </p>
-        </div>
-
-        <!-- Form -->
-        <form class="space-y-5">
-
-            <!-- Email -->
-            <div>
-                <label class="block text-sm font-semibold text-white mb-2">
-                    Email
-                </label>
-
-                <input type="email" placeholder="Masukkan email"
-                    class="w-full rounded-xl
-    border border-white/20
-    bg-white/10
-    text-white
-    placeholder-white/50
-    px-4 py-3 text-sm
-    focus:outline-none
-    focus:ring-2
-    focus:ring-white/40">
-            </div>
-
-            <!-- Password -->
-            <div>
-                <label class="block text-sm font-semibold text-white mb-2">
-                    Password
-                </label>
-
-                <input type="password" placeholder="Masukkan password"
-                    class="w-full rounded-xl
-    border border-white/20
-    bg-white/10
-    text-white
-    placeholder-white/50
-    px-4 py-3 text-sm
-    focus:outline-none
-    focus:ring-2
-    focus:ring-white/40">
-            </div>
-
-            <!-- Button -->
-            <button type="submit"
-                class="w-full rounded-xl py-3.5 text-sm font-bold text-white transition hover:opacity-90"
-                style="background:linear-gradient(135deg, #9c822d 0%, rgb(150, 118, 24) 50%, #9c822d 100%);
-        box-shadow:0 8px 24px rgba(191,161,74,.35);">
-                Masuk Sekarang
-            </button>
-
-        </form>
-
-    </div>
-
-</body> --}}
 
 {{-- Opsi 2 --}}
 <body class="min-h-screen flex items-center justify-start bg-cover bg-no-repeat relative overflow-hidden px-6 lg:px-20"
     style="
         background-image:url('{{ asset('images/tablet-standing-isolated-table.jpg') }}');
-        background-position:center top;
-    ">
+        background-position:center top;">
 
     <!-- Overlay -->
     <div class="absolute inset-0 bg-black/20"></div>
@@ -340,15 +250,16 @@
         </div>
 
         <!-- Form -->
-        <form class="space-y-5">
+        <form action="{{ url('/login-process') }}" method="POST" class="space-y-5">
+            @csrf
 
-            <!-- User -->
+            <!-- Username -->
             <div>
                 <label class="block text-sm font-semibold text-white/90 mb-2">
                     Username
                 </label>
 
-                <input type="email" placeholder="Masukkan username "
+                <input type="text" name="username" placeholder="Masukkan Username"
                     class="w-full rounded-2xl
             border border-white/20
             bg-white/10
@@ -368,7 +279,7 @@
                     Password
                 </label>
 
-                <input type="password" placeholder="Masukkan password"
+                <input type="password" name="password" placeholder="Masukkan password"
                     class="w-full rounded-2xl
             border border-white/20
             bg-white/10
@@ -399,107 +310,5 @@
 
 </body>
 
-{{-- Opsi 3 --}}
-{{-- <body class="min-h-screen flex items-center justify-end bg-cover bg-no-repeat relative overflow-hidden px-6 lg:px-20"
-    style="
-        background-image:url('{{ asset('images/overhead-view-colorful-paper-clips-calculator-eyeglasses-black-wooden-table.jpg') }}');
-        background-position:center top;
-    ">
-
-    <!-- Overlay -->
-    <div class="absolute inset-0 bg-black/10"></div>
-
-    <!-- Login Card -->
-    <div class="relative z-10 w-full max-w-md
-    mx-4 lg:mr-20
-    rounded-[32px]
-    p-8
-    border border-white/10
-    backdrop-blur-2xl
-    shadow-2xl"
-        style="
-        background:rgba(20,20,20,0.45);
-        box-shadow:
-            0 8px 32px rgba(0,0,0,0.45),
-            inset 0 1px 1px rgba(255,255,255,0.05);
-    ">
-
-        <!-- Heading -->
-        <div class="mb-8 text-center">
-            <div class="mb-4 flex justify-center">
-
-                <img src="{{ asset('images/gglogo.png') }}" alt="Logo" class="w-16 h-16 object-contain">
-            </div>
-
-            <h1 class="text-3xl font-black tracking-wide drop-shadow-lg" style="color:#d8b452;">
-                Cafe & Carwash
-            </h1>
-
-            <p class="text-white/55 mt-3 text-sm tracking-wide">
-                Login untuk mengakses dashboard restoran
-            </p>
-        </div>
-
-        <!-- Form -->
-        <form class="space-y-5">
-
-            <!-- Email -->
-            <div>
-                <label class="block text-sm font-semibold text-white/90 mb-2">
-                    Email
-                </label>
-
-                <input type="email" placeholder="Masukkan email"
-                    class="w-full rounded-2xl
-    border border-white/10
-    bg-white/5
-    backdrop-blur-md
-    text-white
-    placeholder-white/30
-    px-4 py-3.5 text-sm
-    focus:outline-none
-    focus:ring-2
-    transition"
-                    style="
-        box-shadow: inset 0 1px 2px rgba(255,255,255,0.04);
-    ">
-            </div>
-
-            <!-- Password -->
-            <div>
-                <label class="block text-sm font-semibold text-white/90 mb-2">
-                    Password
-                </label>
-
-                <input type="password" placeholder="Masukkan password"
-                    class="w-full rounded-2xl
-            border border-white/20
-            bg-white/10
-            backdrop-blur-md
-            text-white
-            placeholder-white/40
-            px-4 py-3.5 text-sm
-            focus:outline-none
-            focus:ring-2
-            focus:ring-[#D4AF37]
-            transition duration-300">
-            </div>
-
-            <!-- Button -->
-            <button type="submit"
-                class="w-full rounded-2xl py-3.5 text-sm font-bold text-white
-        transition duration-300
-        hover:scale-[1.02]
-        hover:brightness-110"
-                style="
-            background:linear-gradient(135deg, #7a6220 0%, #D4AF37 50%, #8f7424 100%);">
-                Masuk Sekarang
-            </button>
-
-        </form>
-
-    </div>
-
-</body> --}}
 
 </html>

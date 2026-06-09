@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 class DashboardController extends Controller
 {
-    public function cafe()
+    public function index()
     {
-        return view('dashboard-cafe');
+        return view("dashboard");
     }
 
-    public function carwash()
+    public function indexcarwash()
     {
-        return view('dashboard-carwash');
+        return view("dashboard_carwash");
     }
 }

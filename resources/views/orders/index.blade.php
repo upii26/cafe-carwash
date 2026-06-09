@@ -12,78 +12,10 @@
 
             <!-- CENTER SCROLL -->
             <div class="flex-1 p-4 flex flex-col overflow-hidden">
-                <h1 class="text-lg font-bold text-gray-900 mb-3">Order Line</h1>
-
-                <!-- Status Tabs -->
-                <div class="flex gap-2 mb-4 overflow-x-auto pb-1 flex-shrink-0">
-                    <button
-                        class="flex-shrink-0 tab-active px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1">All
-                        <span
-                            class="bg-white/30 rounded-full w-4 h-4 flex items-center justify-center text-[10px]">11</span></button>
-                    <button
-                        class="flex-shrink-0 px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-gray-500 flex items-center gap-1">Dine
-                        in <span
-                            class="bg-blue-100 text-blue-600 rounded-full w-4 h-4 flex items-center justify-center text-[10px]">45</span></button>
-                    <button
-                        class="flex-shrink-0 px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-gray-500 flex items-center gap-1">Wait
-                        List <span
-                            class="bg-orange-100 text-orange-600 rounded-full w-4 h-4 flex items-center justify-center text-[10px]">02</span></button>
-                    <button
-                        class="flex-shrink-0 px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-gray-500 flex items-center gap-1">Take
-                        Away <span
-                            class="bg-purple-100 text-purple-600 rounded-full w-4 h-4 flex items-center justify-center text-[10px]">8</span></button>
-                    <button
-                        class="flex-shrink-0 px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-gray-500 flex items-center gap-1">Served
-                        <span
-                            class="bg-green-100 text-green-600 rounded-full w-4 h-4 flex items-center justify-center text-[10px]">4</span></button>
-                </div>
-
-                <!-- Order Cards -->
-                <div class="flex gap-3 overflow-x-auto pb-2 mb-5 -mx-1 px-1 flex-shrink-0">
-                    <div
-                        class="order-card bg-white rounded-2xl p-3.5 min-w-[152px] flex-shrink-0 border-2 border-transparent">
-                        <div class="flex justify-between mb-0.5"><span class="text-[10px] text-gray-400">Order
-                                #F0027</span><span class="text-[10px] text-gray-400">Tbl 03</span></div>
-                        <div class="font-bold text-gray-800 text-sm mb-0.5">Item: 8X</div>
-                        <div class="text-[10px] text-gray-400 mb-2">2 mins ago</div>
-                        <span class="badge-kitchen text-[10px] font-semibold px-2 py-0.5 rounded-md">In Kitchen</span>
-                    </div>
-                    <div
-                        class="order-card bg-white rounded-2xl p-3.5 min-w-[152px] flex-shrink-0 border-2 border-transparent">
-                        <div class="flex justify-between mb-0.5"><span class="text-[10px] text-gray-400">Order
-                                #F0028</span><span class="text-[10px] text-gray-400">Tbl 07</span></div>
-                        <div class="font-bold text-gray-800 text-sm mb-0.5">Item: 3X</div>
-                        <div class="text-[10px] text-gray-400 mb-2">Just Now</div>
-                        <span class="badge-waitlist text-[10px] font-semibold px-2 py-0.5 rounded-md">Wait List</span>
-                    </div>
-                    <div class="order-card selected bg-white rounded-2xl p-3.5 min-w-[152px] flex-shrink-0 border-2">
-                        <div class="flex justify-between mb-0.5"><span class="text-[10px] text-gray-400">Order
-                                #F0019</span><span class="text-[10px] text-gray-400">Tbl 09</span></div>
-                        <div class="font-bold text-gray-800 text-sm mb-0.5">Item: 2X</div>
-                        <div class="text-[10px] text-gray-400 mb-2">25 mins ago</div>
-                        <span class="badge-ready text-[10px] font-semibold px-2 py-0.5 rounded-md">Ready</span>
-                    </div>
-                    <div
-                        class="order-card bg-white rounded-2xl p-3.5 min-w-[152px] flex-shrink-0 border-2 border-transparent">
-                        <div class="flex justify-between mb-0.5"><span class="text-[10px] text-gray-400">Order
-                                #F0031</span><span class="text-[10px] text-gray-400">Tbl 12</span></div>
-                        <div class="font-bold text-gray-800 text-sm mb-0.5">Item: 5X</div>
-                        <div class="text-[10px] text-gray-400 mb-2">10 mins ago</div>
-                        <span class="badge-kitchen text-[10px] font-semibold px-2 py-0.5 rounded-md">In Kitchen</span>
-                    </div>
-                    <div
-                        class="order-card bg-white rounded-2xl p-3.5 min-w-[152px] flex-shrink-0 border-2 border-transparent">
-                        <div class="flex justify-between mb-0.5"><span class="text-[10px] text-gray-400">Order
-                                #F0014</span><span class="text-[10px] text-gray-400">Tbl 01</span></div>
-                        <div class="font-bold text-gray-800 text-sm mb-0.5">Item: 6X</div>
-                        <div class="text-[10px] text-gray-400 mb-2">35 mins ago</div>
-                        <span class="badge-ready text-[10px] font-semibold px-2 py-0.5 rounded-md">Ready</span>
-                    </div>
-                </div>
 
                 <!-- Foodies Menu -->
                 <div class="flex items-center justify-between mb-3 flex-shrink-0">
-                    <h2 class="font-bold text-gray-900">Foodies Menu</h2>
+                    <h2 class="font-bold text-gray-900">Menu Orders</h2>
                 </div>
 
                 <!-- Category Filter -->
@@ -91,18 +23,15 @@
                     <button onclick="filterCategory('all')" data-cat="all"
                         class="cat-btn flex-shrink-0 tab-active px-3 py-2 rounded-xl text-xs font-semibold">🍽️
                         All</button>
-                    <button onclick="filterCategory('special')" data-cat="special"
-                        class="cat-btn flex-shrink-0 bg-white text-gray-500 px-3 py-2 rounded-xl text-xs font-semibold">⭐
-                        Special</button>
                     <button onclick="filterCategory('soup')" data-cat="soup"
                         class="cat-btn flex-shrink-0 bg-white text-gray-500 px-3 py-2 rounded-xl text-xs font-semibold">🍲
-                        Soups</button>
+                        Makanan</button>
                     <button onclick="filterCategory('dessert')" data-cat="dessert"
-                        class="cat-btn flex-shrink-0 bg-white text-gray-500 px-3 py-2 rounded-xl text-xs font-semibold">🍰
-                        Desserts</button>
+                        class="cat-btn flex-shrink-0 bg-white text-gray-500 px-3 py-2 rounded-xl text-xs font-semibold">🍵
+                        Minuman</button>
                     <button onclick="filterCategory('chicken')" data-cat="chicken"
-                        class="cat-btn flex-shrink-0 bg-white text-gray-500 px-3 py-2 rounded-xl text-xs font-semibold">🍗
-                        Chicken</button>
+                        class="cat-btn flex-shrink-0 bg-white text-gray-500 px-3 py-2 rounded-xl text-xs font-semibold">🚗
+                        Carwash</button>
                 </div>
 
                 <!-- Menu Grid -->
@@ -120,11 +49,35 @@
                 </div>
 
                 <!-- Table Info -->
+                <!-- Table Info -->
                 <div class="px-4 py-3 border-b border-gray-100 flex-shrink-0">
                     <div class="flex items-center justify-between">
                         <div>
-                            <div class="text-sm font-bold text-gray-900">Table No #04</div>
-                            <div class="text-xs text-gray-400 mt-0.5">Order #F0030 · 2 People</div>
+                            <!-- Table No (editable) -->
+                            <div class="flex items-center gap-1.5">
+                                <span class="text-xs text-gray-400 font-medium">Table No</span>
+                                <div class="relative flex items-center">
+                                    <span class="text-sm font-bold text-gray-900">#</span>
+                                    <input id="tableNoInput"
+                                        type="text"
+                                        value="04"
+                                        maxlength="4"
+                                        oninput="updateTableInfo()"
+                                        class="w-10 text-sm font-bold text-gray-900 bg-transparent border-b-2 border-dashed border-gray-300 focus:border-[#0BAB8C] focus:outline-none text-center transition-colors" />
+                                </div>
+                            </div>
+                            <!-- Order info (editable people count) -->
+                            <div class="flex items-center gap-1 mt-0.5">
+                                <span id="orderLabel" class="text-xs text-gray-400">Order #F0030 ·</span>
+                                <input id="peopleInput"
+                                    type="number"
+                                    value="2"
+                                    min="1"
+                                    max="99"
+                                    oninput="updateTableInfo()"
+                                    class="w-7 text-xs text-gray-400 bg-transparent border-b border-dashed border-gray-300 focus:border-[#0BAB8C] focus:outline-none text-center transition-colors" />
+                                <span class="text-xs text-gray-400">People</span>
+                            </div>
                         </div>
                         <div class="flex gap-1.5">
                             <button
@@ -143,7 +96,6 @@
                                         d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                 </svg>
                             </button>
-                            <!-- Close panel button (mobile/tablet only) -->
                             <button onclick="closePanel()"
                                 class="close-panel-btn w-8 h-8 bg-gray-50 rounded-lg flex items-center justify-center hover:bg-gray-100 lg:hidden">
                                 <svg class="w-3.5 h-3.5 text-gray-500" fill="none" stroke="currentColor"
@@ -183,12 +135,45 @@
                     </div>
                 </div>
 
+                <!-- Notes -->
+                <div class="px-4 pb-3 border-t border-gray-100 flex-shrink-0">
+                    <div class="text-xs font-bold text-gray-900 mb-2 mt-3">Notes</div>
+                    <div class="relative">
+                        <textarea id="orderNotes"
+                            placeholder="Tambahkan catatan untuk dapur... (alergi, tingkat kematangan, dll)"
+                            maxlength="200"
+                            oninput="updateNoteCount()"
+                            class="w-full text-xs text-gray-700 placeholder-gray-300 bg-gray-50 border border-gray-200 rounded-xl px-3 py-2.5 resize-none focus:outline-none focus:ring-2 focus:ring-[#0BAB8C]/30 focus:border-[#0BAB8C] transition-all"
+                            rows="3"></textarea>
+                        <span id="noteCount" class="absolute bottom-2 right-3 text-[10px] text-gray-300">0/200</span>
+                    </div>
+                    <!-- Quick note chips -->
+                    <div class="flex flex-wrap gap-1.5 mt-2">
+                        <button onclick="addQuickNote('Tidak pedas')"
+                            class="quick-note-chip text-[10px] px-2 py-1 bg-gray-100 text-gray-500 rounded-lg hover:bg-[#0BAB8C]/10 hover:text-[#0BAB8C] transition-colors font-medium">
+                            🌶️ Tidak pedas
+                        </button>
+                        <button onclick="addQuickNote('Extra saus')"
+                            class="quick-note-chip text-[10px] px-2 py-1 bg-gray-100 text-gray-500 rounded-lg hover:bg-[#0BAB8C]/10 hover:text-[#0BAB8C] transition-colors font-medium">
+                            🥫 Extra saus
+                        </button>
+                        <button onclick="addQuickNote('Tanpa bawang')"
+                            class="quick-note-chip text-[10px] px-2 py-1 bg-gray-100 text-gray-500 rounded-lg hover:bg-[#0BAB8C]/10 hover:text-[#0BAB8C] transition-colors font-medium">
+                            🧅 Tanpa bawang
+                        </button>
+                        <button onclick="addQuickNote('Take Away')"
+                            class="quick-note-chip text-[10px] px-2 py-1 bg-gray-100 text-gray-500 rounded-lg hover:bg-[#0BAB8C]/10 hover:text-[#0BAB8C] transition-colors font-medium">
+                            🛵 Take Away
+                        </button>
+                    </div>
+                </div>
+
                 <!-- Payment Method -->
                 <div class="px-4 pb-3 flex-shrink-0">
                     <div class="text-xs font-bold text-gray-900 mb-2">Payment Method</div>
                     <div class="flex gap-2">
                         <button onclick="selectPayment(this)"
-                            class="payment-btn flex-1 py-2 rounded-xl text-xs font-semibold text-gray-500">💵
+                            class="payment-btn flex-1 py-2 rounded-xl text-x    s font-semibold text-gray-500">💵
                             Cash</button>
                         <button onclick="selectPayment(this)"
                             class="payment-btn selected flex-1 py-2 rounded-xl text-xs font-semibold">💳 Card</button>
@@ -432,14 +417,41 @@
             btn.classList.remove('text-gray-500');
         }
 
+        function updateNoteCount() {
+            const textarea = document.getElementById('orderNotes');
+            const counter = document.getElementById('noteCount');
+            const len = textarea.value.length;
+            counter.textContent = len + '/200';
+            counter.classList.toggle('text-orange-400', len >= 160);
+            counter.classList.toggle('text-gray-300', len < 160);
+        }
+
+        function addQuickNote(text) {
+            const textarea = document.getElementById('orderNotes');
+            const current = textarea.value.trim();
+            const separator = current ? ', ' : '';
+            const newVal = current + separator + text;
+            if (newVal.length <= 200) {
+                textarea.value = newVal;
+                updateNoteCount();
+                textarea.focus();
+            }
+        }
+
+        function updateTableInfo() {
+            const tableNo = document.getElementById('tableNoInput').value || '00';
+            const people  = document.getElementById('peopleInput').value || '1';
+            // bisa dipakai saat Place Order untuk kirim ke backend
+            console.log('Table:', tableNo, '| People:', people);
+        }
+
         // Close panels on resize to desktop
         window.addEventListener('resize', () => {
             if (window.innerWidth >= 1024) {
                 closeSidebar();
-                // Don't call closePanel on desktop — panel is inline
                 document.getElementById('panelOverlay').classList.remove('open');
             }
-            renderOrderPanel(); // re-evaluate FAB visibility
+            renderOrderPanel();
         });
 
         initOrder();

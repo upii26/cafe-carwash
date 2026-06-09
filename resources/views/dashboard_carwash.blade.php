@@ -5,6 +5,8 @@
         transition: transform .2s, box-shadow .2s;
     }
 
+
+
     .stat-card:hover {
         transform: translateY(-3px);
         box-shadow: 0 8px 24px rgba(0, 0, 0, .09);
@@ -114,11 +116,11 @@
         border-radius: 6px 6px 0 0;
     }
 
-    /* ── Donut chart ── */
-    .donut {
-        transform: rotate(-90deg);
-    }
-</style>
+                /* ── Donut chart ── */
+                .donut {
+                    transform: rotate(-90deg);
+                }
+            </style>
 
 <body class="bg-[#F2F2F0] min-h-screen overflow-x-hidden">
 
@@ -127,17 +129,17 @@
     <!-- Overlay sidebar mobile -->
     <div id="sidebarOverlay" onclick="closeSidebar()"></div>
 
-    <div id="appWrapper" class="flex flex-col min-h-screen">
+    <div id="appWrapper" class="flex flex-col min-h-screen overflow-y-auto h-screen">
 
         @include('header.navbar')
 
         <!-- MAIN LAYOUT -->
-        <div class="main-layout flex flex-1 overflow-hidden">
+        <div class="main-layout flex flex-1 overflow-y-auto">
 
 
 
             {{-- ═══ DASHBOARD CONTENT ═══ --}}
-            <div class="flex-1 overflow-y-auto p-4 md:p-6 pb-20 lg:pb-6" style="-webkit-overflow-scrolling:touch;">
+            <div class="flex-1 p-4 md:p-6 pb-20 lg:pb-6">
 
                 {{-- ── Top greeting row ── --}}
                 <div class="flex items-center justify-between mb-5 fade-up">
@@ -149,24 +151,24 @@
                     </div>
                     <div class="flex items-center gap-2">
                         <div
-                            class="hidden sm:flex items-center gap-1.5 
-                            bg-[#D4AF37]/15 
-                            backdrop-blur-xl 
-                            border border-[#D4AF37]/30 
-                            rounded-xl 
-                            px-3 py-1.5 
+                            class="hidden sm:flex items-center gap-1.5
+                            bg-[#D4AF37]/15
+                            backdrop-blur-xl
+                            border border-[#D4AF37]/30
+                            rounded-xl
+                            px-3 py-1.5
                             text-xs font-medium text-[#000]
                             shadow-[0_8px_30px_rgba(212,175,55,0.15)]">
                             <span class="w-2 h-2 rounded-full bg-green-400 pulse-dot"></span>
                             Carwash Buka
                         </div>
                         <button
-                            class="w-9 h-9 
-                            bg-[#D4AF37]/15 
-                            backdrop-blur-xl 
-                            border border-[#D4AF37]/30 
-                            rounded-xl 
-                            flex items-center justify-center 
+                            class="w-9 h-9
+                            bg-[#D4AF37]/15
+                            backdrop-blur-xl
+                            border border-[#D4AF37]/30
+                            rounded-xl
+                            flex items-center justify-center
                             text-[#000]
                             hover:bg-[#000]/25
                             transition-all duration-200
@@ -181,16 +183,16 @@
                 </div>
 
                 {{-- ── STAT CARDS (4 kolom di lg, 2 di tablet, 2 di mobile) ── --}}
-                <div class="grid grid-cols-2 lg:grid-cols-2 gap-3 md:gap-4 mb-5">
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-5">
 
                     {{-- Total Revenue --}}
                     <div
-                        class="stat-card 
-                        bg-[#D4AF37]/15 
-                        backdrop-blur-xl 
-                        border border-[#D4AF37]/30 
-                        rounded-2xl 
-                        p-4 
+                        class="stat-card
+                        bg-[#D4AF37]/15
+                        backdrop-blur-xl
+                        border border-[#D4AF37]/30
+                        rounded-2xl
+                        p-4
                         shadow-[0_8px_30px_rgba(212,175,55,0.15)]">
 
                         <div class="flex items-start justify-between mb-3">
@@ -206,11 +208,11 @@
                         </div>
 
                         <div class="text-xl md:text-2xl font-bold text-[#000000]" data-count="4820" id="c1">
-                            Rp 0
+                            $0
                         </div>
 
                         <div class="text-xs text-[#000000] mt-0.5">
-                            Total Pendapatan
+                            Total Revenue
                         </div>
 
                         <div class="mt-3 h-1.5 bg-[#FFFFFF] rounded-full overflow-hidden">
@@ -218,24 +220,24 @@
                         </div>
 
                         <div class="text-[10px] text-[#00000] mt-1">
-                            Target bulanan: Rp 6.700.000
+                            Target bulanan: $6.700
                         </div>
                     </div>
 
                     {{-- Total Orders --}}
                     <div
-                        class="stat-card 
-                        bg-[#D4AF37]/15 
-                        backdrop-blur-xl 
-                        border border-[#D4AF37]/30 
-                        rounded-2xl 
-                        p-4 
+                        class="stat-card
+                        bg-[#D4AF37]/15
+                        backdrop-blur-xl
+                        border border-[#D4AF37]/30
+                        rounded-2xl
+                        p-4
                         shadow-[0_8px_30px_rgba(212,175,55,0.15)]">
 
                         <div class="flex items-start justify-between mb-3">
                             <div
                                 class="stat-icon w-10 h-10 rounded-xl bg-blue-500/20 flex items-center justify-center text-xl">
-                                🚗
+                                📋
                             </div>
 
                             <span
@@ -246,7 +248,7 @@
 
                         <div class="text-xl md:text-2xl font-bold text-[#3A2A0F]" data-count="148" id="c2">0
                         </div>
-                        <div class="text-xs text-[#000] mt-0.5">Total Carwash</div>
+                        <div class="text-xs text-[#000] mt-0.5">Total Pesanan</div>
 
                         <div class="mt-3 h-1.5 bg-[#FFFFFF] rounded-full overflow-hidden">
                             <div class="progress-fill" style="width:58%; background:#3b82f6"></div>
@@ -256,13 +258,13 @@
                     </div>
 
                     {{-- Active Tables --}}
-                    {{-- <div
-                        class="stat-card 
-                        bg-[#D4AF37]/15 
-                        backdrop-blur-xl 
-                        border border-[#D4AF37]/30 
-                        rounded-2xl 
-                        p-4 
+                    <div
+                        class="stat-card
+                        bg-[#D4AF37]/15
+                        backdrop-blur-xl
+                        border border-[#D4AF37]/30
+                        rounded-2xl
+                        p-4
                         shadow-[0_8px_30px_rgba(212,175,55,0.15)]">
                         <div class="flex items-start justify-between mb-3">
                             <div
@@ -279,16 +281,16 @@
                             <div class="progress-fill" style="width:56%; background:#f97316"></div>
                         </div>
                         <div class="text-[10px] text-black-400 mt-1">7 meja tersedia</div>
-                    </div> --}}
+                    </div>
 
                     {{-- Avg Order Value --}}
-                    {{-- <div
-                        class="stat-card 
-                        bg-[#D4AF37]/15 
-                        backdrop-blur-xl 
-                        border border-[#D4AF37]/30 
-                        rounded-2xl 
-                        p-4 
+                    <div
+                        class="stat-card
+                        bg-[#D4AF37]/15
+                        backdrop-blur-xl
+                        border border-[#D4AF37]/30
+                        rounded-2xl
+                        p-4
                         shadow-[0_8px_30px_rgba(212,175,55,0.15)]">
                         <div class="flex items-start justify-between mb-3">
                             <div
@@ -304,7 +306,7 @@
                             <div class="progress-fill" style="width:64%; background:#a855f7"></div>
                         </div>
                         <div class="text-[10px] text-black-400 mt-1">Target: $50</div>
-                    </div> --}}
+                    </div>
                 </div>
 
                 {{-- ── ROW 2: Chart + Donut ── --}}
@@ -312,13 +314,13 @@
 
                     {{-- Bar Chart (Revenue 7 hari) --}}
                     <div
-                        class="lg:col-span-2 
-                        bg-[#D4AF37]/15 
-                        backdrop-blur-xl 
-                        border border-[#D4AF37]/30 
-                        rounded-2xl 
-                        p-4 md:p-5 
-                        shadow-[0_8px_30px_rgba(212,175,55,0.15)] 
+                        class="lg:col-span-2
+                        bg-[#D4AF37]/15
+                        backdrop-blur-xl
+                        border border-[#D4AF37]/30
+                        rounded-2xl
+                        p-4 md:p-5
+                        shadow-[0_8px_30px_rgba(212,175,55,0.15)]
                         fade-up delay-5">
                         <div class="flex items-center justify-between mb-4">
                             <div>
@@ -329,13 +331,13 @@
                                 <button
                                     class="px-2.5 py-1 bg-[#0BAB8C] text-white rounded-lg text-[10px] font-semibold">Minggu</button>
                                 <button
-                                    class="px-2.5 py-1 
+                                    class="px-2.5 py-1
                                     bg-[#FFF]/100
                                     border border-[#D4AF37]/30
                                     text-[#000]
-                                    rounded-lg 
-                                    text-[10px] 
-                                    font-semibold 
+                                    rounded-lg
+                                    text-[10px]
+                                    font-semibold
                                     hover:bg-[#D4AF37]/25
                                     transition-all duration-200">Bulan</button>
                             </div>
@@ -349,12 +351,12 @@
 
                     {{-- Donut Chart (Order type) --}}
                     <div
-                        class="bg-[#D4AF37]/15 
-                        backdrop-blur-xl 
-                        border border-[#D4AF37]/30 
-                        rounded-2xl 
-                        p-4 md:p-5 
-                        shadow-[0_8px_30px_rgba(212,175,55,0.15)] 
+                        class="bg-[#D4AF37]/15
+                        backdrop-blur-xl
+                        border border-[#D4AF37]/30
+                        rounded-2xl
+                        p-4 md:p-5
+                        shadow-[0_8px_30px_rgba(212,175,55,0.15)]
                         fade-up delay-6">
                         <h3 class="font-bold text-black-900 text-sm mb-1">Tipe Pesanan</h3>
                         <p class="text-xs text-black-400 mb-4">Hari ini</p>
@@ -415,10 +417,10 @@
                 </div>
 
                 {{-- ── ROW 3: Recent Orders + Top Menu ── --}}
-                {{-- <div class="grid grid-cols-1 lg:grid-cols-3 gap-3 md:gap-4"> --}}
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-3 md:gap-4">
 
-                {{-- Recent Orders Table --}}
-                {{-- <div class="lg:col-span-2 bg-white rounded-2xl overflow-hidden fade-up delay-5">
+                    {{-- Recent Orders Table --}}
+                    <div class="lg:col-span-2 bg-white rounded-2xl overflow-hidden fade-up delay-5">
                         <div class="flex items-center justify-between px-4 md:px-5 pt-4 pb-3 border-b border-black-50">
                             <h3 class="font-bold text-black-900 text-sm">Pesanan Terkini</h3>
                             <a href="#" class="text-xs font-semibold text-[#0BAB8C] hover:underline">Lihat
@@ -487,10 +489,10 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div> --}}
+                    </div>
 
-                {{-- Top Menu Items --}}
-                {{-- <div class="bg-white rounded-2xl p-4 md:p-5 fade-up delay-6">
+                    {{-- Top Menu Items --}}
+                    <div class="bg-white rounded-2xl p-4 md:p-5 fade-up delay-6">
                         <div class="flex items-center justify-between mb-4">
                             <h3 class="font-bold text-black-900 text-sm">Menu Terlaris</h3>
                             <span class="text-[10px] text-black-400">Hari ini</span>
@@ -559,10 +561,10 @@
                                 </div>
                                 <span class="text-xs font-bold text-black-700 flex-shrink-0">12x</span>
                             </div>
-                        </div> --}}
+                        </div>
 
-                {{-- Quick Summary --}}
-                {{-- <div class="mt-4 pt-4 border-t border-black-50 grid grid-cols-2 gap-3">
+                        {{-- Quick Summary --}}
+                        <div class="mt-4 pt-4 border-t border-black-50 grid grid-cols-2 gap-3">
                             <div class="bg-[#e6faf6] rounded-xl p-3 text-center">
                                 <div class="text-sm font-bold text-[#0BAB8C]">$4,820</div>
                                 <div class="text-[10px] text-black-500 mt-0.5">Pendapatan</div>
@@ -571,10 +573,10 @@
                                 <div class="text-sm font-bold text-black-700">4.8 ⭐</div>
                                 <div class="text-[10px] text-black-500 mt-0.5">Rating Hari Ini</div>
                             </div>
-                        </div> --}}
-                {{-- </div>
+                        </div>
+                    </div>
 
-                </div>end row 3 --}}
+                </div>{{-- end row 3 --}}
 
             </div>{{-- end dashboard scroll --}}
 
@@ -597,50 +599,30 @@
                 now.getFullYear();
 
             /* ── Count-up animation ── */
-            function countUp(id, target, isCurrency = false) {
+            function countUp(id, target, prefix = '', suffix = '') {
                 const el = document.getElementById(id);
                 if (!el) return;
-
                 const dur = 900;
                 const step = 16;
                 let cur = 0;
                 const inc = target / (dur / step);
-
                 const t = setInterval(() => {
                     cur += inc;
                     if (cur >= target) {
                         cur = target;
                         clearInterval(t);
                     }
-
-                    el.textContent = isCurrency ?
-                        'Rp ' + Math.floor(cur).toLocaleString('id-ID') :
-                        Math.floor(cur).toLocaleString('id-ID');
+                    el.textContent = prefix + Math.floor(cur).toLocaleString() + suffix;
                 }, step);
             }
-            countUp('c1', 4820000, true);
+            countUp('c1', 4820, '$');
             countUp('c2', 148);
             countUp('c3', 9);
-            countUp('c4', 32000, true);
-
-            function formatRupiah(value) {
-                if (value >= 1000000) {
-                    return (value / 1000000).toFixed(1).replace('.0', '') + 'JT';
-                }
-                return (value / 1000).toFixed(0) + 'K';
-            }
+            countUp('c4', 32, '$');
 
             /* ── Bar chart ── */
             const labels = ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'];
-            const values = [
-                520000,
-                780000,
-                650000,
-                920000,
-                840000,
-                1100000,
-                960000
-            ];
+            const values = [520, 780, 650, 920, 840, 1100, 960]; // in dollars (×10 for display)
             const max = Math.max(...values);
             const colors = [
                 '#3B82F6',
@@ -658,28 +640,28 @@
                 chart.innerHTML = values.map((v, i) => {
                     const pct = (v / max * 100).toFixed(1);
                     const isToday = i === 6;
-
                     return `
-                    <div class="flex-1 flex flex-col items-center h-full">
+                    <div class="flex-1 flex flex-col items-center gap-1 group cursor-pointer h-full">
 
-                        <div class="text-[8px] font-bold text-[#5C4520] mb-1 whitespace-nowrap">
-                            ${formatRupiah(v)}
+                        <div class="text-[10px] font-bold text-[#5C4520]
+                            mb-1 drop-shadow-sm">
+                            $${v}
                         </div>
 
-                        <div class="w-full flex-1 flex items-end">
-                            <div
-                                class="w-full rounded-lg"
+                        <div class="w-full h-full flex items-end">
+                            <div class="chart-bar w-full rounded-lg"
                                 style="
                                     height:${pct}%;
                                     background:${isToday ? '#D4AF37' : colors[i]};
+                                    opacity:1;
                                     box-shadow:0 4px 10px rgba(0,0,0,.12);
                                 "
-                                title="Rp ${v.toLocaleString('id-ID')}">
+                                title="$${v}">
                             </div>
                         </div>
 
                     </div>
-                `;
+                    `;
                 }).join('');
 
                 lblRow.innerHTML = labels.map((l, i) =>
