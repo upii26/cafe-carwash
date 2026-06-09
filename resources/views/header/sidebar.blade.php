@@ -37,21 +37,40 @@ flex flex-col py-5 px-3 shadow-sm z-50 transition-all">
     <nav class="flex flex-col gap-1 flex-1">
 
         <!-- Dashboard -->
-        <!-- Dashboard -->
-        <a href="{{ url('dashboard') }}"
+        <!-- Dashboard Cafe-->
+        <a href="{{ url('dashboard-cafe') }}"
             class="sidebar-item flex items-center gap-3 px-2.5 py-2.5 rounded-xl text-sm font-medium
-{{ request()->is('dashboard')
+{{ request()->is('dashboard-cafe')
     ? 'bg-gradient-to-r from-[#8B6B1F] to-[#D4AF37] text-white shadow-md'
     : 'text-white hover:bg-gradient-to-r hover:from-[#8B6B1F] hover:to-[#D4AF37] hover:text-white' }}">
 
             <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <rect x="3" y="3" width="7" height="7" rx="1.5" />
-                <rect x="14" y="3" width="7" height="7" rx="1.5" />
-                <rect x="3" y="14" width="7" height="7" rx="1.5" />
-                <rect x="14" y="14" width="7" height="7" rx="1.5" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7h13v6a6 6 0 11-12 0V7z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8h1a3 3 0 010 6h-1" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21h13" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 5 Q6.5 3.5 6 2" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.5 5 Q10 3.5 9.5 2" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5 Q13.5 3.5 13 2" />
             </svg>
 
-            <span>Dashboard</span>
+            <span>Dashboard Cafe</span>
+        </a>
+
+        <!-- Dashboard Carwash -->
+        <a href="{{ url('dashboard-carwash') }}"
+            class="sidebar-item flex items-center gap-3 px-2.5 py-2.5 rounded-xl text-sm font-medium 
+{{ request()->is('dashboard-carwash')
+    ? 'bg-gradient-to-r from-[#8B6B1F] to-[#D4AF37] text-white shadow-md'
+    : 'text-white hover:bg-gradient-to-r hover:from-[#8B6B1F] hover:to-[#D4AF37] hover:text-white' }}">
+
+            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M5 11l1.5-4A2 2 0 018.4 6h7.2a2 2 0 011.9 1.3L19 11v5h-2a2 2 0 11-4 0H9a2 2 0 11-4 0H3v-5h2z" />
+                <circle cx="7" cy="16" r="1" fill="currentColor" />
+                <circle cx="17" cy="16" r="1" fill="currentColor" />
+            </svg>
+
+            <span>Dashboard Carwash</span>
         </a>
 
         <!-- Order Line -->
@@ -68,7 +87,7 @@ flex flex-col py-5 px-3 shadow-sm z-50 transition-all">
         </a>
 
         <!-- Manage Table -->
-        <a href=""
+        {{-- <a href=""
             class="sidebar-item flex items-center gap-3 px-2.5 py-2.5 rounded-xl text-sm font-medium
             {{ Route::is('manage.table')
                 ? 'bg-gradient-to-r from-[#8B6B1F] to-[#D4AF37] text-white shadow-md'
@@ -78,7 +97,7 @@ flex flex-col py-5 px-3 shadow-sm z-50 transition-all">
                     d="M3 10h18M3 14h18M10 6v12M14 6v12M5 6h14a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2z" />
             </svg>
             <span>Manage Table</span>
-        </a>
+        </a> --}}
 
         <!-- Manage Dishes -->
 

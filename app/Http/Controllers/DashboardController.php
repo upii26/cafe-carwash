@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 class DashboardController extends Controller
 {
-    public function index(){
-        return view('dashboard');
+    public function cafe()
+    {
+        return view('dashboard-cafe');
+    }
+
+    public function carwash()
+    {
+        return view('dashboard-carwash');
     }
 }

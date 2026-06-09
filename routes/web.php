@@ -10,7 +10,11 @@ Route::get("/", function () {
     return view("login");
 });
 
-Route::get("/dashboard", [DashboardController::class, "index"]);
+// Dashboard Cafe
+Route::get("/dashboard-cafe", [DashboardController::class, "cafe"]);
+
+// Dashboard Carwash
+Route::get("/dashboard-carwash", [DashboardController::class, "carwash"]);
 
 // Menu routes
 Route::get("/dishes", [MenuController::class, "index"]);

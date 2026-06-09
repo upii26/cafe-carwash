@@ -335,20 +335,20 @@
             </h1>
 
             <p class="text-white/55 mt-3 text-sm tracking-wide">
-                Login untuk mengakses dashboard restoran
+                Login untuk mengakses dashboard 
             </p>
         </div>
 
         <!-- Form -->
         <form class="space-y-5">
 
-            <!-- Email -->
+            <!-- User -->
             <div>
                 <label class="block text-sm font-semibold text-white/90 mb-2">
-                    Email
+                    Username
                 </label>
 
-                <input type="email" placeholder="Masukkan email"
+                <input type="email" placeholder="Masukkan username "
                     class="w-full rounded-2xl
             border border-white/20
             bg-white/10
