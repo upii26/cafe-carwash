@@ -10,15 +10,9 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create("menu", function (Blueprint $table) {
+        Schema::create("category_menu", function (Blueprint $table) {
             $table->id();
-            $table->string("photo");
-            $table->string("name");
-            $table->integer("category_id")->nullable();
-            $table->decimal("price")->nullable();
-            $table->integer("terjual")->nullable();
-            $table->integer("deskripsi")->nullable();
-            $table->string("status");
+            $table->string("name_category");
             $table->timestamps();
         });
     }

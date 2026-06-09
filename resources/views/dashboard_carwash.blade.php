@@ -160,7 +160,7 @@
                             text-xs font-medium text-[#000]
                             shadow-[0_8px_30px_rgba(212,175,55,0.15)]">
                             <span class="w-2 h-2 rounded-full bg-green-400 pulse-dot"></span>
-                            Restoran Buka
+                            Carwash Buka
                         </div>
                         <button
                             class="w-9 h-9
