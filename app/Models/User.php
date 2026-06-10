@@ -26,6 +26,16 @@ class User extends Authenticatable
      */
     protected $hidden = ["password", "remember_token"];
 
+    public function isOwner(): bool
+    {
+        return $this->role === 'owner';
+    }
+ 
+    public function isKasir(): bool
+    {
+        return $this->role === 'kasir';
+    }
+    
     /**
      * Get the attributes that should be cast.
      *

@@ -35,11 +35,11 @@
 
         <div class="hidden sm:block">
             <div class="text-sm font-semibold text-white leading-tight">
-                Ibrahim Kadri
+                {{ auth()->user()->name }}
             </div>
 
             <div class="text-xs text-white/80 font-medium">
-                Admin
+                {{ auth()->user()->role }}
             </div>
         </div>
     </div>
