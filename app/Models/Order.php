@@ -11,11 +11,13 @@ class Order extends Model
         "no_order",
         "name_customer",
         "no_table",
-        "menus_id",
-        "category_menu_id",
         "total",
-        "tax",
         "payment_method",
-        "status",
     ];
+
+    public function items() { 
+    
+        return $this->hasMany(OrderItem::class); 
+    
+    }
 }

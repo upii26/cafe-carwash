@@ -18,7 +18,7 @@ class MenuController extends Controller
             'photo'    => $item->photo,
             'category' => $item->category->name_category ?? '-',
             'price'    => (int) $item->price,
-            'sold'     => (int) $item->terjual,
+            'sold'     => (int) $item->sold,
 
         ];
     });

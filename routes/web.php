@@ -31,12 +31,13 @@ Route::middleware(["auth"])->group(function () {
 
     // Order Routes
     Route::get("/orders", [OrderController::class, "index"]);
+    Route::post('/orders/store', [OrderController::class, 'store']);
 
     // User Routes
     Route::get('/users',           [UsersController::class, 'index']);
-Route::get('/users/create',    [UsersController::class, 'create']);
-Route::post('/users',          [UsersController::class, 'store']);
-Route::get('/users/{id}/edit', [UsersController::class, 'edit']);
-Route::put('/users/{id}',      [UsersController::class, 'update']);
-Route::delete('/users/{id}',   [UsersController::class, 'destroy']);
+    Route::get('/users/create',    [UsersController::class, 'create']);
+    Route::post('/users',          [UsersController::class, 'store']);
+    Route::get('/users/{id}/edit', [UsersController::class, 'edit']);
+    Route::put('/users/{id}',      [UsersController::class, 'update']);
+    Route::delete('/users/{id}',   [UsersController::class, 'destroy']);
 });
