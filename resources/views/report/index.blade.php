@@ -15,11 +15,13 @@
 
             <!-- Tabs -->
             <div class="flex gap-2 mb-4">
-                <a href="{{ url('/reports') }}?type=food&from={{ $from }}&to={{ $to }}" data-tab="food"
+                <a href="{{ url('/reports') }}?type=food&from={{ $from }}&to={{ $to }}"
+                    data-tab="food"
                     class="report-tab-btn {{ $type === 'food' ? 'tab-active' : 'bg-white text-gray-500' }} px-4 py-2 rounded-xl text-sm font-semibold">
                     🍽️ Makanan &amp; Minuman
                 </a>
-                <a href="{{ url('/reports') }}?type=carwash&from={{ $from }}&to={{ $to }}" data-tab="carwash"
+                <a href="{{ url('/reports') }}?type=carwash&from={{ $from }}&to={{ $to }}"
+                    data-tab="carwash"
                     class="report-tab-btn {{ $type === 'carwash' ? 'tab-active' : 'bg-white text-gray-500' }} px-4 py-2 rounded-xl text-sm font-semibold">
                     🚗 Carwash
                 </a>
@@ -88,7 +90,8 @@
             </div>
 
             <!-- Chart: Carwash -->
-            <div id="chartCarwashWrapper" class="bg-white rounded-2xl p-4 mb-4 {{ $type !== 'carwash' ? 'hidden' : '' }}">
+            <div id="chartCarwashWrapper"
+                class="bg-white rounded-2xl p-4 mb-4 {{ $type !== 'carwash' ? 'hidden' : '' }}">
                 <div class="flex items-center justify-between mb-3">
                     <span class="text-sm font-bold text-gray-900">Penjualan Carwash per Bulan</span>
                     <span class="flex items-center gap-1.5 text-xs text-gray-500">
@@ -100,10 +103,26 @@
                 </div>
             </div>
 
+            <!-- Search -->
+            <div class="mb-3 flex justify-end">
+                <div class="relative w-full max-w-xs">
+
+                    <svg class="w-4 h-4 text-gray-300 absolute left-3 top-1/2 -translate-y-1/2" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z" />
+                    </svg>
+
+                    <input type="text" id="searchOrder" placeholder="Cari no order..." oninput="filterTable()"
+                        class="w-full text-sm border border-gray-200 rounded-xl pl-9 pr-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-[#0BAB8C]/30 focus:border-[#0BAB8C] transition-all">
+
+                </div>
+            </div>
+
             <!-- Table -->
             <div class="bg-white rounded-2xl overflow-hidden">
                 <div class="overflow-x-auto">
-                    <table class="w-full text-sm">
+                    <table id="reportTable" class="w-full text-sm">
                         <thead>
                             <tr class="bg-gray-50 text-gray-400 text-xs font-semibold">
                                 <th class="text-left px-4 py-3 whitespace-nowrap">Tanggal</th>
@@ -115,47 +134,24 @@
                                 <th class="text-center px-4 py-3 whitespace-nowrap">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @forelse ($orders as $order)
-                                <tr class="border-t border-gray-100">
-                                    <td class="px-4 py-3 whitespace-nowrap text-gray-600">
-                                        {{ $order->created_at->format('d M Y') }}
-                                        <br>
-                                        <span class="text-xs text-gray-400">
-                                            {{ $order->created_at->format('H:i') }}
-                                        </span>
-                                    </td>
-                                    <td class="px-4 py-3 font-semibold text-gray-800">
-                                        #{{ $order->no_order }}
-                                    </td>
-                                    <td class="px-4 py-3 text-gray-700">
-                                        {{ $order->name_customer }}
-                                    </td>
-                                    <td class="px-4 py-3 text-center text-gray-700">
-                                        {{ $order->no_table }}
-                                    </td>
-                                    <td class="px-4 py-3 text-gray-700">
-                                        {{ $order->payment_method }}
-                                    </td>
-                                    <td class="px-4 py-3 text-right font-bold text-[#0BAB8C]">
-                                        Rp {{ number_format($order->total, 0, ',', '.') }}
-                                    </td>
-                                    <td class="px-4 py-3 text-center">
-                                        <button onclick="printReceipt({{ $order->id }})"
-                                            class="px-3 py-1.5 bg-gray-50 hover:bg-gray-100 rounded-lg text-xs font-semibold text-gray-700">
-                                            🖨 Print
-                                        </button>
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="7" class="text-center py-10 text-gray-400">
-                                        Tidak ada transaksi 📭
-                                    </td>
-                                </tr>
-                            @endforelse
-                        </tbody>
+                        <tbody id="reportTableBody"></tbody>
                     </table>
+                    <div class="flex items-center justify-between px-4 py-3 border-t border-gray-100 flex-wrap gap-2">
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs text-gray-400">Tampilkan</span>
+                            <select id="perPageSelect" onchange="changePerPage()"
+                                class="text-xs border border-gray-200 rounded-lg px-2 py-1 bg-white text-gray-600 focus:outline-none focus:ring-2 focus:ring-[#0BAB8C]/30 focus:border-[#0BAB8C] transition-colors">
+                                <option value="10">10</option>
+                                <option value="30">30</option>
+                                <option value="50">50</option>
+                            </select>
+                            <span class="text-xs text-gray-400" id="paginationInfo"></span>
+                        </div>
+                        <div class="flex items-center gap-1" id="paginationBtns"></div>
+                    </div>
+                </div>
+                <div id="searchEmptyState" class="text-center text-gray-300 py-10 text-sm hidden">
+                    Order tidak ditemukan 🔍
                 </div>
             </div>
 
@@ -181,10 +177,125 @@
         // DATA CHART PER BULAN, MASING-MASING KATEGORI
         // format: [{ month: 'Jan', total: 0 }, ...]
         // ════════════════════════════════════════
-        const monthlyFoodData    = @json($chartFood);
+        const monthlyFoodData = @json($chartFood);
         const monthlyCarwashData = @json($chartCarwash);
 
         let chartFood, chartCarwash;
+
+        let filteredOrders = [...ordersData];
+        let currentPage = 1;
+        let perPage = 10;
+
+        const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+        function formatTanggal(dateStr) {
+            const d = new Date(dateStr);
+            return `${String(d.getDate()).padStart(2,'0')} ${monthNames[d.getMonth()]} ${d.getFullYear()}`;
+        }
+
+        function formatRp(n) {
+            return 'Rp ' + Number(n).toLocaleString('id-ID');
+        }
+
+        function filterTable() {
+            const keyword = document.getElementById('searchOrder').value.trim().toLowerCase();
+            filteredOrders = ordersData.filter(o =>
+                (o.order_code || '').toLowerCase().includes(keyword)
+            );
+            currentPage = 1;
+            renderTable();
+        }
+
+        function changePerPage() {
+            perPage = parseInt(document.getElementById('perPageSelect').value);
+            currentPage = 1;
+            renderTable();
+        }
+
+        function renderTable() {
+            const tbody = document.getElementById('reportTableBody');
+            const total = filteredOrders.length;
+            const start = (currentPage - 1) * perPage;
+            const slice = filteredOrders.slice(start, start + perPage);
+
+            tbody.innerHTML = '';
+
+            if (slice.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="7" class="text-center py-10 text-gray-300">
+            ${ordersData.length === 0 ? 'Tidak ada transaksi 📭' : 'Order tidak ditemukan 🔍'}
+        </td></tr>`;
+            } else {
+                slice.forEach(o => {
+                    const tr = document.createElement('tr');
+                    tr.className = 'border-t border-gray-100';
+                    tr.innerHTML = `
+                <td class="px-4 py-3 whitespace-nowrap text-gray-600">
+                    ${formatTanggal(o.date)}
+                    <br>
+                    <span class="text-xs text-gray-400">${o.time || ''}</span>
+                </td>
+                <td class="px-4 py-3 font-semibold text-gray-800">${o.order_code}</td>
+                <td class="px-4 py-3 text-gray-700">${o.customer}</td>
+                <td class="px-4 py-3 text-center text-gray-700">${o.table}</td>
+                <td class="px-4 py-3 text-gray-700">${o.payment}</td>
+                <td class="px-4 py-3 text-right font-bold text-[#0BAB8C]">${formatRp(o.total)}</td>
+                <td class="px-4 py-3 text-center">
+                    <button onclick="printReceipt(${o.id})"
+                        class="px-3 py-1.5 bg-gray-50 hover:bg-gray-100 rounded-lg text-xs font-semibold text-gray-700">
+                        🖨 Print
+                    </button>
+                </td>
+            `;
+                    tbody.appendChild(tr);
+                });
+            }
+
+            document.getElementById('paginationInfo').textContent =
+                total === 0 ? '' : `Menampilkan ${start + 1}–${Math.min(start + perPage, total)} dari ${total} data`;
+
+            const container = document.getElementById('paginationBtns');
+            container.innerHTML = '';
+            const totalPages = Math.ceil(total / perPage);
+            if (totalPages <= 1) return;
+
+            const mkBtn = (label, page, disabled, active) => {
+                const b = document.createElement('button');
+                b.innerHTML = label;
+                b.disabled = disabled;
+                b.className =
+                `px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors
+            ${active ? 'bg-[#0BAB8C] text-white border-[#0BAB8C]' : ''}
+            ${disabled ? 'text-gray-300 border-gray-100 cursor-default' : ''}
+            ${!active && !disabled ? 'text-gray-500 border-gray-200 hover:border-[#0BAB8C] hover:text-[#0BAB8C]' : ''}`;
+                if (!disabled && !active) b.onclick = () => {
+                    currentPage = page;
+                    renderTable();
+                };
+                return b;
+            };
+
+            container.appendChild(mkBtn('&#8249;', currentPage - 1, currentPage === 1, false));
+            for (let p = 1; p <= totalPages; p++) container.appendChild(mkBtn(p, p, false, p === currentPage));
+            container.appendChild(mkBtn('&#8250;', currentPage + 1, currentPage === totalPages, false));
+        }
+
+        function filterTable() {
+            const keyword = document.getElementById('searchOrder').value.trim().toLowerCase();
+            const rows = document.querySelectorAll('#reportTableBody .order-row');
+            let visibleCount = 0;
+
+            rows.forEach(row => {
+                const noOrder = row.dataset.order || '';
+                const match = noOrder.includes(keyword);
+                row.style.display = match ? '' : 'none';
+                if (match) visibleCount++;
+            });
+
+            const searchEmptyState = document.getElementById('searchEmptyState');
+            if (rows.length > 0) {
+                searchEmptyState.classList.toggle('hidden', visibleCount > 0 || keyword === '');
+            }
+        }
 
         // ════════════════════════════════════════
         // CHARTS
@@ -224,7 +335,9 @@
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
-                    legend: { display: false },
+                    legend: {
+                        display: false
+                    },
                     tooltip: {
                         callbacks: {
                             label: (ctx) => ctx.dataset.label + ': Rp ' + ctx.parsed.y.toLocaleString('id-ID')
@@ -232,7 +345,11 @@
                     }
                 },
                 scales: {
-                    x: { ticks: { autoSkip: false } },
+                    x: {
+                        ticks: {
+                            autoSkip: false
+                        }
+                    },
                     y: {
                         ticks: {
                             callback: (v) => 'Rp ' + (v / 1000000).toLocaleString('id-ID') + 'jt'
@@ -241,6 +358,8 @@
                 }
             };
         }
+
+
 
         // ════════════════════════════════════════
         // PRINT STRUK
@@ -358,10 +477,14 @@
             win.print();
         }
 
+
+
         // ════════════════════════════════════════
         // INIT
         // ════════════════════════════════════════
         renderCharts();
+        renderTable();
     </script>
+
 
     @include('footer.footer')

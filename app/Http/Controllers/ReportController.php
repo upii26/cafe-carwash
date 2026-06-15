@@ -19,25 +19,25 @@ class ReportController extends Controller
         // Apakah user secara eksplisit memberi filter tanggal?
         $hasFilter = $request->filled('from') || $request->filled('to');
 
-        // ════════════════════════════════════════
-        // FILTER UNTUK TABEL
-        // Default: hari ini jika belum ada filter
-        // ════════════════════════════════════════
-        $tableFrom = $from;
-        $tableTo   = $to;
-
-        if (!$hasFilter) {
-            $tableFrom = $tableTo = now()->format('Y-m-d');
-        }
-
         $query = Order::with(['items.menu', 'items.category']);
 
-        if ($tableFrom) {
-            $query->whereDate('created_at', '>=', $tableFrom);
-        }
+        // ════════════════════════════════════════
+        // FILTER TANGGAL UNTUK TABEL
+        // Default: hari ini jika belum ada filter
+        // ════════════════════════════════════════
+        if (!$hasFilter) {
+            $query->whereBetween('created_at', [
+                now()->startOfDay(),
+                now()->endOfDay(),
+            ]);
+        } else {
+            if ($from) {
+                $query->where('created_at', '>=', Carbon::parse($from)->startOfDay());
+            }
 
-        if ($tableTo) {
-            $query->whereDate('created_at', '<=', $tableTo);
+            if ($to) {
+                $query->where('created_at', '<=', Carbon::parse($to)->endOfDay());
+            }
         }
 
         $query->whereHas('items.category', function ($q) use ($type) {
@@ -109,10 +109,11 @@ class ReportController extends Controller
 
         if ($from || $to) {
             if ($from) {
-                $query->whereDate('order_items.created_at', '>=', $from);
+                $query->where('order_items.created_at', '>=', Carbon::parse($from)->startOfDay());
             }
+
             if ($to) {
-                $query->whereDate('order_items.created_at', '<=', $to);
+                $query->where('order_items.created_at', '<=', Carbon::parse($to)->endOfDay());
             }
         } else {
             $query->whereYear('order_items.created_at', now()->year);
