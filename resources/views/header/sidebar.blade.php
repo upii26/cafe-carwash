@@ -126,7 +126,7 @@ flex flex-col py-5 px-3 shadow-sm z-50 transition-all">
         </a>
 
         <!-- Repots -->
-        <a href="{{ url('reports') }}"
+        <a href="{{ url('/reports') }}"
             class="sidebar-item flex items-center gap-3 px-2.5 py-2.5 rounded-xl text-sm font-medium
             {{ Route::is('reports')
                 ? 'bg-gradient-to-r from-[#8B6B1F] to-[#D4AF37] text-white shadow-md'

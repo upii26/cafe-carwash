@@ -223,7 +223,7 @@
                         Place Order
                     </button>
                 </div>
-            </div>
+            </div>    
         </div>
 
     </div>
@@ -308,9 +308,6 @@
         let currentCat = 'all';
 
 
-
-
-
         function filterCategory(cat) {
             currentCat = cat;
             document.querySelectorAll('.cat-btn').forEach(b => {
@@ -330,12 +327,11 @@
                 return `
                 <div class="menu-card bg-white rounded-2xl p-3 select-none">
                   <div class="w-full h-24 rounded-xl overflow-hidden mb-2 bg-gray-100">
-    <img
-        src="/storage/${item.photo}"
-        class="w-full h-full object-cover"
-        onerror="this.src='https://placehold.co/300x200'"
-    >
-</div>
+                    <img
+                        src="/storage/${item.photo}"
+                        class="w-full h-full object-cover"
+                        onerror="this.src='https://placehold.co/300x200'">
+                </div>
                     <div class="text-[10px] text-gray-400 font-medium">${item.type}</div>
                     <div class="text-xs font-bold text-gray-800 mb-2 leading-tight">${item.name}</div>
                     <div class="flex items-center justify-between">

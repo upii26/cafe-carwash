@@ -5,6 +5,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\ReportController;
 
 Route::get("/", function () {
     return view("login");
@@ -40,4 +41,7 @@ Route::middleware(["auth"])->group(function () {
     Route::get('/users/{id}/edit', [UsersController::class, 'edit']);
     Route::put('/users/{id}',      [UsersController::class, 'update']);
     Route::delete('/users/{id}',   [UsersController::class, 'destroy']);
+
+    //Report Routes
+    Route::get('/reports', [ReportController::class, 'index']);
 });
