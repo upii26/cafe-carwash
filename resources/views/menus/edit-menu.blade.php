@@ -134,16 +134,6 @@
         gap: 8px
     }
 
-    .step-pill {
-        background: var(--green-bg);
-        color: var(--green);
-        font-size: 11px;
-        font-weight: 700;
-        padding: 5px 12px;
-        border-radius: 99px;
-        border: 1px solid rgba(11, 171, 140, .2);
-    }
-
     .nav-icon-btn {
         width: 34px;
         height: 34px;
@@ -192,87 +182,6 @@
         padding: 20px 20px 80px;
     }
 
-    .stepper {
-        display: flex;
-        align-items: center;
-        gap: 0;
-        margin-bottom: 20px;
-        background: var(--white);
-        border-radius: 12px;
-        padding: 14px 16px;
-        box-shadow: var(--shadow);
-        border: var(--border);
-    }
-
-    .step {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        flex: 1
-    }
-
-    .step-dot {
-        width: 26px;
-        height: 26px;
-        border-radius: 50%;
-        flex-shrink: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 10px;
-        font-weight: 800;
-        transition: all var(--transition);
-    }
-
-    .step-dot.done {
-        background: var(--green);
-        color: #fff
-    }
-
-    .step-dot.active {
-        background: var(--green);
-        color: #fff;
-        box-shadow: 0 0 0 4px var(--green-bg)
-    }
-
-    .step-dot.idle {
-        background: var(--s100);
-        color: var(--s400)
-    }
-
-    .step-info {
-        flex: 1
-    }
-
-    .step-label {
-        font-size: 11px;
-        font-weight: 700;
-        color: var(--s700)
-    }
-
-    .step-label.idle {
-        color: var(--s400)
-    }
-
-    .step-desc {
-        font-size: 9.5px;
-        color: var(--s400);
-        margin-top: 1px
-    }
-
-    .step-line {
-        flex: 1;
-        height: 1.5px;
-        background: var(--s200);
-        border-radius: 1px;
-        max-width: 40px;
-        margin: 0 6px
-    }
-
-    .step-line.done {
-        background: var(--green)
-    }
-
     .layout-row {
         display: flex;
         gap: 18px;
@@ -313,10 +222,6 @@
 
     .card:nth-child(3) {
         animation-delay: .12s
-    }
-
-    .card:nth-child(4) {
-        animation-delay: .16s
     }
 
     @keyframes fadeUp {
@@ -368,12 +273,6 @@
         display: flex;
         flex-direction: column;
         gap: 5px
-    }
-
-    .field-row {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 12px
     }
 
     label.lbl {
@@ -534,6 +433,53 @@
 
     .remove-btn:hover {
         text-decoration: underline
+    }
+
+    /* Badge foto lama */
+    .existing-photo-wrap {
+        text-align: center;
+        padding: 8px 0;
+    }
+
+    .existing-photo-wrap img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 12px;
+        margin: 0 auto 6px;
+        display: block;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, .12)
+    }
+
+    .existing-badge {
+        display: inline-block;
+        font-size: 10px;
+        font-weight: 700;
+        color: var(--green);
+        background: var(--green-bg);
+        padding: 3px 10px;
+        border-radius: 99px;
+        border: 1px solid rgba(11, 171, 140, .2);
+        margin-top: 4px;
+    }
+
+    .change-photo-btn {
+        margin-top: 6px;
+        background: none;
+        border: 1.5px solid var(--s200);
+        border-radius: 8px;
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--s600);
+        padding: 5px 14px;
+        cursor: pointer;
+        transition: all var(--transition);
+    }
+
+    .change-photo-btn:hover {
+        border-color: var(--green);
+        color: var(--green);
+        background: var(--green-bg);
     }
 
     .actions {
@@ -726,7 +672,6 @@
         text-align: center
     }
 
-    /* ── COMPLETENESS CARD (kanan bawah) ── */
     .meta-card {
         margin-top: 10px;
         background: var(--white);
@@ -880,12 +825,11 @@
                     </svg>
                 </button>
                 <div style="margin-left:4px">
-                    <div class="page-title">Tambah Menu Baru</div>
-                    <div class="page-sub">Manage Dishes › Tambah Menu</div>
+                    <div class="page-title">Edit Menu</div>
+                    <div class="page-sub">Manage Dishes › Edit Menu › {{ $menu->name }}</div>
                 </div>
             </div>
             <div class="navbar-right">
-                <div class="step-pill" id="stepPill">Langkah 1 dari 3</div>
                 <button class="nav-icon-btn" onclick="showToast('🔔 Tidak ada notifikasi baru','#475569')">
                     <svg viewBox="0 0 24 24">
                         <path
@@ -899,49 +843,38 @@
         <!-- PAGE BODY -->
         <div class="page-body">
 
-            <!-- STEPPER -->
-            <div class="stepper">
-                <div class="step">
-                    <div class="step-dot active" id="sd1">1</div>
-                    <div class="step-info">
-                        <div class="step-label" id="sl1">Info Dasar</div>
-                        <div class="step-desc">Nama, foto, harga</div>
-                    </div>
-                </div>
-                <div class="step-line" id="sl-line1"></div>
-                <div class="step">
-                    <div class="step-dot idle" id="sd2">2</div>
-                    <div class="step-info">
-                        <div class="step-label idle" id="sl2">Kategori</div>
-                        <div class="step-desc">Pilih kategori menu</div>
-                    </div>
-                </div>
-                <div class="step-line" id="sl-line2"></div>
-                <div class="step">
-                    <div class="step-dot idle" id="sd3">3</div>
-                    <div class="step-info">
-                        <div class="step-label idle" id="sl3">Review</div>
-                        <div class="step-desc">Cek &amp; simpan</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ── MAIN 2-COLUMN LAYOUT ── -->
             <div class="layout-row">
 
-                <!-- FORM COLUMN (kiri) -->
+                <!-- FORM COLUMN -->
                 <div class="form-col">
 
-                    <!-- CARD 1: Foto -->
-                    <form action="{{ url('/addMenu') }}" method="POST" enctype="multipart/form-data" id="menuForm">
+                    <form action="{{ url('/dishes/' . $menu->id) }}" method="POST" enctype="multipart/form-data"
+                        id="menuForm">
                         @csrf
-                        <div class="card ">
+                        @method('PUT')
+
+                        <!-- CARD 1: Foto -->
+                        <div class="card">
                             <div class="card-head">
                                 <span class="card-num">1</span>
                                 <span class="card-title">Foto Menu</span>
                                 <span class="card-subtitle">Maks. 2MB</span>
                             </div>
+
+                            {{-- Tampilkan foto lama jika ada --}}
+                            @if ($menu->photo)
+                                <div class="existing-photo-wrap" id="existingPhotoWrap">
+                                    <img src="{{ Storage::url($menu->photo) }}" alt="Foto saat ini" id="existingPhoto">
+                                    <div><span class="existing-badge">✓ Foto saat ini</span></div>
+                                    <button type="button" class="change-photo-btn" onclick="showUploadZone()">
+                                        🔄 Ganti Foto
+                                    </button>
+                                </div>
+                            @endif
+
+                            {{-- Upload zone (tersembunyi dulu kalau sudah ada foto, langsung tampil kalau belum ada) --}}
                             <div class="upload-zone" id="uploadZone"
+                                style="{{ $menu->photo ? 'display:none; margin-top:10px' : '' }}"
                                 onclick="document.getElementById('imgInput').click()"
                                 ondragover="event.preventDefault();this.classList.add('drag')"
                                 ondragleave="this.classList.remove('drag')" ondrop="handleDrop(event)">
@@ -955,7 +888,7 @@
                                 <div id="uploadPreviewWrap">
                                     <img id="previewImg" src="" alt="">
                                     <div class="upload-fname" id="uploadFname"></div>
-                                    <button type="button" class="remove-btn" onclick="removeImg(event)">✕ Hapus
+                                    <button type="button" class="remove-btn" onclick="removeImg(event)">✕ Batal ganti
                                         foto</button>
                                 </div>
                             </div>
@@ -971,20 +904,22 @@
                                 <div class="field">
                                     <label class="lbl">Nama Menu <span class="req">*</span></label>
                                     <input type="text" id="menuName" name="name"
-                                        placeholder="cth. Grilled Salmon Steak" oninput="updatePreview();syncStep()">
+                                        value="{{ old('name', $menu->name) }}" placeholder="cth. Grilled Salmon Steak"
+                                        oninput="updatePreview()">
                                     <span class="field-err" id="err-name">Nama menu wajib diisi</span>
                                 </div>
                                 <div class="field">
                                     <label class="lbl">Deskripsi <span class="opt">(opsional)</span></label>
                                     <textarea id="menuDesc" rows="3" name="deskripsi" placeholder="Deskripsikan bahan dan keunikan menu ini…"
-                                        oninput="updatePreview()"></textarea>
+                                        oninput="updatePreview()">{{ old('deskripsi', $menu->deskripsi) }}</textarea>
                                 </div>
                                 <div class="field">
                                     <label class="lbl">Harga <span class="req">*</span></label>
                                     <div class="inp-wrap">
                                         <span class="inp-pre">Rp</span>
-                                        <input type="number" id="menuPrice" name="price" placeholder="45000"
-                                            min="0" oninput="updatePreview();syncStep()">
+                                        <input type="number" id="menuPrice" name="price"
+                                            value="{{ old('price', $menu->price) }}" placeholder="45000" min="0"
+                                            oninput="updatePreview()">
                                     </div>
                                     <span class="field-err" id="err-price">Harga wajib diisi</span>
                                 </div>
@@ -992,7 +927,7 @@
                         </div>
 
                         <!-- CARD 3: Kategori -->
-                        <div class="card mt-3 ">
+                        <div class="card mt-3">
                             <div class="card-head">
                                 <span class="card-num">3</span>
                                 <span class="card-title">Kategori</span>
@@ -1000,10 +935,9 @@
                             <div class="field">
                                 <label class="lbl">Kategori <span class="req">*</span></label>
                                 <div style="display:flex;flex-direction:row;flex-wrap:wrap;gap:16px">
-                                    @foreach ($data as $item)
+                                    @foreach ($categories as $item)
                                         @php
                                             $icon = '📦';
-
                                             if (strtolower($item->name_category) == 'makanan') {
                                                 $icon = '🍲';
                                             } elseif (strtolower($item->name_category) == 'minuman') {
@@ -1012,14 +946,12 @@
                                                 $icon = '🚗';
                                             }
                                         @endphp
-
                                         <label
                                             style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px">
-
-                                            <input type="radio" name="category_id" value="{{ $item->id }}">
-
+                                            <input type="radio" name="category_id" value="{{ $item->id }}"
+                                                {{ old('category_id', $menu->category_id) == $item->id ? 'checked' : '' }}
+                                                onchange="selectCat('{{ $item->id }}', '{{ $item->name_category }}')">
                                             {{ $icon }} {{ $item->name_category }}
-
                                         </label>
                                     @endforeach
                                 </div>
@@ -1029,15 +961,18 @@
 
                         <!-- ACTIONS -->
                         <div class="actions mt-3">
-                            <button type="button" class="btn btn-ghost" onclick="resetForm()">🗑 Reset</button>
-                            <button type="submit" class="btn btn-main">✅ Simpan Menu</button>
+                            <button type="button" class="btn btn-ghost" onclick="window.history.back()">✕
+                                Batal</button>
+                            <button type="submit" class="btn btn-main" onclick="return validateForm()">✅ Simpan
+                                Perubahan</button>
                         </div>
 
+                    </form>
+
                 </div>
-                </form>
                 <!-- /form-col -->
 
-                <!-- PREVIEW COLUMN (kanan) -->
+                <!-- PREVIEW COLUMN -->
                 <div class="preview-col">
                     <div class="preview-label">Preview Kartu Menu</div>
 
@@ -1064,12 +999,12 @@
                     <!-- Meta Info Card -->
                     <div class="meta-card">
                         <div class="meta-row">
-                            <span>Stok</span>
-                            <strong id="mvStock">—</strong>
+                            <span>ID Menu</span>
+                            <strong>#{{ $menu->id }}</strong>
                         </div>
                         <div class="meta-row">
-                            <span>Porsi</span>
-                            <strong id="mvPortion">—</strong>
+                            <span>Terjual</span>
+                            <strong>{{ $menu->terjual ?? 0 }} porsi</strong>
                         </div>
                     </div>
 
@@ -1083,21 +1018,11 @@
                             <div class="bar-fill" id="barFill"></div>
                         </div>
                         <div class="complete-list">
-                            <div class="complete-item" id="ci-img">
-                                <span class="ci-dot"></span> Foto menu
-                            </div>
-                            <div class="complete-item" id="ci-name">
-                                <span class="ci-dot"></span> Nama menu
-                            </div>
-                            <div class="complete-item" id="ci-price">
-                                <span class="ci-dot"></span> Harga
-                            </div>
-                            <div class="complete-item" id="ci-cat">
-                                <span class="ci-dot"></span> Kategori
-                            </div>
-                            <div class="complete-item" id="ci-desc">
-                                <span class="ci-dot"></span> Deskripsi
-                            </div>
+                            <div class="complete-item" id="ci-img"><span class="ci-dot"></span> Foto menu</div>
+                            <div class="complete-item" id="ci-name"><span class="ci-dot"></span> Nama menu</div>
+                            <div class="complete-item" id="ci-price"><span class="ci-dot"></span> Harga</div>
+                            <div class="complete-item" id="ci-cat"><span class="ci-dot"></span> Kategori</div>
+                            <div class="complete-item" id="ci-desc"><span class="ci-dot"></span> Deskripsi</div>
                         </div>
                     </div>
 
@@ -1110,49 +1035,57 @@
 
     <div id="toast"></div>
 
+    @php
+        $selectedCatId = old('category_id', $menu->category_id);
+        $selectedCatName = $categories->firstWhere('id', $selectedCatId)->name_category ?? null;
+        $existingPhoto = $menu->photo ? Storage::url($menu->photo) : null;
+    @endphp
     <script>
-        // ── State ──────────────────────────────────────────────────────────
-        var selCat = null;
-        var imgSrc = null;
+       var selCat           = null;
+    var selCatName       = null;
+    var imgSrc           = null;
+    var existingPhotoUrl = @json($existingPhoto);
+    var initialCategoryId   = @json($selectedCatId);
+    var initialCategoryName = @json($selectedCatName);
 
-        // Mapping per kategori
-        var CE = {
-            all: '🍽️',
-            special: '⭐',
-            soup: '🍲',
-            dessert: '🍰',
-            chicken: '🍗',
-            beverage: '🥤',
-            snack: '🍟'
-        };
-        var CB = {
-            all: '#e6faf6',
-            special: '#fff9f0',
-            soup: '#fff8f0',
-            dessert: '#fffff0',
-            chicken: '#f5fff0',
-            beverage: '#f0f8ff',
-            snack: '#fff0f0'
-        };
-        var CL = {
-            all: 'Makanan',
-            special: 'Special',
-            soup: 'Soup',
-            dessert: 'Dessert',
-            chicken: 'Chicken',
-            beverage: 'Minuman',
-            snack: 'Snack'
-        };
-
-        // ── FIX 1: selectCat menerima value langsung (bukan dari event.target.closest('.pill'))
-        function selectCat(cat) {
-            selCat = cat;
-            document.getElementById('err-cat').classList.remove('show');
-            updatePreview();
-            syncStep();
+        // ── Map kategori untuk preview (dinamis dari DB) ──────────────────────
+        // Emoji berdasarkan nama kategori
+        function getCatEmoji(name) {
+            if (!name) return '🍽️';
+            var n = name.toLowerCase();
+            if (n === 'makanan') return '🍲';
+            if (n === 'minuman') return '🥤';
+            if (n === 'carwash') return '🚗';
+            if (n === 'snack') return '🍟';
+            if (n === 'dessert') return '🍰';
+            if (n === 'special') return '⭐';
+            return '🍽️';
         }
 
-        // ── Upload gambar ──────────────────────────────────────────────────
+        function getCatBg(name) {
+            if (!name) return '#e6faf6';
+            var n = name.toLowerCase();
+            if (n === 'makanan') return '#fff8f0';
+            if (n === 'minuman') return '#f0f8ff';
+            if (n === 'carwash') return '#f0f4ff';
+            if (n === 'snack') return '#fff0f0';
+            if (n === 'dessert') return '#fffff0';
+            if (n === 'special') return '#fff9f0';
+            return '#e6faf6';
+        }
+
+        // ── Init: set kategori awal ───────────────────────────────────────────
+        if (initialCategoryId && initialCategoryName) {
+            selCat = String(initialCategoryId);
+            selCatName = initialCategoryName;
+        }
+
+        // ── Fungsi upload foto baru ───────────────────────────────────────────
+        function showUploadZone() {
+            document.getElementById('uploadZone').style.display = '';
+            document.getElementById('uploadZone').style.marginTop = '10px';
+        }
+
         function handleImg(e) {
             var f = e.target.files[0];
             if (!f) return;
@@ -1168,7 +1101,6 @@
                 document.getElementById('uploadPH').style.display = 'none';
                 document.getElementById('uploadPreviewWrap').style.display = 'block';
                 updatePreview();
-                syncStep();
             };
             r.readAsDataURL(f);
         }
@@ -1186,27 +1118,35 @@
             }
         }
 
-        // ── FIX 2: removeImg — stopPropagation aman karena ada pengecekan
         function removeImg(e) {
             if (e && e.stopPropagation) e.stopPropagation();
             imgSrc = null;
             document.getElementById('imgInput').value = '';
             document.getElementById('uploadPH').style.display = '';
             document.getElementById('uploadPreviewWrap').style.display = 'none';
+            // Sembunyikan upload zone lagi kalau ada foto lama
+            if (existingPhotoUrl) {
+                document.getElementById('uploadZone').style.display = 'none';
+            }
             updatePreview();
-            syncStep();
         }
 
-        // ── FIX 3: updatePreview — pakai ID yang benar (mvStock, mvPortion, ci-*)
+        // ── selectCat menerima id dan nama langsung ───────────────────────────
+        function selectCat(id, name) {
+            selCat = String(id);
+            selCatName = name;
+            document.getElementById('err-cat').classList.remove('show');
+            updatePreview();
+        }
+
+        // ── Update preview kartu ──────────────────────────────────────────────
         function updatePreview() {
             var name = (document.getElementById('menuName') && document.getElementById('menuName').value.trim()) || '';
             var desc = (document.getElementById('menuDesc') && document.getElementById('menuDesc').value.trim()) || '';
             var price = (document.getElementById('menuPrice') && document.getElementById('menuPrice').value) || '';
-            var st = (document.getElementById('menuStock') && document.getElementById('menuStock').value) || '';
-            var por = (document.getElementById('menuPortion') && document.getElementById('menuPortion').value.trim()) || '';
 
-            // Preview card
             document.getElementById('mcName').textContent = name || 'Nama Menu';
+
             var de = document.getElementById('mcDesc');
             de.textContent = desc;
             de.style.display = desc ? '' : 'none';
@@ -1215,34 +1155,34 @@
                 'Rp ' + parseInt(price).toLocaleString('id-ID') :
                 'Rp —';
 
-            document.getElementById('mcCat').textContent = selCat ? CL[selCat] : 'Kategori';
+            document.getElementById('mcCat').textContent = selCatName || 'Kategori';
 
-            // Gambar / emoji di preview
+            // Foto di preview: prioritas foto baru > foto lama > emoji
             var ia = document.getElementById('mcImg');
             if (imgSrc) {
                 ia.innerHTML = '<img src="' + imgSrc + '" alt="">';
                 ia.style.background = '';
+            } else if (existingPhotoUrl) {
+                ia.innerHTML = '<img src="' + existingPhotoUrl + '" alt="">';
+                ia.style.background = '';
             } else {
-                ia.innerHTML = selCat ? CE[selCat] : '🍽️';
-                ia.style.background = selCat ? CB[selCat] : '#e6faf6';
+                ia.innerHTML = getCatEmoji(selCatName);
+                ia.style.background = getCatBg(selCatName);
             }
 
             // Badge kategori
             var badges = document.getElementById('mcBadges');
-            if (selCat && selCat !== 'all') {
-                badges.innerHTML = '<span class="mc-badge" style="background:' + CB[selCat] + ';color:var(--s600)">' + CL[
-                    selCat] + '</span>';
+            if (selCatName) {
+                badges.innerHTML = '<span class="mc-badge" style="background:' + getCatBg(selCatName) +
+                    ';color:var(--s600)">' + selCatName + '</span>';
             } else {
                 badges.innerHTML = '';
             }
 
-            // FIX: gunakan ID yang sudah ada di HTML (mvStock, mvPortion)
-            document.getElementById('mvStock').textContent = st ? st + ' porsi' : '—';
-            document.getElementById('mvPortion').textContent = por || '—';
-
-            // FIX: gunakan ID ci-img, ci-name, ci-price, ci-cat, ci-desc yang ada di HTML
+            // Completeness
+            var hasPhoto = !!(imgSrc || existingPhotoUrl);
             var checks = {
-                img: !!imgSrc,
+                img: hasPhoto,
                 name: !!name,
                 price: !!price && Number(price) > 0,
                 cat: !!selCat,
@@ -1268,41 +1208,8 @@
             });
         }
 
-        // ── Sinkronisasi stepper ───────────────────────────────────────────
-        function syncStep() {
-            var name = document.getElementById('menuName') ? document.getElementById('menuName').value.trim() : '';
-            var price = document.getElementById('menuPrice') ? document.getElementById('menuPrice').value : '';
-            var step = 1;
-            if (name && Number(price) > 0) step = 2;
-            if (step >= 2 && selCat) step = 3;
-
-            var dots = ['sd1', 'sd2', 'sd3'];
-            var labels = ['sl1', 'sl2', 'sl3'];
-            dots.forEach(function(id, i) {
-                var el = document.getElementById(id);
-                var lbl = document.getElementById(labels[i]);
-                if (i + 1 < step) {
-                    el.className = 'step-dot done';
-                    el.innerHTML = '✓';
-                    lbl.className = 'step-label';
-                } else if (i + 1 === step) {
-                    el.className = 'step-dot active';
-                    el.textContent = i + 1;
-                    lbl.className = 'step-label';
-                } else {
-                    el.className = 'step-dot idle';
-                    el.textContent = i + 1;
-                    lbl.className = 'step-label idle';
-                }
-            });
-
-            document.getElementById('sl-line1').className = 'step-line' + (step > 1 ? ' done' : '');
-            document.getElementById('sl-line2').className = 'step-line' + (step > 2 ? ' done' : '');
-            document.getElementById('stepPill').textContent = 'Langkah ' + Math.min(step, 3) + ' dari 3';
-        }
-
-        // ── Validasi ──────────────────────────────────────────────────────
-        function validate() {
+        // ── Validasi sebelum submit ───────────────────────────────────────────
+        function validateForm() {
             var ok = true;
             var name = document.getElementById('menuName').value.trim();
             var price = document.getElementById('menuPrice').value;
@@ -1332,50 +1239,8 @@
                 document.getElementById('err-cat').classList.remove('show');
             }
 
+            if (!ok) showToast('❌ Lengkapi field yang wajib diisi', '#ef4444');
             return ok;
-        }
-
-        // ── Aksi tombol ───────────────────────────────────────────────────
-        function submitForm() {
-            if (!validate()) {
-                showToast('❌ Lengkapi field yang wajib diisi', '#ef4444');
-                return;
-            }
-            showToast('✅ Menu berhasil disimpan!', '#0BAB8C');
-        }
-
-        function saveDraft() {
-            var n = document.getElementById('menuName').value.trim();
-            if (!n) {
-                showToast('❌ Isi nama menu terlebih dahulu', '#ef4444');
-                return;
-            }
-            showToast('💾 Draft berhasil disimpan', '#475569');
-        }
-
-        // ── FIX 4: resetForm — panggil removeImg dengan object dummy yang aman
-        function resetForm() {
-            if (!confirm('Reset semua data?')) return;
-
-            ['menuName', 'menuDesc', 'menuPrice', 'menuStock', 'menuPortion'].forEach(function(id) {
-                var el = document.getElementById(id);
-                if (el) el.value = '';
-            });
-
-            // Reset radio buttons
-            document.querySelectorAll('input[name="category"]').forEach(function(r) {
-                r.checked = false;
-            });
-            selCat = null;
-
-            // Hapus gambar dengan object event dummy yang aman
-            removeImg({
-                stopPropagation: function() {}
-            });
-
-            updatePreview();
-            syncStep();
-            showToast('🗑 Form direset', '#6b7280');
         }
 
         function showToast(msg, bg) {
@@ -1389,8 +1254,7 @@
             }, 2800);
         }
 
-        // ── Init ──────────────────────────────────────────────────────────
+        // ── Init preview saat halaman load ───────────────────────────────────
         updatePreview();
-        syncStep();
     </script>
 </body>

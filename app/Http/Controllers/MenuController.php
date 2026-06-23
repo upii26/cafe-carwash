@@ -18,7 +18,7 @@ class MenuController extends Controller
             'photo'    => $item->photo,
             'category' => $item->category->name_category ?? '-',
             'price'    => (int) $item->price,
-            'sold'     => (int) $item->terjual,
+            'sold'     => (int) $item->sold,
 
         ];
     });
@@ -62,6 +62,45 @@ class MenuController extends Controller
             "success",
             "Menu berhasil ditambahkan",
         );
+    }
+
+    public function edit($id)
+    {
+        $menu       = Menu::findOrFail($id);
+        $categories = Category::all();
+ 
+        return view('menus.edit-menu', [
+            'menu'       => $menu,
+            'categories' => $categories,
+        ]);
+    }
+ 
+    public function update(Request $request, $id)
+    {
+        $menu = Menu::findOrFail($id);
+ 
+        $data = $request->validate([
+            'photo'       => 'nullable|image|max:2048',
+            'name'        => 'required',
+            'deskripsi'   => 'nullable',
+            'category_id' => 'required',
+            'price'       => 'required|numeric',
+        ]);
+ 
+        // Jika ada foto baru: hapus foto lama, simpan yang baru
+        if ($request->hasFile('photo')) {
+            if ($menu->photo && Storage::disk('public')->exists($menu->photo)) {
+                Storage::disk('public')->delete($menu->photo);
+            }
+            $data['photo'] = $request->file('photo')->store('menu', 'public');
+        } else {
+            // Tidak ada foto baru → pertahankan foto lama
+            unset($data['photo']);
+        }
+ 
+        $menu->update($data);
+ 
+        return redirect('/dishes')->with('success', 'Menu berhasil diperbarui');
     }
 
     public function destroy($id)

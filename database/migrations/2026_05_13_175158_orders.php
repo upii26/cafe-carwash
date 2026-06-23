@@ -4,24 +4,20 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create("order", function (Blueprint $table) {
+        Schema::create('order', function (Blueprint $table) {
             $table->id();
-            $table->string("no_order");
-            $table->string("name_customer");
-            $table->string("no_table");
-            $table->integer("menus_id");
-            $table->integer("category_menu_id");
-            $table->decimal("total")->nullable();
-            $table->decimal("tax")->nullable();
-            $table->string("payment_method")->nullable();
-            $table->string("notes")->nullable();
-            $table->string("status")->nullable();
+            $table->string('no_order');
+            $table->string('name_customer')->nullable();
+            $table->string('no_table');
+            $table->bigInteger('total')->default(0);
+            $table->string('payment_method')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +27,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('orders');
     }
 };

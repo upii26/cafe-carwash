@@ -17,80 +17,48 @@
             <!-- CONTENT -->
             <div class="flex-1 p-6 overflow-auto">
 
+                {{-- Flash message --}}
+                @if(session('success'))
+                    <div id="flashMsg"
+                        class="flex items-center gap-2 mb-4 px-4 py-3 rounded-xl text-sm font-semibold"
+                        style="background:#e6faf6;color:#0BAB8C;border:1px solid rgba(11,171,140,.2)">
+                        ✅ {{ session('success') }}
+                    </div>
+                @endif
+
                 <!-- Header -->
                 <div class="flex items-start justify-between mb-6">
                     <div>
                         <h1 class="text-xl font-semibold text-gray-800">Manage Users</h1>
-                        <p class="text-sm text-gray-500 mt-1">
-                            Kelola akun & hak akses pengguna
-                        </p>
+                        <p class="text-sm text-gray-500 mt-1">Kelola akun &amp; hak akses pengguna</p>
                     </div>
-
                     <a href="/users/create"
                         class="inline-flex items-center gap-2 bg-[#2DCE98] hover:bg-[#26b585] text-sm font-medium px-4 py-2 rounded-xl transition-colors"
                         style="color:#fff !important">
-
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                            class="w-4 h-4"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            stroke-width="2.5">
-
-                            <path stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="M12 4v16m8-8H4"/>
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
                         </svg>
-
                         Tambah User
                     </a>
                 </div>
 
                 <!-- Toolbar -->
                 <div class="flex items-center justify-between gap-3 mb-3 flex-wrap">
-
                     <div class="flex items-center gap-2">
-
-                        <select id="filterRole"
-                            onchange="filterTable()"
+                        <select id="filterRole" onchange="filterTable()"
                             class="text-sm border border-gray-200 rounded-xl px-3 py-2 bg-white text-gray-600 focus:outline-none focus:ring-2 focus:ring-[#2DCE98]/30 focus:border-[#2DCE98] transition-colors">
-
                             <option value="">Semua Role</option>
-                            <option value="Admin">Admin</option>
-                            <option value="Kasir">Kasir</option>
-                            <option value="Dapur">Dapur</option>
-                            <option value="Manajer">Manajer</option>
-                        </select>
-
-                        <select id="filterStatus"
-                            onchange="filterTable()"
-                            class="text-sm border border-gray-200 rounded-xl px-3 py-2 bg-white text-gray-600 focus:outline-none focus:ring-2 focus:ring-[#2DCE98]/30 focus:border-[#2DCE98] transition-colors">
-
-                            <option value="">Semua Status</option>
-                            <option value="Aktif">Aktif</option>
-                            <option value="Nonaktif">Nonaktif</option>
+                            <option value="owner">Owner</option>
+                            <option value="kasir">Kasir</option>
                         </select>
                     </div>
-
                     <div class="relative">
-
                         <span class="absolute inset-y-0 left-3 flex items-center text-gray-400 pointer-events-none">
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                class="w-4 h-4"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor">
-
-                                <path stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"/>
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"/>
                             </svg>
                         </span>
-
-                        <input type="text"
-                            id="searchInput"
-                            oninput="filterTable()"
+                        <input type="text" id="searchInput" oninput="filterTable()"
                             placeholder="Cari nama / email..."
                             class="pl-9 pr-4 py-2 text-sm border border-gray-200 rounded-xl bg-white text-gray-700 w-56 focus:outline-none focus:ring-2 focus:ring-[#2DCE98]/30 focus:border-[#2DCE98] transition-colors">
                     </div>
@@ -98,65 +66,100 @@
 
                 <!-- Table -->
                 <div class="bg-white border border-gray-100 rounded-2xl overflow-hidden">
-
                     <div class="overflow-x-auto">
-
                         <table class="w-full text-sm">
-
                             <thead>
                                 <tr class="bg-[#F8FFFE] border-b border-gray-100">
                                     <th class="text-left px-4 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide w-10">#</th>
                                     <th class="text-left px-4 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Pengguna</th>
                                     <th class="text-left px-4 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Role</th>
-                                    <th class="text-left px-4 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">No. HP</th>
                                     <th class="text-left px-4 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Bergabung</th>
-                                    <th class="text-left px-4 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Status</th>
                                     <th class="text-center px-4 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Aksi</th>
                                 </tr>
                             </thead>
+                            <tbody>
+                                @forelse($users as $i => $user)
+                                    <tr class="border-b border-gray-50 hover:bg-[#F8FFFE] transition-colors user-row"
+                                        data-name="{{ strtolower($user->name) }}"
+                                        data-email="{{ strtolower($user->email) }}"
+                                        data-role="{{ $user->role }}">
 
-                            <tbody id="tableBody"></tbody>
+                                        <td class="px-4 py-3 text-xs text-gray-400">{{ $i + 1 }}</td>
 
+                                        <td class="px-4 py-3">
+                                            <div class="flex items-center gap-3">
+                                                <div class="w-9 h-9 rounded-full flex items-center justify-center text-white text-xs font-semibold flex-shrink-0"
+                                                    style="background:{{ $user->role === 'owner' ? '#2DCE98' : '#3B82F6' }}">
+                                                    {{ strtoupper(substr($user->name, 0, 2)) }}
+                                                </div>
+                                                <div>
+                                                    <div class="font-medium text-gray-800 text-sm">{{ $user->name }}</div>
+                                                    <div class="text-xs text-gray-400">{{ $user->email }}</div>
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                        <td class="px-4 py-3">
+                                            @if($user->role === 'owner')
+                                                <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-50 text-purple-700">
+                                                    👑 Owner
+                                                </span>
+                                            @else
+                                                <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-50 text-blue-600">
+                                                    🧑‍💼 Kasir
+                                                </span>
+                                            @endif
+                                        </td>
+
+                                        <td class="px-4 py-3 text-xs text-gray-500">
+                                            {{ $user->created_at->format('d M Y') }}
+                                        </td>
+
+                                        <td class="px-4 py-3">
+                                            <div class="flex items-center justify-center gap-2">
+                                                <a href="/users/{{ $user->id }}/edit"
+                                                    class="inline-flex items-center px-3 py-1.5 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 text-xs font-medium transition-colors">
+                                                    Edit
+                                                </a>
+                                                <button
+                                                    onclick="openDeleteModal({{ $user->id }}, '{{ addslashes($user->name) }}')"
+                                                    class="inline-flex items-center px-3 py-1.5 rounded-lg bg-red-50 text-red-500 hover:bg-red-100 text-xs font-medium transition-colors">
+                                                    Hapus
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="5" class="px-4 py-16 text-center">
+                                            <div class="flex flex-col items-center text-gray-400">
+                                                <svg class="w-12 h-12 mb-3 text-gray-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0"/>
+                                                </svg>
+                                                <p class="text-sm font-medium">Belum ada user</p>
+                                                <a href="/users/create" class="text-xs mt-1 text-[#2DCE98] font-semibold">Tambah sekarang →</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
                         </table>
                     </div>
 
-                    <!-- Empty -->
-                    <div id="emptyState"
-                        class="hidden flex-col items-center justify-center py-16 text-gray-400">
-
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                            class="w-12 h-12 mb-3 text-gray-200"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor">
-
-                            <path stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="1.5"
-                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0"/>
-                        </svg>
-
-                        <p class="text-sm font-medium">
-                            Tidak ada user ditemukan
-                        </p>
-
-                        <p class="text-xs mt-1">
-                            Coba ubah filter atau kata kunci pencarian
-                        </p>
+                    {{-- Empty state filter --}}
+                    <div id="emptyFilter" class="hidden py-12 text-center text-gray-400">
+                        <p class="text-sm font-medium">Tidak ada user ditemukan</p>
+                        <p class="text-xs mt-1">Coba ubah filter atau kata kunci pencarian</p>
                     </div>
 
-                    <!-- Footer -->
-                    <div class="flex items-center justify-between px-4 py-3 border-t border-gray-100">
-
-                        <p class="text-xs text-gray-400"
-                            id="paginationInfo">
+                    <!-- Footer count -->
+                    <div class="px-4 py-3 border-t border-gray-100">
+                        <p class="text-xs text-gray-400">
+                            Total <span id="userCount" class="font-bold text-gray-600">{{ $users->count() }}</span> user
                         </p>
-
-                        <div class="flex items-center gap-1"
-                            id="paginationBtns">
-                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
 
@@ -166,323 +169,105 @@
 
     @include('footer.footer')
 
-    <script>
-
-        const users = [
-            {
-                id:1,
-                name:'Ibrahim Khalil',
-                email:'ibrahim@tasty.com',
-                role:'Admin',
-                phone:'081234567890',
-                joined:'01 Jan 2026',
-                status:'Aktif'
-            },
-            {
-                id:2,
-                name:'Sari Dewi',
-                email:'sari@tasty.com',
-                role:'Kasir',
-                phone:'082233445566',
-                joined:'15 Feb 2026',
-                status:'Aktif'
-            },
-            {
-                id:3,
-                name:'Budi Santoso',
-                email:'budi@tasty.com',
-                role:'Dapur',
-                phone:'085544332211',
-                joined:'20 Feb 2026',
-                status:'Aktif'
-            },
-            {
-                id:4,
-                name:'Rina Melati',
-                email:'rina@tasty.com',
-                role:'Manajer',
-                phone:'087788990011',
-                joined:'01 Mar 2026',
-                status:'Aktif'
-            },
-            {
-                id:5,
-                name:'Doni Pratama',
-                email:'doni@tasty.com',
-                role:'Kasir',
-                phone:'089900112233',
-                joined:'10 Apr 2026',
-                status:'Nonaktif'
-            },
-            {
-                id:6,
-                name:'Ayu Lestari',
-                email:'ayu@tasty.com',
-                role:'Dapur',
-                phone:'081122334455',
-                joined:'12 Apr 2026',
-                status:'Aktif'
-            },
-        ];
-
-        const avatarColors = [
-            '#2DCE98',
-            '#3B82F6',
-            '#8B5CF6',
-            '#EC4899',
-            '#F59E0B',
-            '#14B8A6',
-            '#EF4444'
-        ];
-
-        const roleBadge = {
-            Admin   : 'bg-purple-50 text-purple-700',
-            Kasir   : 'bg-blue-50 text-blue-600',
-            Dapur   : 'bg-orange-50 text-orange-600',
-            Manajer : 'bg-teal-50 text-teal-700',
-        };
-
-        let filtered = [...users];
-        let currentPage = 1;
-        const perPage = 8;
-
-        function getInitials(name) {
-            return name
-                .split(' ')
-                .slice(0,2)
-                .map(w => w[0])
-                .join('')
-                .toUpperCase();
-        }
-
-        function getColor(name) {
-
-            let h = 0;
-
-            for (let c of name) {
-                h = (h * 31 + c.charCodeAt(0)) % avatarColors.length;
-            }
-
-            return avatarColors[h];
-        }
-
-        function filterTable() {
-
-            const q = document.getElementById('searchInput')
-                .value
-                .toLowerCase();
-
-            const role = document.getElementById('filterRole').value;
-            const stat = document.getElementById('filterStatus').value;
-
-            filtered = users.filter(u =>
-
-                (!q || u.name.toLowerCase().includes(q) || u.email.toLowerCase().includes(q)) &&
-                (!role || u.role === role) &&
-                (!stat || u.status === stat)
-
-            );
-
-            currentPage = 1;
-
-            render();
-        }
-
-        function render() {
-
-            const tbody = document.getElementById('tableBody');
-            const empty = document.getElementById('emptyState');
-
-            const total = filtered.length;
-
-            const start = (currentPage - 1) * perPage;
-
-            const slice = filtered.slice(start, start + perPage);
-
-            tbody.innerHTML = '';
-
-            if (slice.length === 0) {
-
-                empty.classList.remove('hidden');
-                empty.classList.add('flex');
-
-            } else {
-
-                empty.classList.add('hidden');
-                empty.classList.remove('flex');
-
-                slice.forEach((u, i) => {
-
-                    const badgeClass = roleBadge[u.role] || 'bg-gray-100 text-gray-500';
-
-                    const tr = document.createElement('tr');
-
-                    tr.className = 'border-b border-gray-50 hover:bg-[#F8FFFE] transition-colors';
-
-                    tr.innerHTML = `
-                        <td class="px-4 py-3 text-xs text-gray-400">
-                            ${start + i + 1}
-                        </td>
-
-                        <td class="px-4 py-3">
-                            <div class="flex items-center gap-3">
-
-                                <div class="w-9 h-9 rounded-full flex items-center justify-center text-white text-xs font-semibold flex-shrink-0"
-                                    style="background:${getColor(u.name)}">
-
-                                    ${getInitials(u.name)}
-                                </div>
-
-                                <div>
-                                    <div class="font-medium text-gray-800 text-sm">
-                                        ${u.name}
-                                    </div>
-
-                                    <div class="text-xs text-gray-400">
-                                        ${u.email}
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-
-                        <td class="px-4 py-3">
-                            <span class="px-2.5 py-0.5 rounded-full text-xs font-medium ${badgeClass}">
-                                ${u.role}
-                            </span>
-                        </td>
-
-                        <td class="px-4 py-3 text-xs text-gray-500">
-                            ${u.phone}
-                        </td>
-
-                        <td class="px-4 py-3 text-xs text-gray-500">
-                            ${u.joined}
-                        </td>
-
-                        <td class="px-4 py-3">
-
-                            ${
-                                u.status === 'Aktif'
-
-                                ? `
-                                    <span class="inline-flex items-center gap-1.5 text-xs font-medium text-[#0F6E56]">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-[#2DCE98]"></span>
-                                        Aktif
-                                    </span>
-                                `
-
-                                : `
-                                    <span class="inline-flex items-center gap-1.5 text-xs font-medium text-red-500">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-red-400"></span>
-                                        Nonaktif
-                                    </span>
-                                `
-                            }
-
-                        </td>
-
-                        <td class="px-4 py-3">
-
-                            <div class="flex items-center justify-center gap-2">
-
-                                <a href="/users/${u.id}/edit"
-                                    class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 text-xs font-medium transition-colors">
-
-                                    Edit
-                                </a>
-
-                                <button onclick="confirmDelete(${u.id}, '${u.name.replace(/'/g, "\\'")}')"
-                                    class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-red-50 text-red-500 hover:bg-red-100 text-xs font-medium transition-colors">
-
-                                    Hapus
-                                </button>
-                            </div>
-                        </td>
-                    `;
-
-                    tbody.appendChild(tr);
-                });
-            }
-
-            document.getElementById('paginationInfo').textContent =
-
-                total === 0
-
-                ? 'Tidak ada data'
-
-                : `Menampilkan ${start + 1}–${Math.min(start + perPage, total)} dari ${total} data`;
-
-            const container = document.getElementById('paginationBtns');
-
-            container.innerHTML = '';
-
-            const totalPages = Math.ceil(total / perPage);
-
-            if (totalPages <= 1) return;
-
-            const mkBtn = (label, page, disabled, active) => {
-
-                const b = document.createElement('button');
-
-                b.innerHTML = label;
-
-                b.disabled = disabled;
-
-                b.className = `
-                    px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors
-
-                    ${active ? 'bg-[#2DCE98] text-white border-[#2DCE98]' : ''}
-
-                    ${disabled ? 'text-gray-300 border-gray-100 cursor-default' : ''}
-
-                    ${!active && !disabled
-                        ? 'text-gray-500 border-gray-200 hover:border-[#2DCE98] hover:text-[#2DCE98]'
-                        : ''
-                    }
-                `;
-
-                if (!disabled && !active) {
-
-                    b.onclick = () => {
-
-                        currentPage = page;
-
-                        render();
-                    };
-                }
-
-                return b;
-            };
-
-            container.appendChild(
-                mkBtn('&#8249;', currentPage - 1, currentPage === 1, false)
-            );
-
-            for (let p = 1; p <= totalPages; p++) {
-
-                container.appendChild(
-                    mkBtn(p, p, false, p === currentPage)
-                );
-            }
-
-            container.appendChild(
-                mkBtn('&#8250;', currentPage + 1, currentPage === totalPages, false)
-            );
-        }
-
-        function confirmDelete(id, name) {
-
-            if (confirm(`Hapus user "${name}" ?`)) {
-
-                console.log('delete id:', id);
-            }
-        }
-
-        render();
-
-    </script>
-
-    @include('header.navmobile')
+    {{-- ── DELETE MODAL ── --}}
+    <div id="deleteModal"
+        class="fixed inset-0 z-50 items-center justify-center p-4"
+        style="display:none; background:rgba(0,0,0,0.45)">
+        <div class="bg-white rounded-2xl shadow-xl w-full max-w-sm p-6"
+            style="animation:fadeUp .22s ease both">
+
+            <div class="flex items-center justify-center w-14 h-14 rounded-full mx-auto mb-4"
+                style="background:#fef2f2">
+                <svg class="w-7 h-7" fill="none" stroke="#ef4444" stroke-width="2.5" viewBox="0 0 24 24">
+                    <polyline points="3 6 5 6 21 6"/>
+                    <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/>
+                    <path d="M10 11v6M14 11v6"/>
+                    <path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/>
+                </svg>
+            </div>
+
+            <div class="text-center mb-5">
+                <div class="text-base font-extrabold text-gray-900 mb-1">Hapus User?</div>
+                <div class="text-sm text-gray-400 leading-relaxed">
+                    User <span id="deleteUserName" class="font-bold text-gray-700"></span>
+                    akan dihapus permanen dan tidak bisa dikembalikan.
+                </div>
+            </div>
+
+            <form id="deleteForm" method="POST">
+                @csrf
+                @method('DELETE')
+                <div class="flex gap-3">
+                    <button type="button" onclick="closeDeleteModal()"
+                        class="flex-1 py-2.5 rounded-xl text-sm font-bold border transition-colors"
+                        style="background:white;color:#475569;border-color:#e2e8f0">
+                        Batal
+                    </button>
+                    <button type="submit"
+                        class="flex-1 py-2.5 rounded-xl text-sm font-bold text-white"
+                        style="background:#ef4444">
+                        Ya, Hapus
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 
-    @include('footer.footer')
+    <style>
+        @keyframes fadeUp {
+            from { opacity:0; transform:translateY(12px) }
+            to   { opacity:1; transform:translateY(0) }
+        }
+    </style>
+
+    <script>
+        // ── Delete modal ──────────────────────────────────────────────
+        function openDeleteModal(id, name) {
+            document.getElementById('deleteUserName').textContent = name;
+            document.getElementById('deleteForm').action = '/users/' + id;
+            document.getElementById('deleteModal').style.display = 'flex';
+        }
+
+        function closeDeleteModal() {
+            document.getElementById('deleteModal').style.display = 'none';
+        }
+
+        // Klik backdrop → tutup modal
+        document.getElementById('deleteModal').addEventListener('click', function(e) {
+            if (e.target === this) closeDeleteModal();
+        });
+
+        // ── Filter & search ───────────────────────────────────────────
+        function filterTable() {
+            var q    = document.getElementById('searchInput').value.toLowerCase();
+            var role = document.getElementById('filterRole').value;
+            var rows = document.querySelectorAll('.user-row');
+            var visible = 0;
+
+            rows.forEach(function(row) {
+                var matchQ    = !q    || row.dataset.name.includes(q) || row.dataset.email.includes(q);
+                var matchRole = !role || row.dataset.role === role;
+                var show      = matchQ && matchRole;
+                row.style.display = show ? '' : 'none';
+                if (show) visible++;
+            });
+
+            document.getElementById('userCount').textContent = visible;
+
+            var emptyFilter = document.getElementById('emptyFilter');
+            emptyFilter.classList.toggle('hidden', visible > 0 || rows.length === 0);
+        }
+
+        // ── Auto hide flash ───────────────────────────────────────────
+        var flash = document.getElementById('flashMsg');
+        if (flash) {
+            setTimeout(function() {
+                flash.style.transition = 'opacity .4s';
+                flash.style.opacity = '0';
+                setTimeout(function() { flash.remove(); }, 400);
+            }, 3000);
+        }
+    </script>
+
+</body>
+
