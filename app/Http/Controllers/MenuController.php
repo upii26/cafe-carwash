@@ -18,7 +18,7 @@ class MenuController extends Controller
             'photo'    => $item->photo,
             'category' => $item->category->name_category ?? '-',
             'price'    => (int) $item->price,
-            'sold'     => (int) $item->sold,
+            'terjual' => (int) $item->terjual,
 
         ];
     });
@@ -55,6 +55,7 @@ class MenuController extends Controller
         }
 
         $data["terjual"] = 0;
+        $data["status"] = "aktif";
 
         Menu::create($data);
 

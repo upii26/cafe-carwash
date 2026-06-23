@@ -258,7 +258,7 @@
                     </div>
 
                     {{-- Active Tables --}}
-                    <div
+                    {{-- <div
                         class="stat-card
                         bg-[#D4AF37]/15
                         backdrop-blur-xl
@@ -281,10 +281,10 @@
                             <div class="progress-fill" style="width:56%; background:#f97316"></div>
                         </div>
                         <div class="text-[10px] text-black-400 mt-1">7 meja tersedia</div>
-                    </div>
+                    </div> --}}
 
                     {{-- Avg Order Value --}}
-                    <div
+                    {{-- <div
                         class="stat-card
                         bg-[#D4AF37]/15
                         backdrop-blur-xl
@@ -306,7 +306,7 @@
                             <div class="progress-fill" style="width:64%; background:#a855f7"></div>
                         </div>
                         <div class="text-[10px] text-black-400 mt-1">Target: $50</div>
-                    </div>
+                    </div> --}}
                 </div>
 
                 {{-- ── ROW 2: Chart + Donut ── --}}
