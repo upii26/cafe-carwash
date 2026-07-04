@@ -329,7 +329,7 @@
                   <div class="w-full rounded-xl overflow-hidden mb-2 bg-gray-100">
                     <img
                         src="/storage/${item.photo}"
-                        class=" object-cover"
+                        class="object-cover"
                         onerror="this.src='https://placehold.co/300x200'">
                 </div>
                     <div class="text-[10px] text-gray-400 font-medium">${item.category}</div>
