@@ -202,14 +202,22 @@
                 <div class="px-4 pb-3 flex-shrink-0">
                     <div class="text-xs font-bold text-gray-900 mb-2">Payment Method</div>
                     <div class="flex gap-2">
-                        <button onclick="selectPayment(this)"
+                        <button onclick="selectPayment(this)" data-payment="cash"
                             class="payment-btn flex-1 py-2 rounded-xl text-xs font-semibold text-gray-500">💵
                             Cash</button>
-                        <button onclick="selectPayment(this)"
+                        <button onclick="selectPayment(this)" data-payment="card"
                             class="payment-btn selected flex-1 py-2 rounded-xl text-xs font-semibold">💳 Card</button>
-                        <button onclick="selectPayment(this)"
-                            class="payment-btn flex-1 py-2 rounded-xl text-xs font-semibold text-gray-500">📷
-                            Scan</button>
+                        <button onclick="selectPayment(this)" data-payment="qris"
+                            class="payment-btn flex-1 py-2 rounded-xl text-xs font-semibold text-gray-500 flex items-center justify-center gap-1">
+
+                            <svg class="w-4 h-4 text-black" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 4h6v6H4V4zm10 0h6v6h-6V4zM4 14h6v6H4v-6zm10 4h2v2h-2v-2zm4-4h2v2h-2v-2z" />
+                            </svg>
+
+                            <span>Qris</span>
+                        </button>
                     </div>
                 </div>
 
@@ -223,7 +231,7 @@
                         Place Order
                     </button>
                 </div>
-            </div>    
+            </div>
         </div>
 
     </div>
@@ -326,10 +334,10 @@
                 const qty = order[item.id]?.qty || 0;
                 return `
                 <div class="menu-card bg-white rounded-2xl p-3 select-none">
-                  <div class="w-full rounded-xl overflow-hidden mb-2 bg-gray-100">
+                  <div class="w-full h-44 rounded-xl overflow-hidden mb-2 bg-gray-100">
                     <img
                         src="/storage/${item.photo}"
-                        class="object-cover"
+                        class="w-full h-full object-cover"
                         onerror="this.src='https://placehold.co/300x200'">
                 </div>
                     <div class="text-[10px] text-gray-400 font-medium">${item.category}</div>
@@ -436,7 +444,7 @@
             btn.classList.add('selected');
             btn.classList.remove('text-gray-500');
 
-            paymentMethod = btn.innerText.trim();
+            paymentMethod = btn.dataset.payment;
         }
 
         function updateNoteCount() {
@@ -481,6 +489,12 @@
 
         let lastOrderData = null;
 
+        const paymentLabelMap = {
+            cash: 'Cash',
+            card: 'Card',
+            qris: 'QRIS'
+        };
+
         async function placeOrder() {
 
             const items = Object.values(order);
@@ -497,9 +511,9 @@
                 document.getElementById('tableNoInput').value || '00';
 
             const paymentMethod =
-                document.querySelector('.payment-btn.selected')
-                ?.innerText
-                ?.trim() || 'Cash';
+                document.querySelector('.payment-btn.selected')?.dataset.payment || 'cash';
+
+            const paymentLabel = paymentLabelMap[paymentMethod] || paymentMethod;
 
             const menus = items.map(i => ({
                 id: i.id,
@@ -542,6 +556,7 @@
                         customer: customerName,
                         table: tableNo,
                         payment: paymentMethod,
+                        paymentLabel: paymentLabel,
                         items: items,
                         total: total
                     };
@@ -549,7 +564,7 @@
                     // Isi ringkasan ke modal
                     document.getElementById('modalCustomer').textContent = customerName;
                     document.getElementById('modalTable').textContent = '#' + tableNo;
-                    document.getElementById('modalPayment').textContent = paymentMethod;
+                    document.getElementById('modalPayment').textContent = paymentLabel;
                     document.getElementById('modalTotal').textContent =
                         'Rp ' + total.toLocaleString('id-ID');
 
@@ -626,83 +641,225 @@
             const win = window.open('', '', 'width=350,height=600');
 
             win.document.write(`
-        <html>
-        <head>
-            <title>Print Struk</title>
+            <html>
+            <head>
+            <title>Struk</title>
 
             <style>
-                * { box-sizing: border-box; }
-                body {
-                    font-family: 'Courier New', monospace;
-                    padding: 16px;
-                    font-size: 12px;
-                    color: #222;
-                }
-                .center { text-align: center; }
-                h2 { margin: 0; font-size: 16px; letter-spacing: 1px; }
-                .sub { font-size: 10px; color: #777; margin-top: 2px; }
-                hr { border: none; border-top: 1px dashed #999; margin: 10px 0; }
-                table { width: 100%; border-collapse: collapse; }
-                td { padding: 2px 0; vertical-align: top; }
-                .info td { font-size: 11px; color: #555; }
-                .total td { font-weight: bold; font-size: 14px; padding-top: 6px; }
-                .footer { margin-top: 14px; font-size: 11px; }
+            @page {
+            size: 80mm auto;
+                margin: 0;
+            }
+
+            html,
+            body {
+                width: 80mm;
+                margin: 0;
+                padding: 0;
+                background: white;
+            }
+
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+                color: #333;
+                font-size: 11px;
+            }
+
+            .receipt {
+                width: 80mm;
+                padding: 8px;
+                box-sizing: border-box;
+            }
+
+            .header {
+                text-align: center;
+            }
+
+            .store-name {
+                font-size: 20px;
+                font-weight: 700;
+                margin-bottom: 4px;
+            }
+
+            .store-address {
+                font-size: 11px;
+                line-height: 1.4;
+            }
+
+            .store-phone {
+                font-size: 11px;
+                margin-top: 4px;
+            }
+
+            .divider {
+                border-top: 1px solid #ddd;
+                margin: 10px 0;
+            }
+
+            .info-table,
+            .summary-table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            .info-table td,
+            .summary-table td {
+                padding: 2px 0;
+                font-size: 11px;
+            }
+
+            .right {
+                text-align: right;
+            }
+
+            .item-row {
+                margin-bottom: 8px;
+            }
+
+            .item-header {
+                display: grid;
+                grid-template-columns: 1fr auto auto;
+                gap: 8px;
+                align-items: start;
+            }
+
+            .item-title {
+                font-size: 13px;
+                font-weight: 600;
+            }
+
+            .item-qty {
+                font-size: 12px;
+            }
+
+            .item-price {
+                text-align: right;
+                font-size: 12px;
+                font-weight: 600;
+            }
+
+            .item-detail {
+                margin-top: 2px;
+                margin-left: 12px;
+                font-size: 10px;
+                color: #777;
+            }
+
+            .grand-total td {
+                font-size: 15px;
+                font-weight: 700;
+                padding-top: 8px;
+            }
+
+            .footer {
+                text-align: center;
+                font-size: 11px;
+                line-height: 1.6;
+                margin-top: 10px;
+            }
             </style>
-        </head>
+            </head>
 
-        <body>
+            <body>
+            <div class="receipt">
 
-            <div class="center">
-                <h2>GG CAFE & CARWASH</h2>
-                <div class="sub">Jl. Contoh Alamat No. 123</div>
-                <div class="sub">${dateStr} • ${timeStr}</div>
+                <!-- HEADER -->
+                <div class="header">
+                    <div class="store-name">GG Cafe & Carwash</div>
+                    <div class="store-address">
+                        Nanga Pinoh, Kalimantan Barat
+                    </div>
+                    <div class="store-phone">
+                        +62 812 3456 7890
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <!-- INFO TRANSAKSI -->
+                <table class="info-table">
+                    <tr>
+                        <td>${dateStr}</td>
+                        <td class="right">${timeStr}</td>
+                    </tr>
+                    <tr>
+                        <td>Receipt Number</td>
+                        <td class="right">#${Date.now()}</td>
+                    </tr>
+                    <tr>
+                        <td>Customer</td>
+                        <td class="right">${lastOrderData.customer}</td>
+                    </tr>
+                    <tr>
+                        <td>Table</td>
+                        <td class="right">${lastOrderData.table}</td>
+                    </tr>
+                    <tr>
+                        <td>Payment</td>
+                        <td class="right">${lastOrderData.paymentLabel}</td>
+                    </tr>
+                </table>
+
+                <div class="divider"></div>
+
+                <!-- ITEM -->
+                ${lastOrderData.items.map(item => `
+                            <div class="item-row">
+
+                                <div class="item-header">
+                                    <div class="item-title">
+                                        ${item.name}
+                                    </div>
+
+                                    <div class="item-qty">
+                                        x${item.qty}
+                                    </div>
+
+                                    <div class="item-price">
+                                        Rp ${(item.qty * item.price).toLocaleString('id-ID')}
+                                    </div>
+                                </div>
+
+                                <div class="item-detail">
+                                    @ Rp ${Number(item.price).toLocaleString('id-ID')}
+                                </div>
+
+                            </div>
+                        `).join('')}
+
+                <div class="divider"></div>
+
+                <!-- TOTAL -->
+                <table class="summary-table">
+
+                    <tr>
+                        <td>Subtotal</td>
+                        <td class="right">
+                            Rp ${subtotal.toLocaleString('id-ID')}
+                        </td>
+                    </tr>
+
+                    <tr class="grand-total">
+                        <td>Total</td>
+                        <td class="right">
+                            Rp ${Number(lastOrderData.total).toLocaleString('id-ID')}
+                        </td>
+                    </tr>
+
+                </table>
+
+                <div class="divider"></div>
+
+                <!-- FOOTER -->
+                <div class="footer">
+                    <div>Terima Kasih</div>
+                    <div>Selamat Menikmati</div>
+                </div>
+
             </div>
-
-            <hr>
-
-            <table class="info">
-                <tr>
-                    <td>Customer</td>
-                    <td style="text-align:right">${lastOrderData.customer}</td>
-                </tr>
-                <tr>
-                    <td>No. Meja</td>
-                    <td style="text-align:right">#${lastOrderData.table}</td>
-                </tr>
-                <tr>
-                    <td>Pembayaran</td>
-                    <td style="text-align:right">${lastOrderData.payment}</td>
-                </tr>
-            </table>
-
-            <hr>
-
-            <table>
-                ${itemsHtml}
-            </table>
-
-            <hr>
-
-            <table>
-                <tr>
-                    <td>Subtotal</td>
-                    <td style="text-align:right">Rp ${subtotal.toLocaleString('id-ID')}</td>
-                </tr>
-                <tr class="total">
-                    <td>TOTAL</td>
-                    <td style="text-align:right">Rp ${Number(lastOrderData.total).toLocaleString('id-ID')}</td>
-                </tr>
-            </table>
-
-            <div class="footer center">
-                Terima kasih atas kunjungan Anda 🙏<br>
-                Sampai jumpa kembali!
-            </div>
-
-        </body>
-        </html>
-    `);
-
+            </body>
+            </html>
+            `);
             win.document.close();
 
             win.print();

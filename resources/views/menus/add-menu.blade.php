@@ -1016,7 +1016,8 @@
                                         <label
                                             style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px">
 
-                                            <input type="radio" name="category_id" value="{{ $item->id }}">
+                                            <input type="radio" name="category_id" value="{{ $item->id }}"
+                                                onchange="selectCat('{{ strtolower($item->name_category) }}')">
 
                                             {{ $icon }} {{ $item->name_category }}
 
@@ -1117,31 +1118,21 @@
 
         // Mapping per kategori
         var CE = {
-            all: '🍽️',
-            special: '⭐',
-            soup: '🍲',
-            dessert: '🍰',
-            chicken: '🍗',
-            beverage: '🥤',
-            snack: '🍟'
+            makanan: '🍲',
+            minuman: '🍵',
+            carwash: '🚗'
         };
+
         var CB = {
-            all: '#e6faf6',
-            special: '#fff9f0',
-            soup: '#fff8f0',
-            dessert: '#fffff0',
-            chicken: '#f5fff0',
-            beverage: '#f0f8ff',
-            snack: '#fff0f0'
+            makanan: '#fff8f0',
+            minuman: '#f0f8ff',
+            carwash: '#f5fff0'
         };
+
         var CL = {
-            all: 'Makanan',
-            special: 'Special',
-            soup: 'Soup',
-            dessert: 'Dessert',
-            chicken: 'Chicken',
-            beverage: 'Minuman',
-            snack: 'Snack'
+            makanan: 'Makanan',
+            minuman: 'Minuman',
+            carwash: 'Carwash'
         };
 
         // ── FIX 1: selectCat menerima value langsung (bukan dari event.target.closest('.pill'))

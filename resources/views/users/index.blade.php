@@ -112,7 +112,7 @@
                                         </td>
 
                                         <td class="px-4 py-3 text-xs text-gray-500">
-                                            {{ $user->created_at->format('d M Y') }}
+                                            {{ $user->created_at?->format('d M Y') ?? '-' }}
                                         </td>
 
                                         <td class="px-4 py-3">

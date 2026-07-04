@@ -245,7 +245,7 @@
             </h1>
 
             <p class="text-white/55 mt-3 text-sm tracking-wide">
-                Login untuk mengakses dashboard restoran
+                Login untuk mengakses dashboard 
             </p>
         </div>
 

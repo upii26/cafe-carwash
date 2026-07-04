@@ -64,10 +64,10 @@ class OrderController extends Controller
 
             if ($menu) {
 
-                $currentSold = $menu->sold ?? 0;
+                $currentSold = $menu->terjual ?? 0;
 
                 $menu->update([
-                    'sold' => $currentSold + $item['qty']
+                    'terjual' => $currentSold + $item['qty']
                 ]);
             }
         }

@@ -76,9 +76,18 @@ flex flex-col py-5 px-3 shadow-sm z-50 transition-all">
                         {{ request()->is('dashboard')
                             ? 'bg-gradient-to-r from-[#8B6B1F] to-[#D4AF37] text-white shadow-md'
                             : 'text-white/80 hover:bg-gradient-to-r hover:from-[#8B6B1F] hover:to-[#D4AF37] hover:text-white' }}">
-                    <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8zM6 1v3M10 1v3M14 1v3" />
+                            d="M3 7h13v6a6 6 0 11-12 0V7z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M16 8h1a3 3 0 010 6h-1" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21h13" />
+                        <!-- uap -->
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 5 Q6.5 3.5 6 2" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9.5 5 Q10 3.5 9.5 2" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 5 Q13.5 3.5 13 2" />
                     </svg>
                     <span>Cafe</span>
                 </a>
@@ -89,9 +98,20 @@ flex flex-col py-5 px-3 shadow-sm z-50 transition-all">
                     {{ request()->is('dashboard-carwash')
                         ? 'bg-gradient-to-r from-[#8B6B1F] to-[#D4AF37] text-white shadow-md'
                         : 'text-white/80 hover:bg-gradient-to-r hover:from-[#8B6B1F] hover:to-[#D4AF37] hover:text-white' }}">
-                    <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M3 17h1m16 0h1M5 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0m10 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0M3 17V9l3-5h12l3 5v8M3 13h18" />
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+
+                        <!-- Car body -->
+                        <path d="M3 14l2-5c.6-1.5 2-2 3.5-2h6c1.5 0 2.9.5 3.5 2l2 5" />
+                        <path d="M2.5 14h19l-.5 4H3z" />
+
+                        <!-- Wheels -->
+                        <circle cx="7" cy="18" r="2" />
+                        <circle cx="17" cy="18" r="2" />
+
+                        <!-- Windows -->
+                        <path d="M8 9h8" />
+                        <path d="M9 9l1.5-2h3l1.5 2" />
                     </svg>
                     <span>Carwash</span>
                 </a>
@@ -104,9 +124,13 @@ flex flex-col py-5 px-3 shadow-sm z-50 transition-all">
     {{ request()->is('orders')
         ? 'bg-gradient-to-r from-[#8B6B1F] to-[#D4AF37] text-white shadow-md'
         : 'text-white hover:bg-gradient-to-r hover:from-[#8B6B1F] hover:to-[#D4AF37] hover:text-white' }}">
-            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="8" y="2" width="8" height="4" rx="1" />
+                <rect x="4" y="4" width="16" height="18" rx="2" />
+                <line x1="8" y1="10" x2="16" y2="10" />
+                <line x1="8" y1="14" x2="14" y2="14" />
+                <line x1="8" y1="18" x2="12" y2="18" />
             </svg>
             <span>Order Line</span>
         </a>
@@ -118,9 +142,18 @@ flex flex-col py-5 px-3 shadow-sm z-50 transition-all">
     {{ request()->is('dishes')
         ? 'bg-gradient-to-r from-[#8B6B1F] to-[#D4AF37] text-white shadow-md'
         : 'text-white hover:bg-gradient-to-r hover:from-[#8B6B1F] hover:to-[#D4AF37] hover:text-white' }}">
-            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="7" x2="14" y2="7" />
+                <line x1="3" y1="12" x2="14" y2="12" />
+                <line x1="3" y1="17" x2="14" y2="17" />
+                <circle cx="10" cy="7" r="2" fill="white" />
+                <circle cx="6" cy="12" r="2" fill="white" />
+                <circle cx="11" cy="17" r="2" fill="white" />
+                <line x1="18" y1="3" x2="18" y2="21" />
+                <line x1="16" y1="3" x2="16" y2="7" />
+                <line x1="20" y1="3" x2="20" y2="7" />
+                <path d="M16 7a2 2 0 0 0 4 0" />
             </svg>
             <span>Manage Dishes</span>
         </a>
@@ -131,10 +164,11 @@ flex flex-col py-5 px-3 shadow-sm z-50 transition-all">
             {{ Route::is('reports')
                 ? 'bg-gradient-to-r from-[#8B6B1F] to-[#D4AF37] text-white shadow-md'
                 : 'text-white hover:bg-gradient-to-r hover:from-[#8B6B1F] hover:to-[#D4AF37] hover:text-white' }}">
-            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <polyline points="7,17 10,12 13,14 17,8" />
+                <line x1="7" y1="17" x2="17" y2="17" />
             </svg>
             <span>Repots</span>
         </a>
@@ -145,9 +179,12 @@ flex flex-col py-5 px-3 shadow-sm z-50 transition-all">
             {{ Route::is('users')
                 ? 'bg-gradient-to-r from-[#8B6B1F] to-[#D4AF37] text-white shadow-md'
                 : 'text-white hover:bg-gradient-to-r hover:from-[#8B6B1F] hover:to-[#D4AF37] hover:text-white' }}">
-            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0" />
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="7" r="4" />
+                <path d="M1 21v-2a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v2" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
             </svg>
             <span>Users</span>
         </a>

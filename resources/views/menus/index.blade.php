@@ -26,7 +26,7 @@
                 <div class="flex items-start justify-between mb-6">
                     <div>
                         <h1 class="text-xl font-semibold text-gray-800">Manage Dishes</h1>
-                        <p class="text-sm text-gray-500 mt-1">Kelola semua menu makanan & minuman</p>
+                        <p class="text-sm text-gray-500 mt-1">Kelola semua menu cafe & carwash</p>
                     </div>
                     <a href="{{ url('/menu-add') }}" style="color: white !important;"
                         class="inline-flex items-center gap-2 bg-[#2DCE98] hover:bg-[#26b585] text-sm font-medium px-4 py-2 rounded-xl transition-colors">
@@ -158,6 +158,7 @@
 
             <script>
                 const dishes = @json($menus);
+                console.log(dishes);
 
                 const avatarColors = ['#2DCE98', '#3B82F6', '#F59E0B', '#8B5CF6', '#EC4899', '#14B8A6', '#EF4444'];
                 const badgeClass = {
@@ -188,11 +189,11 @@
                 function filterTable() {
                     const q = document.getElementById('searchInput').value.toLowerCase();
                     const kat = document.getElementById('filterKategori').value;
-                    const st = document.getElementById('filterStatus').value;
+                    // const st = document.getElementById('filterStatus').value;
                     filtered = dishes.filter(d =>
                         (!q || d.name.toLowerCase().includes(q)) &&
-                        (!kat || d.category === kat) &&
-                        (!st || d.status === st)
+                        (!kat || d.category === kat) 
+                        // && (!st || d.status === st)
                     );
                     currentPage = 1;
                     render();
@@ -214,7 +215,7 @@
                         empty.classList.add('hidden');
                         empty.classList.remove('flex');
                         slice.forEach((d, i) => {
-                            const pct = Math.min(Math.round((d.sold / 50) * 100), 100);
+                            const pct = Math.min(Math.round((d.terjual / 50) * 100), 100);
                             const bc = badgeClass[d.category] || 'bg-gray-100 text-gray-500';
                             const tr = document.createElement('tr');
                             tr.className = 'border-b border-gray-50 hover:bg-[#F8FFFE] transition-colors';
@@ -240,7 +241,7 @@
                             <td class="px-4 py-3">
                                 <div class="flex items-center gap-2">
                                    
-                                    <span class="text-xs text-gray-500">${d.sold}×</span>
+                                    <span class="text-xs text-gray-500">${d.terjual}×</span>
                                 </div>
                             </td>
                             

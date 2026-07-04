@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->integer("category_id")->nullable();
             $table->decimal("price")->nullable();
             $table->integer("terjual")->nullable();
-            $table->integer("deskripsi")->nullable();
+            $table->text("deskripsi")->nullable();
             $table->string("status");
             $table->timestamps();
         });
