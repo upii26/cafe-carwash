@@ -22,20 +22,19 @@
 <body class="bg-[#F2F2F0] min-h-screen overflow-x-hidden">
 
 @include('header.sidebar')
-<div id="sidebarOverlay" onclick="closeSidebar()"></div>
+{{-- <div id="sidebarOverlay" onclick="closeSidebar()"></div> --}}
 <div id="appWrapper" class="flex flex-col min-h-screen overflow-y-auto h-screen">
     @include('header.navbar')
 
-    <div class="main-layout flex flex-1 overflow-y-auto">
-        <div class="flex-1 p-4 md:p-6 pb-20 lg:pb-6">
+    <div class="main-layout flex-1 overflow-y-auto p-4 md:p-6 pb-12">
 
             {{-- ── Greeting ── --}}
             <div class="flex items-center justify-between mb-5 fade-up">
                 <div>
                     <h1 class="text-lg md:text-xl font-bold text-[#000000] leading-tight">
-                        Selamat Datang 👋
+                        Dashboard Cafe ☕
                     </h1>
-                    <p class="text-xs text-gray-400 mt-0.5" id="dateLabel"></p>
+                    <p class="text-xs text-black-400 mt-0.5" id="dateLabel"></p>
                 </div>
                 <div class="flex items-center gap-2">
                     <div class="hidden sm:flex items-center gap-1.5 bg-[#D4AF37]/15 backdrop-blur-xl border border-[#D4AF37]/30 rounded-xl px-3 py-1.5 text-xs font-medium text-[#000] shadow-[0_8px_30px_rgba(212,175,55,0.15)]">
@@ -53,7 +52,7 @@
             </div>
 
             {{-- ── STAT CARDS ── --}}
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-5">
+            <div class="grid grid-cols-2 gap-3 md:gap-4 mb-5">
 
                 {{-- Total Revenue --}}
                 <div class="stat-card bg-[#D4AF37]/15 backdrop-blur-xl border border-[#D4AF37]/30 rounded-2xl p-4 shadow-[0_8px_30px_rgba(212,175,55,0.15)] fade-up delay-1">
@@ -64,11 +63,11 @@
                     <div class="text-xl md:text-2xl font-bold text-[#000000]" id="c1">
                         Rp {{ number_format($totalRevenue, 0, ',', '.') }}
                     </div>
-                    <div class="text-xs text-[#000000] mt-0.5">Total Revenue</div>
+                    <div class="text-xs text-[#000000] mt-0.5">Pendapatan Hari Ini</div>
                     <div class="mt-3 h-1.5 bg-white rounded-full overflow-hidden">
-                        <div class="h-full bg-gradient-to-r from-[#D4AF37] to-[#B8860B]" style="width:72%"></div>
+                        <div class="h-full bg-gradient-to-r from-[#D4AF37] to-[#B8860B]" style="width: {{ $pctPendapatan }}%"></div>
                     </div>
-                    <div class="text-[10px] text-gray-500 mt-1">Makanan &amp; Minuman</div>
+                    <div class="text-[10px] text-black-500 mt-1">Target: Rp 1.500.000</div>
                 </div>
 
                 {{-- Total Pesanan --}}
@@ -84,40 +83,40 @@
                     <div class="mt-3 h-1.5 bg-white rounded-full overflow-hidden">
                         <div class="progress-fill" style="width:{{ min(($totalOrders/200)*100, 100) }}%; background:#3b82f6"></div>
                     </div>
-                    <div class="text-[10px] text-gray-500 mt-1">Target hari ini: 200</div>
+                    <div class="text-[10px] text-black-500 mt-1">Target hari ini: 200</div>
                 </div>
 
                 {{-- Meja Aktif (dummy, belum ada model Table) --}}
-                <div class="stat-card bg-[#D4AF37]/15 backdrop-blur-xl border border-[#D4AF37]/30 rounded-2xl p-4 shadow-[0_8px_30px_rgba(212,175,55,0.15)] fade-up delay-3">
+                {{-- <div class="stat-card bg-[#D4AF37]/15 backdrop-blur-xl border border-[#D4AF37]/30 rounded-2xl p-4 shadow-[0_8px_30px_rgba(212,175,55,0.15)] fade-up delay-3">
                     <div class="flex items-start justify-between mb-3">
                         <div class="stat-icon w-10 h-10 rounded-xl bg-orange-50 flex items-center justify-center text-xl">🪑</div>
                         <span class="text-[10px] font-semibold text-orange-500 bg-orange-50 px-2 py-0.5 rounded-full">Live</span>
                     </div>
-                    <div class="text-xl md:text-2xl font-bold text-gray-900">
-                        {{ $totalOrders }} <span class="text-sm font-normal text-gray-400">order aktif</span>
+                    <div class="text-xl md:text-2xl font-bold text-black-900">
+                        {{ $totalOrders }} <span class="text-sm font-normal text-black-400">order aktif</span>
                     </div>
-                    <div class="text-xs text-gray-400 mt-0.5">Meja Aktif</div>
+                    <div class="text-xs text-black-400 mt-0.5">Meja Aktif</div>
                     <div class="mt-3 h-1.5 bg-white rounded-full overflow-hidden">
                         <div class="progress-fill" style="width:{{ min(($totalOrders/20)*100, 100) }}%; background:#f97316"></div>
                     </div>
-                    <div class="text-[10px] text-gray-400 mt-1">Berdasarkan order hari ini</div>
-                </div>
+                    <div class="text-[10px] text-black-400 mt-1">Berdasarkan order hari ini</div>
+                </div> --}}
 
                 {{-- Rata-rata Pesanan --}}
-                <div class="stat-card bg-[#D4AF37]/15 backdrop-blur-xl border border-[#D4AF37]/30 rounded-2xl p-4 shadow-[0_8px_30px_rgba(212,175,55,0.15)] fade-up delay-4">
+                {{-- <div class="stat-card bg-[#D4AF37]/15 backdrop-blur-xl border border-[#D4AF37]/30 rounded-2xl p-4 shadow-[0_8px_30px_rgba(212,175,55,0.15)] fade-up delay-4">
                     <div class="flex items-start justify-between mb-3">
                         <div class="stat-icon w-10 h-10 rounded-xl bg-purple-50 flex items-center justify-center text-xl">⭐</div>
                         <span class="text-[10px] font-semibold text-purple-500 bg-purple-50 px-2 py-0.5 rounded-full">Avg</span>
                     </div>
-                    <div class="text-xl md:text-2xl font-bold text-gray-900">
+                    <div class="text-xl md:text-2xl font-bold text-black-900">
                         Rp {{ number_format($avgOrder, 0, ',', '.') }}
                     </div>
-                    <div class="text-xs text-gray-400 mt-0.5">Rata-rata Pesanan</div>
+                    <div class="text-xs text-black-400 mt-0.5">Rata-rata Pesanan</div>
                     <div class="mt-3 h-1.5 bg-white rounded-full overflow-hidden">
                         <div class="progress-fill" style="width:64%; background:#a855f7"></div>
                     </div>
-                    <div class="text-[10px] text-gray-400 mt-1">Per transaksi hari ini</div>
-                </div>
+                    <div class="text-[10px] text-black-400 mt-1">Per transaksi hari ini</div>
+                </div> --}}
 
             </div>
 
@@ -128,8 +127,8 @@
                 <div class="lg:col-span-2 bg-[#D4AF37]/15 backdrop-blur-xl border border-[#D4AF37]/30 rounded-2xl p-4 md:p-5 shadow-[0_8px_30px_rgba(212,175,55,0.15)] fade-up delay-5">
                     <div class="flex items-center justify-between mb-4">
                         <div>
-                            <h3 class="font-bold text-gray-900 text-sm">Pendapatan Mingguan</h3>
-                            <p class="text-xs text-gray-400 mt-0.5">7 hari terakhir · Makanan &amp; Minuman</p>
+                            <h3 class="font-bold text-black-900 text-sm">Pendapatan Mingguan</h3>
+                            <p class="text-xs text-black-400 mt-0.5">7 hari terakhir · Makanan &amp; Minuman</p>
                         </div>
                     </div>
                     <div class="flex items-end gap-2 h-32 md:h-40 bg-white/30 rounded-xl p-2" id="barChart"></div>
@@ -139,12 +138,12 @@
                 {{-- Top Menu --}}
                 <div class="bg-[#D4AF37]/15 backdrop-blur-xl border border-[#D4AF37]/30 rounded-2xl p-4 md:p-5 shadow-[0_8px_30px_rgba(212,175,55,0.15)] fade-up delay-6">
                     <div class="flex items-center justify-between mb-4">
-                        <h3 class="font-bold text-gray-900 text-sm">Menu Terlaris</h3>
-                        <span class="text-[10px] text-gray-400">Hari ini</span>
+                        <h3 class="font-bold text-black-900 text-sm">Menu Terlaris</h3>
+                        <span class="text-[10px] text-black-400">Hari ini</span>
                     </div>
 
                     @if($topMenus->isEmpty())
-                        <div class="text-center text-gray-300 py-8 text-xs">Belum ada data hari ini 🍽️</div>
+                        <div class="text-center text-black-300 py-8 text-xs">Belum ada data hari ini 🍽️</div>
                     @else
                         <div class="flex flex-col gap-3">
                             @php
@@ -152,11 +151,11 @@
                             @endphp
                             @foreach($topMenus as $i => $menu)
                                 <div class="flex items-center gap-3">
-                                    <div class="w-9 h-9 rounded-xl bg-gray-50 flex items-center justify-center text-lg flex-shrink-0">
+                                    <div class="w-9 h-9 rounded-xl bg-black-50 flex items-center justify-center text-lg flex-shrink-0">
                                         🍽️
                                     </div>
                                     <div class="flex-1 min-w-0">
-                                        <div class="text-xs font-semibold text-gray-800 truncate">
+                                        <div class="text-xs font-semibold text-black-800 truncate">
                                             {{ $menu->name }}
                                         </div>
                                         <div class="progress-bar mt-1">
@@ -165,7 +164,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <span class="text-xs font-bold text-gray-700 flex-shrink-0">
+                                    <span class="text-xs font-bold text-black-700 flex-shrink-0">
                                         {{ $menu->total_qty }}x
                                     </span>
                                 </div>
@@ -174,16 +173,16 @@
                     @endif
 
                     {{-- Quick Summary --}}
-                    <div class="mt-4 pt-4 border-t border-gray-100 grid grid-cols-2 gap-3">
-                        <div class="bg-[#e6faf6] rounded-xl p-3 text-center">
-                            <div class="text-sm font-bold text-[#0BAB8C]">
+                    <div class="mt-4 pt-4 border-t border-black/20 grid grid-cols-2 gap-3">
+                        <div class="bg-[#D4AF37]/15 border border-[#D4AF37]/30 rounded-xl p-3 text-center">
+                            <div class="text-sm font-bold text-[#000000]">
                                 Rp {{ number_format($totalRevenue, 0, ',', '.') }}
                             </div>
-                            <div class="text-[10px] text-gray-500 mt-0.5">Pendapatan</div>
+                            <div class="text-[10px] text-black-500 mt-0.5">Pendapatan</div>
                         </div>
-                        <div class="bg-gray-50 rounded-xl p-3 text-center">
-                            <div class="text-sm font-bold text-gray-700">{{ $totalOrders }}</div>
-                            <div class="text-[10px] text-gray-500 mt-0.5">Total Order</div>
+                        <div class="bg-black-50 rounded-xl p-3 text-center">
+                            <div class="text-sm font-bold text-black-700">{{ $totalOrders }}</div>
+                            <div class="text-[10px] text-black-500 mt-0.5">Total Order</div>
                         </div>
                     </div>
                 </div>
@@ -191,50 +190,50 @@
             </div>
 
             {{-- ── ROW 3: Recent Orders ── --}}
-            <div class="bg-white rounded-2xl overflow-hidden fade-up delay-5">
-                <div class="flex items-center justify-between px-4 md:px-5 pt-4 pb-3 border-b border-gray-100">
-                    <h3 class="font-bold text-gray-900 text-sm">Pesanan Terkini</h3>
-                    <a href="{{ url('/reports?type=food') }}" class="text-xs font-semibold text-[#0BAB8C] hover:underline">
+            <div class="bg-[#D4AF37]/15 rounded-2xl overflow-hidden fade-up delay-5">
+                <div class="flex items-center justify-between px-4 md:px-5 pt-4 pb-3 border-b border-black/20">
+                    <h3 class="font-bold text-black-900 text-sm">Pesanan Terkini</h3>
+                    <a href="{{ url('/reports?type=food') }}" class="text-xs font-semibold text-[#00000] hover:underline">
                         Lihat semua
                     </a>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-xs">
                         <thead>
-                            <tr class="bg-gray-50">
-                                <th class="text-left px-4 md:px-5 py-2.5 text-gray-400 font-semibold">Order ID</th>
-                                <th class="text-left px-3 py-2.5 text-gray-400 font-semibold">Meja</th>
-                                <th class="text-left px-3 py-2.5 text-gray-400 font-semibold hidden sm:table-cell">Item</th>
-                                <th class="text-left px-3 py-2.5 text-gray-400 font-semibold">Total</th>
-                                <th class="text-left px-3 py-2.5 text-gray-400 font-semibold">Bayar</th>
-                                <th class="text-left px-3 py-2.5 text-gray-400 font-semibold">Waktu</th>
+                            <tr class="bg-black-50">
+                                <th class="text-left px-4 md:px-5 py-2.5 text-black-400 font-semibold">Order ID</th>
+                                <th class="text-left px-3 py-2.5 text-black-400 font-semibold">Meja</th>
+                                <th class="text-left px-3 py-2.5 text-black-400 font-semibold hidden sm:table-cell">Item</th>
+                                <th class="text-left px-3 py-2.5 text-black-400 font-semibold">Total</th>
+                                <th class="text-left px-3 py-2.5 text-black-400 font-semibold">Bayar</th>
+                                <th class="text-left px-3 py-2.5 text-black-400 font-semibold">Waktu</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse($recentOrders as $order)
-                                <tr class="order-row border-t border-gray-50">
-                                    <td class="px-4 md:px-5 py-3 font-semibold text-gray-800">
+                                <tr class="order-row border-t border-black-50">
+                                    <td class="px-4 md:px-5 py-3 font-semibold text-black-800">
                                         #{{ $order['no_order'] }}
                                     </td>
-                                    <td class="px-3 py-3 text-gray-500">
+                                    <td class="px-3 py-3 text-black-500">
                                         {{ $order['no_table'] }}
                                     </td>
-                                    <td class="px-3 py-3 text-gray-500 hidden sm:table-cell">
+                                    <td class="px-3 py-3 text-black-500 hidden sm:table-cell">
                                         {{ $order['item_count'] }} item
                                     </td>
-                                    <td class="px-3 py-3 font-bold text-[#0BAB8C]">
+                                    <td class="px-3 py-3 font-bold text-[#00000]">
                                         Rp {{ number_format($order['total'], 0, ',', '.') }}
                                     </td>
-                                    <td class="px-3 py-3 text-gray-500">
+                                    <td class="px-3 py-3 text-black-500">
                                         {{ $order['payment_method'] }}
                                     </td>
-                                    <td class="px-3 py-3 text-gray-400">
+                                    <td class="px-3 py-3 text-black-400">
                                         {{ $order['created_at'] }}
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="6" class="text-center py-10 text-gray-300 text-sm">
+                                    <td colspan="6" class="text-center py-10 text-black-300 text-sm">
                                         Belum ada pesanan hari ini 🍽️
                                     </td>
                                 </tr>
@@ -243,8 +242,6 @@
                     </table>
                 </div>
             </div>
-
-        </div>
     </div>
 </div>
 
@@ -289,7 +286,7 @@
         }).join('');
 
         lblRow.innerHTML = weeklyChart.map((d, i) =>
-            `<div class="flex-1 text-center text-[9px] font-medium ${d.date === todayStr ? 'text-[#000] font-bold' : 'text-gray-400'}">${d.label}</div>`
+            `<div class="flex-1 text-center text-[9px] font-medium ${d.date === todayStr ? 'text-[#000] font-bold' : 'text-black-400'}">${d.label}</div>`
         ).join('');
     }
 </script>

@@ -3,9 +3,9 @@
 <body class="bg-[#F2F2F0] min-h-screen overflow-x-hidden">
 
     @include('header.sidebar')
-    <div id="sidebarOverlay" onclick="closeSidebar()"></div>
+    {{-- <div id="sidebarOverlay" onclick="closeSidebar()"></div> --}}
 
-    <div id="appWrapper" class="flex flex-col min-h-screen">
+    <div id="appWrapper" class="flex flex-col h-screen overflow-hidden">
         @include('header.navbar')
 
         <div class="main-layout flex flex-1 overflow-hidden">
@@ -36,7 +36,7 @@
                         <div class="bg-white rounded-2xl p-5 shadow-sm border border-black/[.07]">
                             <div class="flex items-center gap-2 mb-4">
                                 <span class="w-6 h-6 rounded-lg flex items-center justify-center text-xs font-bold text-white flex-shrink-0"
-                                    style="background:#0BAB8C">1</span>
+                                    style="background:#D4AF37">1</span>
                                 <span class="text-sm font-extrabold text-gray-900">Informasi User</span>
                             </div>
 
@@ -45,7 +45,7 @@
                                 {{-- Avatar preview --}}
                                 <div class="flex items-center gap-3 pb-3 border-b border-gray-100">
                                     <div class="w-12 h-12 rounded-full flex items-center justify-center text-base font-bold flex-shrink-0"
-                                        style="background:{{ $user->role === 'owner' ? '#e6faf6' : '#eff6ff' }};color:{{ $user->role === 'owner' ? '#0BAB8C' : '#3b82f6' }}"
+                                        style="background:{{ $user->role === 'owner' ? 'rgba(212,175,55,.15)' : '#eff6ff' }};color:{{ $user->role === 'owner' ? '#D4AF37' : '#3b82f6' }}"
                                         id="avatarCircle">
                                         {{ strtoupper(substr($user->name, 0, 2)) }}
                                     </div>
@@ -120,7 +120,7 @@
                         <div class="bg-white rounded-2xl p-5 shadow-sm border border-black/[.07]">
                             <div class="flex items-center gap-2 mb-4">
                                 <span class="w-6 h-6 rounded-lg flex items-center justify-center text-xs font-bold text-white flex-shrink-0"
-                                    style="background:#0BAB8C">2</span>
+                                    style="background:#D4AF37">2</span>
                                 <span class="text-sm font-extrabold text-gray-900">Role</span>
                             </div>
 
@@ -130,18 +130,18 @@
 
                                 <label class="flex items-center gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all"
                                     id="roleOwner"
-                                    style="{{ $selectedRole === 'owner' ? 'border-color:#0BAB8C;background:#e6faf6' : 'border-color:#e2e8f0;background:#f8fafb' }}"
+                                    style="{{ $selectedRole === 'owner' ? 'border-color:#D4AF37;background:rgba(212,175,55,.15)' : 'border-color:#e2e8f0;background:#f8fafb' }}"
                                     onclick="selectRole('owner')">
                                     <input type="radio" name="role" value="owner" class="hidden"
                                         {{ $selectedRole === 'owner' ? 'checked' : '' }}>
                                     <div class="w-10 h-10 rounded-xl flex items-center justify-center text-xl flex-shrink-0"
-                                        style="background:#e6faf6">👑</div>
+                                        style="background:rgba(212,175,55,.15)">👑</div>
                                     <div class="flex-1">
                                         <div class="text-sm font-bold text-gray-800">Owner</div>
                                         <div class="text-xs text-gray-400 mt-0.5">Akses penuh ke semua fitur</div>
                                     </div>
                                     <div class="w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 role-check-owner"
-                                        style="{{ $selectedRole === 'owner' ? 'border-color:#0BAB8C;background:#0BAB8C' : 'border-color:#cbd5e1' }}">
+                                        style="{{ $selectedRole === 'owner' ? 'border-color:#D4AF37;background:#D4AF37' : 'border-color:#cbd5e1' }}">
                                         @if($selectedRole === 'owner')
                                             <svg class="w-3 h-3" fill="none" stroke="white" stroke-width="3" viewBox="0 0 24 24">
                                                 <polyline points="20 6 9 17 4 12"/>
@@ -153,7 +153,7 @@
                                 {{-- Kasir --}}
                                 <label class="flex items-center gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all"
                                     id="roleKasir"
-                                    style="{{ $selectedRole === 'kasir' ? 'border-color:#0BAB8C;background:#e6faf6' : 'border-color:#e2e8f0;background:#f8fafb' }}"
+                                    style="{{ $selectedRole === 'kasir' ? 'border-color:#D4AF37;background:rgba(212,175,55,.15)' : 'border-color:#e2e8f0;background:#f8fafb' }}"
                                     onclick="selectRole('kasir')">
                                     <input type="radio" name="role" value="kasir" class="hidden"
                                         {{ $selectedRole === 'kasir' ? 'checked' : '' }}>
@@ -164,7 +164,7 @@
                                         <div class="text-xs text-gray-400 mt-0.5">Akses transaksi &amp; menu</div>
                                     </div>
                                     <div class="w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 role-check-kasir"
-                                        style="{{ $selectedRole === 'kasir' ? 'border-color:#0BAB8C;background:#0BAB8C' : 'border-color:#cbd5e1' }}">
+                                        style="{{ $selectedRole === 'kasir' ? 'border-color:#D4AF37;background:#D4AF37' : 'border-color:#cbd5e1' }}">
                                         @if($selectedRole === 'kasir')
                                             <svg class="w-3 h-3" fill="none" stroke="white" stroke-width="3" viewBox="0 0 24 24">
                                                 <polyline points="20 6 9 17 4 12"/>
@@ -188,7 +188,7 @@
                             </a>
                             <button type="submit"
                                 class="flex-1 py-3 rounded-xl text-sm font-bold text-white transition-colors"
-                                style="background:#0BAB8C;box-shadow:0 4px 14px rgba(11,171,140,.25)">
+                                style="background:#D4AF37;box-shadow:0 4px 14px rgba(11,171,140,.25)">
                                 ✅ Simpan Perubahan
                             </button>
                         </div>
@@ -211,10 +211,10 @@
                 var card  = document.getElementById('role' + r.charAt(0).toUpperCase() + r.slice(1));
                 var check = document.querySelector('.role-check-' + r);
                 if (r === role) {
-                    card.style.borderColor  = '#0BAB8C';
-                    card.style.background   = '#e6faf6';
-                    check.style.borderColor = '#0BAB8C';
-                    check.style.background  = '#0BAB8C';
+                    card.style.borderColor  = '#D4AF37';
+                    card.style.background   = 'rgba(212,175,55,.15)';
+                    check.style.borderColor = '#D4AF37';
+                    check.style.background  = '#D4AF37';
                     check.innerHTML = '<svg class="w-3 h-3" fill="none" stroke="white" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
                 } else {
                     card.style.borderColor  = '#e2e8f0';

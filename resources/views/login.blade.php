@@ -206,10 +206,12 @@
             border-radius: 999px;
         }
     </style>
+
 </head>
 
 
 {{-- Opsi 2 --}}
+
 <body class="min-h-screen flex items-center justify-start bg-cover bg-no-repeat relative overflow-hidden px-6 lg:px-20"
     style="
         background-image:url('{{ asset('images/tablet-standing-isolated-table.jpg') }}');
@@ -245,7 +247,7 @@
             </h1>
 
             <p class="text-white/55 mt-3 text-sm tracking-wide">
-                Login untuk mengakses dashboard 
+                Login untuk mengakses dashboard
             </p>
         </div>
 
@@ -261,16 +263,16 @@
 
                 <input type="text" name="username" placeholder="Masukkan Username"
                     class="w-full rounded-2xl
-            border border-white/20
-            bg-white/10
-            backdrop-blur-md
-            text-white
-            placeholder-white/40
-            px-4 py-3.5 text-sm
-            focus:outline-none
-            focus:ring-2
-            focus:ring-[#D4AF37]
-            transition duration-300">
+                    border border-white/20
+                    bg-white/10
+                    backdrop-blur-md
+                    text-white
+                    placeholder-white/40
+                    px-4 py-3.5 text-sm
+                    focus:outline-none
+                    focus:ring-2
+                    focus:ring-[#D4AF37]
+                    transition duration-300">
             </div>
 
             <!-- Password -->
@@ -279,19 +281,60 @@
                     Password
                 </label>
 
-                <input type="password" name="password" placeholder="Masukkan password"
-                    class="w-full rounded-2xl
-            border border-white/20
-            bg-white/10
-            backdrop-blur-md
-            text-white
-            placeholder-white/40
-            px-4 py-3.5 text-sm
-            focus:outline-none
-            focus:ring-2
-            focus:ring-[#D4AF37]
-            transition duration-300">
+                <div class="relative">
+                    <input type="password" id="password" name="password" placeholder="Masukkan password"
+                        class="w-full rounded-2xl
+                        border border-white/20
+                        bg-white/10
+                        backdrop-blur-md
+                        text-white
+                        placeholder-white/40
+                        px-4 py-3.5 pr-12 text-sm
+                        focus:outline-none
+                        focus:ring-2
+                        focus:ring-[#D4AF37]
+                        transition duration-300">
+
+                    <button type="button" id="togglePassword"
+                        class="absolute inset-y-0 right-0 flex items-center pr-4 text-white/60 hover:text-[#D4AF37]">
+
+                        <!-- Eye Off -->
+                        <svg id="eyeOff" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M3 3l18 18M10.477 10.484A3 3 0 0013.5 13.5m-3.62-8.41A9.956 9.956 0 0112 4.5c4.638 0 8.573 3.007 9.963 7.178a9.97 9.97 0 01-2.352 3.592M6.228 6.228A9.97 9.97 0 002.036 11.683a1.01 1.01 0 000 .639C3.423 16.49 7.362 19.5 12 19.5a9.95 9.95 0 005.091-1.382" />
+                        </svg>
+
+                        <!-- Eye -->
+                        <svg id="eyeOn" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6 hidden">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5s8.577 3.01 9.964 7.183a1.012 1.012 0 010 .639C20.577 16.49 16.64 19.5 12 19.5S3.423 16.49 2.036 12.322z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+
+                    </button>
+                </div>
             </div>
+
+            {{-- Pesan Error --}}
+            @error('username')
+                <div id="loginError"
+                    class="mt-4 flex items-center gap-2 rounded-xl
+           border border-red-500/30
+           bg-red-500/10
+           px-4 py-3
+           text-sm text-red-300
+           transition-all duration-500">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01M12 3l9 16H3L12 3z" />
+                    </svg>
+
+                    <span>{{ $message }}</span>
+                </div>
+            @enderror
 
             <!-- Button -->
             <button type="submit"
@@ -305,9 +348,42 @@
             </button>
 
         </form>
-
     </div>
 
+    <script>
+        const password = document.getElementById('password');
+        const toggle = document.getElementById('togglePassword');
+        const eyeOff = document.getElementById('eyeOff');
+        const eyeOn = document.getElementById('eyeOn');
+
+        toggle.addEventListener('click', () => {
+            if (password.type === 'password') {
+                password.type = 'text';
+                eyeOff.classList.add('hidden');
+                eyeOn.classList.remove('hidden');
+            } else {
+                password.type = 'password';
+                eyeOn.classList.add('hidden');
+                eyeOff.classList.remove('hidden');
+            }
+        });
+
+        const error = document.getElementById('loginError');
+
+        if (error) {
+            setTimeout(() => {
+                error.classList.add(
+                    'opacity-0',
+                    '-translate-y-2'
+                );
+
+                setTimeout(() => {
+                    error.remove();
+                }, 500);
+
+            }, 3000); // hilang setelah 3 detik
+        }
+    </script>
 </body>
 
 

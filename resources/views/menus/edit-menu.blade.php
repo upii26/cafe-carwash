@@ -10,11 +10,11 @@
     }
 
     :root {
-        --green: #0BAB8C;
-        --green-2: #089073;
-        --green-3: #065f46;
-        --green-bg: #e6faf6;
-        --green-glow: rgba(11, 171, 140, .18);
+        --green: #D4AF37;
+        --green-2: #C49A22;
+        --green-3: #8B6B1F;
+        --green-bg: rgba(212, 175, 55, .15);
+        --green-glow: rgba(212, 175, 55, .22);
         --bg: #F2F2F0;
         --sidebar-w: 220px;
         --nav-h: 56px;
@@ -364,9 +364,9 @@
     }
 
     .upload-zone {
-        border: 2px dashed var(--s200);
+        border: 2px dashed rgba(212, 175, 55, .30);
         border-radius: 14px;
-        background: var(--s50);
+        background: rgba(212, 175, 55, .08);
         text-align: center;
         padding: 22px 16px;
         cursor: pointer;
@@ -375,8 +375,8 @@
 
     .upload-zone:hover,
     .upload-zone.drag {
-        border-color: var(--green);
-        background: var(--green-bg)
+        background: rgba(212, 175, 55, .16);
+        border-color: #D4AF37;
     }
 
     .upload-zone input {
@@ -517,14 +517,14 @@
     }
 
     .btn-main {
-        background: var(--green);
+        background: #D4AF37;
         color: #fff;
         flex: 1.6;
-        box-shadow: 0 4px 14px var(--green-glow)
+        box-shadow: 0 8px 20px rgba(212, 175, 55, .22);
     }
 
     .btn-main:hover {
-        background: var(--green-2);
+        background: #C49A22;
         box-shadow: 0 6px 18px var(--green-glow)
     }
 
@@ -1041,12 +1041,12 @@
         $existingPhoto = $menu->photo ? Storage::url($menu->photo) : null;
     @endphp
     <script>
-       var selCat           = null;
-    var selCatName       = null;
-    var imgSrc           = null;
-    var existingPhotoUrl = @json($existingPhoto);
-    var initialCategoryId   = @json($selectedCatId);
-    var initialCategoryName = @json($selectedCatName);
+        var selCat = null;
+        var selCatName = null;
+        var imgSrc = null;
+        var existingPhotoUrl = @json($existingPhoto);
+        var initialCategoryId = @json($selectedCatId);
+        var initialCategoryName = @json($selectedCatName);
 
         // ── Map kategori untuk preview (dinamis dari DB) ──────────────────────
         // Emoji berdasarkan nama kategori
@@ -1196,11 +1196,11 @@
 
             document.getElementById('pctText').textContent = pct + '%';
             document.getElementById('pctText').style.color =
-                pct >= 80 ? '#0BAB8C' : pct >= 40 ? '#f97316' : '#94a3b8';
+                pct >= 80 ? '#D4AF37' : pct >= 40 ? '#f97316' : '#94a3b8';
 
             var bar = document.getElementById('barFill');
             bar.style.width = pct + '%';
-            bar.style.background = pct >= 80 ? '#0BAB8C' : pct >= 40 ? '#f97316' : '#e2e8f0';
+            bar.style.background = pct >= 80 ? '#D4AF37' : pct >= 40 ? '#f97316' : '#e2e8f0';
 
             keys.forEach(function(k) {
                 var el = document.getElementById('ci-' + k);
@@ -1244,7 +1244,7 @@
         }
 
         function showToast(msg, bg) {
-            bg = bg || '#0BAB8C';
+            bg = bg || '#D4AF37';
             var t = document.getElementById('toast');
             t.textContent = msg;
             t.style.background = bg;

@@ -84,7 +84,7 @@
 
     /* ── Tabs / payment ── */
     .tab-active {
-        background: #0BAB8C !important;
+        background: #D4AF37 !important;
         color: white !important;
     }
 
@@ -177,7 +177,8 @@
         background: white;
         display: flex;
         flex-direction: column;
-        overflow: hidden;
+        overflow-y: auto;
+        overflow-x: hidden;
         flex-shrink: 0;
 
         /* Mobile/tablet: fixed bottom sheet */

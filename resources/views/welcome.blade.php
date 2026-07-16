@@ -5,7 +5,7 @@
     @include('header.sidebar')
 
     <!-- Overlay sidebar mobile -->
-    <div id="sidebarOverlay" onclick="closeSidebar()"></div>
+    {{-- <div id="sidebarOverlay" onclick="closeSidebar()"></div> --}}
 
     <div id="appWrapper" class="flex flex-col min-h-screen">
 
@@ -20,6 +20,5 @@
     </div>
 
     @include('header.navmobile')
-    </div>
 
     @include('footer.footer')

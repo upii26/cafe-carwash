@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Menu;
 use App\Models\Order;
 use App\Models\OrderItem;
-use App\Models\Menu;
 use Carbon\Carbon;
-
 
 class DashboardController extends Controller
 {
-      public function index()
+    public function index()
     {
         $today = now()->toDateString();
 
@@ -21,15 +19,15 @@ class DashboardController extends Controller
 
         // Total Revenue hari ini (Makanan & Minuman)
         $totalRevenue = Order::whereHas('items.category', function ($q) {
-                $q->whereIn('name_category', ['Makanan', 'Minuman']);
-            })
+            $q->whereIn('name_category', ['Makanan', 'Minuman']);
+        })
             ->whereDate('created_at', $today)
             ->sum('total');
 
         // Total Pesanan hari ini (Makanan & Minuman)
         $totalOrders = Order::whereHas('items.category', function ($q) {
-                $q->whereIn('name_category', ['Makanan', 'Minuman']);
-            })
+            $q->whereIn('name_category', ['Makanan', 'Minuman']);
+        })
             ->whereDate('created_at', $today)
             ->count();
 
@@ -37,6 +35,12 @@ class DashboardController extends Controller
         $avgOrder = $totalOrders > 0
             ? round($totalRevenue / $totalOrders)
             : 0;
+
+        // Progress pendapatan
+        $targetPendapatan = 1500000;
+        $pctPendapatan = $targetPendapatan > 0
+        ? min(100, ($totalRevenue / $targetPendapatan) * 100)
+        : 0;
 
         // ════════════════════════════════════════
         // CHART — Pendapatan 7 hari terakhir (Makanan & Minuman)
@@ -47,15 +51,15 @@ class DashboardController extends Controller
             $date = now()->subDays($i);
 
             $total = Order::whereHas('items.category', function ($q) {
-                    $q->whereIn('name_category', ['Makanan', 'Minuman']);
-                })
+                $q->whereIn('name_category', ['Makanan', 'Minuman']);
+            })
                 ->whereDate('created_at', $date->toDateString())
                 ->sum('total');
 
             $weeklyChart[] = [
                 'label' => $date->translatedFormat('D'),
                 'total' => (int) $total,
-                'date'  => $date->toDateString(),
+                'date' => $date->toDateString(),
             ];
         }
 
@@ -72,12 +76,12 @@ class DashboardController extends Controller
             ->get()
             ->map(function ($order) {
                 return [
-                    'no_order'       => $order->no_order,
-                    'no_table'       => $order->no_table,
-                    'item_count'     => $order->items->count(),
-                    'total'          => (int) $order->total,
+                    'no_order' => $order->no_order,
+                    'no_table' => $order->no_table,
+                    'item_count' => $order->items->count(),
+                    'total' => (int) $order->total,
                     'payment_method' => $order->payment_method,
-                    'created_at'     => $order->created_at->format('H:i'),
+                    'created_at' => $order->created_at->format('H:i'),
                 ];
             });
 
@@ -98,45 +102,47 @@ class DashboardController extends Controller
         $maxQty = $topMenus->max('total_qty') ?: 1;
 
         return view('dashboard', [
-            'totalRevenue' => $totalRevenue,
-            'totalOrders'  => $totalOrders,
-            'avgOrder'     => $avgOrder,
-            'weeklyChart'  => $weeklyChart,
-            'recentOrders' => $recentOrders,
-            'topMenus'     => $topMenus,
-            'maxQty'       => $maxQty,
+            'totalRevenue'     => $totalRevenue,
+            'totalOrders'      => $totalOrders,
+            'avgOrder'         => $avgOrder,
+            'targetPendapatan' => $targetPendapatan,
+            'pctPendapatan'    => $pctPendapatan,
+            'weeklyChart'      => $weeklyChart,
+            'recentOrders'     => $recentOrders,
+            'topMenus'         => $topMenus,
+            'maxQty'           => $maxQty,
         ]);
     }
 
     public function indexcarwash()
     {
-        $today        = Carbon::today();
+        $today = Carbon::today();
         $carwashCatId = 3;
- 
+
         // Order ID yang mengandung item carwash
         $orderIdsCarwash = OrderItem::where('category_menu_id', $carwashCatId)
             ->pluck('order_id')
             ->unique();
- 
+
         // 1. Pendapatan hari ini
         $pendapatanHariIni = OrderItem::where('category_menu_id', $carwashCatId)
-            ->whereHas('order', fn($q) => $q->whereDate('created_at', $today))
+            ->whereHas('order', fn ($q) => $q->whereDate('created_at', $today))
             ->sum('subtotal');
- 
+
         // 2. Total kendaraan hari ini
         $totalHariIni = Order::whereIn('id', $orderIdsCarwash)
             ->whereDate('created_at', $today)
             ->count();
- 
+
         // 3. Bar chart 7 hari terakhir
         $weeklyData = [];
         for ($i = 6; $i >= 0; $i--) {
-            $date       = Carbon::today()->subDays($i);
+            $date = Carbon::today()->subDays($i);
             $idsHariItu = OrderItem::where('category_menu_id', $carwashCatId)
-                ->whereHas('order', fn($q) => $q->whereDate('created_at', $date))
+                ->whereHas('order', fn ($q) => $q->whereDate('created_at', $date))
                 ->pluck('order_id')
                 ->unique();
- 
+
             $weeklyData[] = [
                 'label' => $date->locale('id')->isoFormat('ddd'),
                 'count' => Order::whereIn('id', $idsHariItu)
@@ -144,24 +150,24 @@ class DashboardController extends Controller
                     ->count(),
             ];
         }
- 
+
         // 4. Tipe layanan hari ini
         $tipeLayanan = OrderItem::where('category_menu_id', $carwashCatId)
-            ->whereHas('order', fn($q) => $q->whereDate('created_at', $today))
+            ->whereHas('order', fn ($q) => $q->whereDate('created_at', $today))
             ->with('menu:id,name')
             ->get()
             ->groupBy('menu_id')
-            ->map(fn($items) => (object)[
-                'name'  => optional($items->first()->menu)->name ?? 'Layanan',
+            ->map(fn ($items) => (object) [
+                'name' => optional($items->first()->menu)->name ?? 'Layanan',
                 'total' => $items->sum('qty'),
             ])
             ->values();
- 
+
         $totalLayanan = $tipeLayanan->sum('total') ?: 1;
- 
+
         // 5. Transaksi terkini (pakai relasi 'items' sesuai model Order)
         $antrianTerkini = Order::whereIn('id', $orderIdsCarwash)
-            ->with(['items' => fn($q) => $q->where('category_menu_id', $carwashCatId)->with('menu:id,name')])
+            ->with(['items' => fn ($q) => $q->where('category_menu_id', $carwashCatId)->with('menu:id,name')])
             ->orderByDesc('created_at')
             ->limit(5)
             ->get()
@@ -170,24 +176,25 @@ class DashboardController extends Controller
                     ->pluck('menu.name')
                     ->filter()
                     ->implode(', ');
+
                 return $order;
             });
- 
+
         // 6. Layanan terlaris hari ini
         $layananTerlaris = OrderItem::where('category_menu_id', $carwashCatId)
-            ->whereHas('order', fn($q) => $q->whereDate('created_at', $today))
+            ->whereHas('order', fn ($q) => $q->whereDate('created_at', $today))
             ->with('menu:id,name')
             ->get()
             ->groupBy('menu_id')
-            ->map(fn($items) => (object)[
-                'name'          => optional($items->first()->menu)->name ?? 'Layanan',
+            ->map(fn ($items) => (object) [
+                'name' => optional($items->first()->menu)->name ?? 'Layanan',
                 'total_terjual' => $items->sum('qty'),
             ])
             ->sortByDesc('total_terjual')
             ->values();
- 
+
         $maxTerjual = $layananTerlaris->max('total_terjual') ?: 1;
- 
+
         return view('dashboard_carwash', compact(
             'pendapatanHariIni',
             'totalHariIni',

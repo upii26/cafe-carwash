@@ -18,7 +18,7 @@
                 <a href="{{ url('/reports') }}?type=food&from={{ $from }}&to={{ $to }}"
                     data-tab="food"
                     class="report-tab-btn {{ $type === 'food' ? 'tab-active' : 'bg-white text-gray-500' }} px-4 py-2 rounded-xl text-sm font-semibold">
-                    🍽️ Makanan &amp; Minuman
+                    🍽️ Cafe
                 </a>
                 <a href="{{ url('/reports') }}?type=carwash&from={{ $from }}&to={{ $to }}"
                     data-tab="carwash"
@@ -49,7 +49,7 @@
                         class="text-sm border border-gray-200 rounded-xl px-3 py-2">
                 </div>
 
-                <button type="submit" class="px-4 py-2 bg-[#0BAB8C] text-white rounded-xl text-sm font-semibold">
+                <button type="submit" class="px-4 py-2 bg-[#D4AF37] text-white rounded-xl text-sm font-semibold">
                     Terapkan
                 </button>
 
@@ -70,7 +70,7 @@
                 </div>
                 <div class="bg-white rounded-2xl p-4 sm:col-span-2">
                     <div class="text-xs text-gray-400 font-medium mb-1">Total Penjualan</div>
-                    <div class="text-xl font-bold text-[#0BAB8C]">
+                    <div class="text-xl font-bold text-[#D4AF37]">
                         Rp {{ number_format($totalSales, 0, ',', '.') }}
                     </div>
                 </div>
@@ -81,7 +81,7 @@
                 <div class="flex items-center justify-between mb-3">
                     <span class="text-sm font-bold text-gray-900">Penjualan Makanan &amp; Minuman per Bulan</span>
                     <span class="flex items-center gap-1.5 text-xs text-gray-500">
-                        <span class="w-2.5 h-2.5 rounded-sm bg-[#0BAB8C]"></span> Total / bulan
+                        <span class="w-2.5 h-2.5 rounded-sm bg-[#D4AF37]"></span> Total / bulan
                     </span>
                 </div>
                 <div style="position: relative; width: 100%; height: 260px;">
@@ -114,7 +114,7 @@
                     </svg>
 
                     <input type="text" id="searchOrder" placeholder="Cari no order..." oninput="filterTable()"
-                        class="w-full text-sm border border-gray-200 rounded-xl pl-9 pr-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-[#0BAB8C]/30 focus:border-[#0BAB8C] transition-all">
+                        class="w-full text-sm border border-gray-200 rounded-xl pl-9 pr-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/30 focus:border-[#D4AF37] transition-all">
 
                 </div>
             </div>
@@ -127,7 +127,6 @@
                             <tr class="bg-gray-50 text-gray-400 text-xs font-semibold">
                                 <th class="text-left px-4 py-3 whitespace-nowrap">Tanggal</th>
                                 <th class="text-left px-4 py-3 whitespace-nowrap">Order</th>
-                                <th class="text-left px-4 py-3 whitespace-nowrap">Customer</th>
                                 <th class="text-center px-4 py-3 whitespace-nowrap">Meja</th>
                                 <th class="text-left px-4 py-3 whitespace-nowrap">Pembayaran</th>
                                 <th class="text-right px-4 py-3 whitespace-nowrap">Total</th>
@@ -140,7 +139,7 @@
                         <div class="flex items-center gap-2">
                             <span class="text-xs text-gray-400">Tampilkan</span>
                             <select id="perPageSelect" onchange="changePerPage()"
-                                class="text-xs border border-gray-200 rounded-lg px-2 py-1 bg-white text-gray-600 focus:outline-none focus:ring-2 focus:ring-[#0BAB8C]/30 focus:border-[#0BAB8C] transition-colors">
+                                class="text-xs border border-gray-200 rounded-lg px-2 py-1 bg-white text-gray-600 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/30 focus:border-[#D4AF37] transition-colors">
                                 <option value="10">10</option>
                                 <option value="30">30</option>
                                 <option value="50">50</option>
@@ -160,7 +159,7 @@
 
     <style>
         .report-tab-btn.tab-active {
-            background-color: #0BAB8C;
+            background-color: #D4AF37;
             color: #fff;
         }
     </style>
@@ -235,10 +234,9 @@
                     <span class="text-xs text-gray-400">${o.time || ''}</span>
                 </td>
                 <td class="px-4 py-3 font-semibold text-gray-800">${o.order_code}</td>
-                <td class="px-4 py-3 text-gray-700">${o.customer}</td>
                 <td class="px-4 py-3 text-center text-gray-700">${o.table}</td>
                 <td class="px-4 py-3 text-gray-700">${o.payment}</td>
-                <td class="px-4 py-3 text-right font-bold text-[#0BAB8C]">${formatRp(o.total)}</td>
+                <td class="px-4 py-3 text-right font-bold text-[#D4AF37]">${formatRp(o.total)}</td>
                 <td class="px-4 py-3 text-center">
                     <button onclick="printReceipt(${o.id})"
                         class="px-3 py-1.5 bg-gray-50 hover:bg-gray-100 rounded-lg text-xs font-semibold text-gray-700">
@@ -264,9 +262,9 @@
                 b.disabled = disabled;
                 b.className =
                 `px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors
-            ${active ? 'bg-[#0BAB8C] text-white border-[#0BAB8C]' : ''}
+            ${active ? 'bg-[#D4AF37] text-white border-[#D4AF37]' : ''}
             ${disabled ? 'text-gray-300 border-gray-100 cursor-default' : ''}
-            ${!active && !disabled ? 'text-gray-500 border-gray-200 hover:border-[#0BAB8C] hover:text-[#0BAB8C]' : ''}`;
+            ${!active && !disabled ? 'text-gray-500 border-gray-200 hover:border-[#D4AF37] hover:text-[#D4AF37]' : ''}`;
                 if (!disabled && !active) b.onclick = () => {
                     currentPage = page;
                     renderTable();
@@ -308,7 +306,7 @@
                     datasets: [{
                         label: 'Makanan & Minuman',
                         data: monthlyFoodData.map(d => d.total),
-                        backgroundColor: '#0BAB8C',
+                        backgroundColor: '#D4AF37',
                         borderRadius: 4
                     }]
                 },
@@ -431,10 +429,6 @@
                         <tr>
                             <td>Order</td>
                             <td style="text-align:right">#${o.order_code}</td>
-                        </tr>
-                        <tr>
-                            <td>Customer</td>
-                            <td style="text-align:right">${o.customer}</td>
                         </tr>
                         <tr>
                             <td>No. Meja</td>
