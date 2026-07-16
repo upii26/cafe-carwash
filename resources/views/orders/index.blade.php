@@ -81,7 +81,7 @@
                             </div>
                             <!-- Order info (editable people count) -->
                             <div class="flex items-center gap-1 mt-0.5">
-                                <span id="orderLabel" class="text-xs text-black">Order #F0030 ·</span>
+                               <span id="orderLabel" class="text-xs text-black">Order #{{ $nextOrderNo }} ·</span>
                                 {{-- <input id="peopleInput" type="number" value="2" min="1" max="99"
                                     oninput="updateTableInfo()"
                                     class="w-7 text-xs text-black-400 bg-transparent border-b border-dashed border-[#000000] focus:border-[#D4AF37] focus:outline-none text-center transition-colors" />
@@ -273,10 +273,10 @@
 
                 <!-- Ringkasan Order -->
                 <div class="bg-black-50 rounded-xl p-3 text-left mb-5">
-                    <div class="flex justify-between text-xs mb-1">
+                    {{-- <div class="flex justify-between text-xs mb-1">
                         <span class="text-black-400">Customer</span>
                         <span id="modalCustomer" class="font-semibold text-black-800">-</span>
-                    </div>
+                    </div> --}}
                     <div class="flex justify-between text-xs mb-1">
                         <span class="text-black-400">No. Meja</span>
                         <span id="modalTable" class="font-semibold text-black-800">-</span>
@@ -522,8 +522,6 @@
                 return;
             }
 
-            const customerName =
-                document.getElementById('customerName').value || 'Guest';
 
             const tableNo =
                 document.getElementById('tableNoInput').value || '00';
@@ -551,7 +549,6 @@
                     },
 
                     body: JSON.stringify({
-                        name_customer: customerName,
                         no_table: tableNo,
                         payment_method: paymentMethod,
                         menus: menus
@@ -562,50 +559,43 @@
 
                 if (result.success) {
 
-                    // Hitung subtotal dari items (client-side)
-                    const subtotal = items.reduce((s, o) => s + (o.price * o.qty), 0);
+    const subtotal = items.reduce((s, o) => s + (o.price * o.qty), 0);
+    const total = (result.total !== undefined && !isNaN(Number(result.total)))
+        ? Number(result.total)
+        : subtotal;
 
-                    // Pakai total dari server kalau valid, kalau tidak fallback ke subtotal
-                    const total = (result.total !== undefined && !isNaN(Number(result.total))) ?
-                        Number(result.total) :
-                        subtotal;
+    lastOrderData = {
+        noOrder: result.no_order,
+        table: tableNo,
+        payment: paymentMethod,
+        paymentLabel: paymentLabel,
+        items: items,
+        total: total
+    };
 
-                    lastOrderData = {
-                        customer: customerName,
-                        table: tableNo,
-                        payment: paymentMethod,
-                        paymentLabel: paymentLabel,
-                        items: items,
-                        total: total
-                    };
+    // Update label order jadi nomor order yang baru saja dibuat
+    document.getElementById('orderLabel').textContent = 'Order #' + result.no_order + ' ·';
 
-                    // Isi ringkasan ke modal
-                    document.getElementById('modalCustomer').textContent = customerName;
-                    document.getElementById('modalTable').textContent = '#' + tableNo;
-                    document.getElementById('modalPayment').textContent = paymentLabel;
-                    document.getElementById('modalTotal').textContent =
-                        'Rp ' + total.toLocaleString('id-ID');
+    // Isi ringkasan ke modal
+    document.getElementById('modalTable').textContent = '#' + tableNo;
+    document.getElementById('modalPayment').textContent = paymentLabel;
+    document.getElementById('modalTotal').textContent =
+        'Rp ' + total.toLocaleString('id-ID');
 
-                    document
-                        .getElementById('successModal')
-                        .classList.remove('hidden');
+    document.getElementById('successModal').classList.remove('hidden');
+    document.getElementById('successModal').classList.add('flex');
 
-                    document
-                        .getElementById('successModal')
-                        .classList.add('flex');
+    // RESET ORDER
+    Object.keys(order).forEach(k => delete order[k]);
 
-                    // RESET ORDER
-                    Object.keys(order).forEach(k => delete order[k]);
+    renderMenu();
+    renderOrderPanel();
 
-                    renderMenu();
-                    renderOrderPanel();
+    document.getElementById('orderNotes').value = '';
 
-                    document.getElementById('orderNotes').value = '';
-                    document.getElementById('customerName').value = '';
-
-                } else {
-                    alert(result.message);
-                }
+} else {
+    alert(result.message);
+}
 
             } catch (err) {
                 console.error(err);
@@ -657,6 +647,10 @@
             });
 
             const win = window.open('', '', 'width=350,height=600');
+     
+
+const ppn = subtotal * 0.11;
+const total = subtotal + ppn;
 
             win.document.write(`
             <html>
@@ -802,7 +796,7 @@
                     </tr>
                     <tr>
                         <td>Receipt Number</td>
-                        <td class="right">#${Date.now()}</td>
+                        <td class="right">#${lastOrderData.noOrder}</td>
                     </tr>
                     <tr>
                         <td>Table</td>
@@ -846,26 +840,26 @@
                 <!-- TOTAL -->
                 <table class="summary-table">
 
-                    <tr>
-                        <td>Subtotal</td>
-                        <td class="right">
-                            Rp ${subtotal.toLocaleString('id-ID')}
-                        </td>
-                    </tr>
+                <tr>
+    <td>Subtotal</td>
+    <td class="right">
+        Rp ${subtotal.toLocaleString('id-ID')}
+    </td>
+</tr>
 
-                    <tr>
-                        <td>PPN (11%)</td>
-                        <td class="right">
-                            Rp ${subtotal.toLocaleString('id-ID')}
-                        </td>
-                    </tr>
+<tr>
+    <td>PPN (11%)</td>
+    <td class="right">
+        Rp ${ppn.toLocaleString('id-ID')}
+    </td>
+</tr>
 
-                    <tr class="grand-total">
-                        <td>Total</td>
-                        <td class="right">
-                            Rp ${Number(lastOrderData.total).toLocaleString('id-ID')}
-                        </td>
-                    </tr>
+<tr class="grand-total">
+    <td>Total</td>
+    <td class="right">
+        Rp ${total.toLocaleString('id-ID')}
+    </td>
+</tr>
 
                 </table>
 

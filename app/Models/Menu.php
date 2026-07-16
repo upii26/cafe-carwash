@@ -12,7 +12,7 @@ class Menu extends Model
         'name',
         'category_id',
         'price',
-        'terjual',
+        'sold',
         'photo',
         'deskripsi',
         'status',
